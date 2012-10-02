@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Grape</th>
+    <th>Color</th>
+  </tr>
+
+  <% @grapes.each do |grape| %>
+    <tr>
+      <td><%= grape.name %></td>
+      <td><%= grape.color %></td>
+    </tr>
+  <% end %>
+
+</table>

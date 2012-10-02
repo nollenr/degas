@@ -5,6 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-puts "Can I do this?"
 
+puts "Loading grapes..."
+
+Grape.delete_all
+open("#{Rails.root}/db/redwinegrapes.csv") do |grapefile|
+  grapefile.read.each_line do |grapeline|
+    grape, color = grapeline.chomp.split(",")
+    puts "Creating new grape: #{grape}"
+    Grape.create!(name: grape, color: color)
+  end
+end
 

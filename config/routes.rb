@@ -1,4 +1,6 @@
 Degas::Application.routes.draw do
+  match "grapes" => "grape#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
