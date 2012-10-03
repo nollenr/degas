@@ -3,4 +3,6 @@ rails generate model grapes name:string, color:string
 
 Wednesday, 10/03
 rails generate model Bottle bottle_id:integer, grape:belongs_to
+rails generate controller Bottle
+
 

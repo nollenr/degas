@@ -1,0 +1,19 @@
+<div class="hero-unit">
+  <h2>Bottles</h2>
+</div>
+
+<table class="table table-hover">
+  <tr>
+    <th>Bottle Number</th>
+    <th>Grape</th>
+  </tr>
+
+  <% @bottles.each do |bottle| %>
+    <tr>
+      <td><%= bottle.bottle_id %></td>
+      <td><%= bottle.grape.name %></td>
+			<td><%= link_to "Consume", "#" %>
+    </tr>
+  <% end %>
+
+</table>
