@@ -7,6 +7,8 @@ rails generate controller Bottle
 
 To Do:
 Ajax the "consume" function
-Flash messages
+Done: Flash messages
 Done: Confirm
-Use after_find (rather than the funny select) for available/consumed bottles
+Done: Use after_find (rather than the funny select) for available/consumed bottles... 
+      still confused about how that might be working!
+Done: Fixed order by so that the rows are ordered by bottle id.  (BTW, order has to come before all)
