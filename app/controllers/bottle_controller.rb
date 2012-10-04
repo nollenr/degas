@@ -5,7 +5,9 @@ class BottleController < ApplicationController
   end
 
 	def consume
-    redirect_to grapes_path
+    bottle = Bottle.update(params[:id], available: :false)
+    bottle.save
+    redirect_to bottle_index_path
   end
 
 end

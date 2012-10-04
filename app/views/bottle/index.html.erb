@@ -13,7 +13,9 @@
       <td><%= bottle.bottle_id %></td>
       <td><%= bottle.grape.name %></td>
 			<td><%= bottle.availability %></td>
-			<td><%= link_to "Consume", "#" %>
+      <% if bottle.available %>
+			  <td><%= link_to "Consume", consume_bottle_path(bottle.id), method: :put %>
+      <% end %>
     </tr>
   <% end %>
 

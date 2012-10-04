@@ -1,6 +1,10 @@
 Degas::Application.routes.draw do
   match "grapes" => "grape#index"
-  match "bottles" => "bottle#index"
+  # match "bottles" => "bottle#index"
+
+  resources :bottle, except: [:create, :new, :show, :update, :edit, :destroy] do
+    put :consume, on: :member
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
