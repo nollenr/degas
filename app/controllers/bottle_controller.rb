@@ -2,7 +2,7 @@ class BottleController < ApplicationController
 
   def index
     # @bottles = Bottle.find :all, select: "*, case when available then 'Available' else 'Consumed' end as availability", order: "bottle_id"
-    @bottles = Bottle.order("bottle_id").all
+    @bottles = params[:consumed] ? Bottle.where(available: true) : Bottle.order("bottle_id").all
   end
 
 	def consume
