@@ -14,7 +14,7 @@
       <td><%= bottle.grape.name %></td>
 			<td><%= bottle.availability %></td>
       <% if bottle.available %>
-			  <td><%= link_to "Consume", consume_bottle_path(bottle.id), method: :put %>
+			  <td><%= link_to "Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " + bottle.bottle_id.to_s + "?" %>
       <% end %>
     </tr>
   <% end %>

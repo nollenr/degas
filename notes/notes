@@ -8,3 +8,5 @@ rails generate controller Bottle
 To Do:
 Ajax the "consume" function
 Flash messages
+Done: Confirm
+Use after_find (rather than the funny select) for available/consumed bottles
