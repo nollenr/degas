@@ -5,4 +5,6 @@ Wednesday, 10/03
 rails generate model Bottle bottle_id:integer, grape:belongs_to
 rails generate controller Bottle
 
-
+To Do:
+Ajax the "consume" function
+Flash messages
