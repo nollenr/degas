@@ -1,0 +1,7 @@
+<% link_text = params[:only_available] ? "Available" : "All" %>
+<% href = params[:only_available] ? bottle_index_path(only_available: true) : bottle_index_path %>
+$("#toggle").html("Showing <%= link_text %> (toggle)");
+$("#toggle").attr("href", "<%= href %>");
+$("#bottle").html('<%= escape_javascript(render @bottles) %>');
+
+

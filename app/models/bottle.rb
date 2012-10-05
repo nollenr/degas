@@ -1,6 +1,8 @@
 class Bottle < ActiveRecord::Base
   belongs_to :grape
-  attr_accessible :bottle_id, :available, :availability
+  # In order to run seed, grape_id needs to be accessible
+  # attr_accessible :bottle_id, :available, :availability, :grape_id
+  attr_accessible :bottle_id, :available
 
   after_find :set_availability
 
