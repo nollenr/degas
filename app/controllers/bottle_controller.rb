@@ -8,12 +8,12 @@ class BottleController < ApplicationController
     @before_changes = params[:show_avail_next]
     @params_has_key = params.has_key?(:show_avail_next)
     params[:show_avail_next] = params.has_key?(:show_avail_next) ? params[:show_avail_next] : false
-    @bottles = params[:show_avail_next] ? Bottle.where(available: true) : Bottle.order("bottle_id").all
+    @bottles = params[:show_avail_next] == 'true' ? Bottle.where(available: true) : Bottle.order("bottle_id").all
     @after_changes = params[:show_avail_next]
 
     respond_to do |format|
       format.html #index.html.erb
-      # format.js   #index.js.erb
+      format.js   #index.js.erb
     end #end repond_to
   end   #end index method
 
