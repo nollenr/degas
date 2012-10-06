@@ -1,0 +1,9 @@
+<% avail_message = 'Consumed' %>
+<% consume_message = '' %>
+<% avail_id   = '#' + @bottleid+'avail' %>
+<% consume_id = '#' + @bottleid+'consume' %>
+
+
+$("<%= avail_id %>").html("<%= avail_message %>");
+$("<%= consume_id %>").attr("href", "");
+$("<%= consume_id %>").html("<%= consume_message %>");

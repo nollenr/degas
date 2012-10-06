@@ -15,3 +15,9 @@ Done: Fixed order by so that the rows are ordered by bottle id.  (BTW, order has
 Done: Use attr_writer rather than trying to set an attribute on the model (oops). 
       This seems to be the right way to attack this problem... use a setter/getter method
       along with the after find.
+When I use the consume function after I've toggled to only available bottles, the display 
+      reverts to "all" bottles.
+
+BTW:
+_bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
+      index.html.erb which has created a local variable for it!
