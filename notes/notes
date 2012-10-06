@@ -12,4 +12,6 @@ Done: Confirm
 Done: Use after_find (rather than the funny select) for available/consumed bottles... 
       still confused about how that might be working!
 Done: Fixed order by so that the rows are ordered by bottle id.  (BTW, order has to come before all)
-Use attr_writer rather than trying to set an attribute on the model (oops).
+Done: Use attr_writer rather than trying to set an attribute on the model (oops). 
+      This seems to be the right way to attack this problem... use a setter/getter method
+      along with the after find.
