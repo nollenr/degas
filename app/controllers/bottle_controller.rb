@@ -5,12 +5,15 @@ class BottleController < ApplicationController
     # @bottles = Bottle.find :all, 
     # select: "*, case when available then 'Available' else 'Consumed' end as availability", order: "bottle_id"
 
-    params[:only_available] = params.has_key?(:only_available) ? params[:only_available] : false
-    @bottles = params[:only_available] ? Bottle.where(available: true) : Bottle.order("bottle_id").all
+    @before_changes = params[:show_avail_next]
+    @params_has_key = params.has_key?(:show_avail_next)
+    params[:show_avail_next] = params.has_key?(:show_avail_next) ? params[:show_avail_next] : false
+    @bottles = params[:show_avail_next] ? Bottle.where(available: true) : Bottle.order("bottle_id").all
+    @after_changes = params[:show_avail_next]
 
     respond_to do |format|
       format.html #index.html.erb
-      format.js   #index.js.erb
+      # format.js   #index.js.erb
     end #end repond_to
   end   #end index method
 

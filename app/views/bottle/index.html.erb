@@ -2,7 +2,11 @@
   <h2>Bottles</h2>
 </div>
 
-<%= link_to "Showing All (toggle)", bottle_index_path(only_available: true), id: 'toggle', remote: true %>
+<%= link_to "Showing All (toggle)", bottle_index_path(show_avail_next: true), id: 'toggle' %>
+
+<p>Before:  <%= @before_changes %></p>
+<p>Has Key: <%= @params_has_key %></p>
+<p>After:   <%= @after_changes  %></p>
 
 <table class="table table-hover" id='bottle'>
   <tr>
