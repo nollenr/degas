@@ -1,17 +1,21 @@
 class Bottle < ActiveRecord::Base
   belongs_to :grape
-  attr_accessible :bottle_id, :available, :availability
+  # In order to run seed, grape_id needs to be accessible
+  # attr_accessible :bottle_id, :available, :availability, :grape_id
+  attr_accessible :available
+
+  def availability
+    return @availability
+  end
+
+  def availability= avail_bool
+    @availability = avail_bool ? 'Available' : 'Consumed'
+  end
 
   after_find :set_availability
 
   def set_availability
-    if self.available 
-			#puts "And the bottle is available"
-      self[:availability] =  'Available'
-    else
-      #puts "And the bottle is UNavailable"
-      self[:availability] =  'Consumed'
-    end
+    self.availability= self.available
   end
 
 end
