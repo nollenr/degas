@@ -30,4 +30,3 @@ end
 gem 'jquery-rails', '2.1.3'
 gem 'will_paginate', '3.0.3'
 gem 'faker', '1.1.2'
-gem 'seed-fu', '2.2.0'

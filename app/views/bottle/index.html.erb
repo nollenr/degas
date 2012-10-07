@@ -2,23 +2,14 @@
   <h2>Bottles</h2>
 </div>
 
-<%= link_to "Showing all (toggle)", bottle_index_path(consumed: false), id: 'toggle' %>
+<%= link_to "Showing All (toggle)", bottle_index_path(show_avail_next: true), id: 'toggle', remote: true %>
 
-<table class="table table-hover">
+<table class="table table-hover" id='bottle'>
   <tr>
-    <th>Bottle Number</th>
-    <th>Grape</th>
+    <th><%= link_to "Bottle Number", sort: "bottle_id" %></th>
+    <th><%= link_to "Grape", sort: "grapes.name" %></th>
   </tr>
 
-  <% @bottles.each do |bottle| %>
-    <tr>
-      <td><%= bottle.bottle_id %></td>
-      <td><%= bottle.grape.name %></td>
-			<td><%= bottle.availability %></td>
-      <% if bottle.available %>
-			  <td><%= link_to "Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " + bottle.bottle_id.to_s + "?" %>
-      <% end %>
-    </tr>
-  <% end %>
+  <%= render @bottles %>
 
 </table>

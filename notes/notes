@@ -5,10 +5,47 @@ Wednesday, 10/03
 rails generate model Bottle bottle_id:integer, grape:belongs_to
 rails generate controller Bottle
 
+Saturday 10/06
+rails generate migration AddAvailStatusToBottle availability_change_date:date availability__change_message:string
+(Note:  the word bottle must be in the "name".  ActiveRecord uses that key to create the correct migration.  It
+will be empty if you don't.)
+
 To Do:
-Ajax the "consume" function
+Done: Ajax the "consume" function
 Done: Flash messages
 Done: Confirm
 Done: Use after_find (rather than the funny select) for available/consumed bottles... 
       still confused about how that might be working!
 Done: Fixed order by so that the rows are ordered by bottle id.  (BTW, order has to come before all)
+Done: Use attr_writer rather than trying to set an attribute on the model (oops). 
+      This seems to be the right way to attack this problem... use a setter/getter method
+      along with the after find.
+N/A:  When I use the consume function after I've toggled to only available bottles, the display 
+      reverts to "all" bottles.  Now that the consume function is Ajaxed, this may be unnecessary.
+What about adding bottles
+Wineries
+Names
+Vintages
+Cellar locations
+Hold: Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
+      Ajax consume function and go to a page to update the date/message when consuming... then go back
+      to the index page.  What would that user experience be like?  Would that make adding a pop-up 
+      later easier?  It think so.
+Rating wines
+Un-consuming a bottle
+Add searches... for just a winery/grape/bottle_id, etc.
+Working: Add sorts (with arrows, etc).  How do I sort by a "lookup" column?  (i.e. grape name in the bottles index view)
+
+
+
+
+
+BTW:
+_bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
+      index.html.erb which has created a local variable for it!
+
+Railscasts:
+#176 Search Logic
+#228 Sortable Table Columns
+#240 Search, Sort, Paginate with AJAX
+#340 Data Tables
