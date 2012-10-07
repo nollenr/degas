@@ -8,7 +8,10 @@ class BottleController < ApplicationController
     @before_changes = params[:show_avail_next]
     @params_has_key = params.has_key?(:show_avail_next)
     params[:show_avail_next] = params.has_key?(:show_avail_next) ? params[:show_avail_next] : false
-    @bottles = params[:show_avail_next] == 'true' ? Bottle.where(available: true) : Bottle.order("bottle_id").all
+    # @bottles = params[:show_avail_next] == 'true' ? Bottle.where(available: true).order(params[:sort]) : Bottle.order(params[:sort]).all
+    @bottles = Bottle.find(:all, conditions: "bottle_id = 322", include: :grape, order: 'grapes.name')
+    # @bottles = Bottle.joins(:grape).where(available: true).order('grapes.name')
+
     @after_changes = params[:show_avail_next]
 
     respond_to do |format|
@@ -25,7 +28,7 @@ class BottleController < ApplicationController
     # redirect_to bottle_index_path
     respond_to do |format|
       format.html { redirect_to bottle_index_path } #index.html.erb
-      format.js   #index.js.erb
+      format.js   #consume.js.erb
     end #end repond_to
   end
 
