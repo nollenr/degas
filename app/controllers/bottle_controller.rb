@@ -9,7 +9,9 @@ class BottleController < ApplicationController
     @params_has_key = params.has_key?(:show_avail_next)
     params[:show_avail_next] = params.has_key?(:show_avail_next) ? params[:show_avail_next] : false
     # @bottles = params[:show_avail_next] == 'true' ? Bottle.where(available: true).order(params[:sort]) : Bottle.order(params[:sort]).all
-    @bottles = Bottle.find(:all, conditions: "bottle_id = 322", include: :grape, order: 'grapes.name')
+    # @bottles = Bottle.find(:all, conditions: "bottle_id = 322", include: :grape, order: 'grapes.name')
+      order_by = 'grapes.name'
+      @bottles = Bottle.find(:all, include: [:grape], order: order_by)
     # @bottles = Bottle.joins(:grape).where(available: true).order('grapes.name')
 
     @after_changes = params[:show_avail_next]

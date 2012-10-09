@@ -16,9 +16,9 @@
 #  encoding: unicode
 development:
   adapter: postgresql
-  host: 192.168.1.148
+  host: 10.248.8.76
   port: 1521
-  database: mydb
+  database: postgres
   pool: 5
   username: postgres
   password: postgres

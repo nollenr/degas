@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121006233922) do
+ActiveRecord::Schema.define(:version => 20121009152428) do
 
   create_table "bottles", :force => true do |t|
     t.integer  "bottle_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20121006233922) do
     t.boolean  "available"
     t.datetime "availability_change_date"
     t.string   "availability_change_message"
+    t.integer  "winery_id"
   end
 
   add_index "bottles", ["grape_id"], :name => "index_bottles_on_grape_id"
@@ -31,6 +32,19 @@ ActiveRecord::Schema.define(:version => 20121006233922) do
     t.text     "description"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "wineries", :force => true do |t|
+    t.string   "name",         :null => false
+    t.string   "country",      :null => false
+    t.string   "location1",    :null => false
+    t.string   "location2",    :null => false
+    t.string   "location3"
+    t.string   "facebook_url"
+    t.string   "twitter_url"
+    t.string   "winery_url"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end
