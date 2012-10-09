@@ -1,18 +1,17 @@
 class BottleController < ApplicationController
 
   def index
-    # removed and replaced with the after_find in the model
-    # @bottles = Bottle.find :all, 
-    # select: "*, case when available then 'Available' else 'Consumed' end as availability", order: "bottle_id"
 
     @before_changes = params[:show_avail_next]
     @params_has_key = params.has_key?(:show_avail_next)
     params[:show_avail_next] = params.has_key?(:show_avail_next) ? params[:show_avail_next] : false
-    # @bottles = params[:show_avail_next] == 'true' ? Bottle.where(available: true).order(params[:sort]) : Bottle.order(params[:sort]).all
-    # @bottles = Bottle.find(:all, conditions: "bottle_id = 322", include: :grape, order: 'grapes.name')
-      order_by = 'grapes.name'
-      @bottles = Bottle.find(:all, include: [:grape], order: order_by)
-    # @bottles = Bottle.joins(:grape).where(available: true).order('grapes.name')
+    v_find_hash = {}
+    v_find_hash[:joins] = [:grape, :winery]
+    v_find_hash[:order] = 'grapes.name'
+    if params[:show_avail_next] == 'true'
+      v_find_hash[:conditions] = {available: true} 
+    end
+    @bottles = Bottle.all(v_find_hash)
 
     @after_changes = params[:show_avail_next]
 
