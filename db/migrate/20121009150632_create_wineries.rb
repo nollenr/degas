@@ -4,7 +4,7 @@ class CreateWineries < ActiveRecord::Migration
       t.string :name, null: false
       t.string :country, null: false
       t.string :location1, null: false
-      t.string :location2, null: false
+      t.string :location2, null: true
       t.string :location3, null: true
       t.string :facebook_url, null: true
       t.string :twitter_url, null: true
