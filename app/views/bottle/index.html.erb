@@ -6,8 +6,9 @@
 
 <table class="table table-hover" id='bottle'>
   <tr>
-    <th><%= link_to "Bottle Number", sort: "bottle_id" %></th>
-    <th><%= link_to "Grape", sort: "grapes.name" %></th>
+    <th><%= sortable "bottle_id",     "Bottle Id" %></th>
+    <th><%= sortable "wineries.name", "Winery" %></th>
+    <th><%= sortable "grapes.name",   "Grape" %></th>
   </tr>
 
   <%= render @bottles %>

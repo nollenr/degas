@@ -1,13 +1,13 @@
 class BottleController < ApplicationController
+  helper_method :sort_column, :sort_direction
 
   def index
 
     @before_changes = params[:show_avail_next]
     @params_has_key = params.has_key?(:show_avail_next)
-    params[:show_avail_next] = params.has_key?(:show_avail_next) ? params[:show_avail_next] : false
     v_find_hash = {}
-    v_find_hash[:joins] = [:grape, :winery]
-    v_find_hash[:order] = 'grapes.name'
+    v_find_hash[:include] = [:grape, :winery]
+    v_find_hash[:order] = sort_column + " " + sort_direction
     if params[:show_avail_next] == 'true'
       v_find_hash[:conditions] = {available: true} 
     end
@@ -31,6 +31,19 @@ class BottleController < ApplicationController
       format.html { redirect_to bottle_index_path } #index.html.erb
       format.js   #consume.js.erb
     end #end repond_to
+  end
+
+private
+  def sort_column
+    params[:sort] || "bottle_id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def show_avail
+    params[:show_avail_next] || false
   end
 
 end

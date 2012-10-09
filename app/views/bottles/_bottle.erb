@@ -1,6 +1,7 @@
 
     <tr>
       <td><%= bottle.bottle_id %></td>
+      <td><%= bottle.winery.name %></td>
       <td><%= bottle.grape.name %></td>
       <td id='<%= bottle.id.to_s + 'avail' %>' ><%= bottle.availability %></td>
       <% if bottle.available %>
