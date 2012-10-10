@@ -6,9 +6,10 @@
 
 <table class="table table-hover" id='bottle'>
   <tr>
-    <th><%= sortable "bottle_id",     "Bottle Id" %></th>
-    <th><%= sortable "wineries.name", "Winery" %></th>
-    <th><%= sortable "grapes.name",   "Grape" %></th>
+    <th><%= sortable "bottle_id",     "Bottle Id " %><%= sort_icon("bottle_id") %></th>
+    <th><%= sortable "wineries.name", "Winery " %><%= sort_icon("wineries.name") %></th>
+    <th><%= sortable "grapes.name",   "Grape " %><%= sort_icon("grapes.name") %></th>
+    <th>Consumed or Available</th>
   </tr>
 
   <%= render @bottles %>
