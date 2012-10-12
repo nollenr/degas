@@ -1,8 +1,13 @@
 
     <tr>
       <td><%= bottle.bottle_id %></td>
+      <td><%= bottle.cellar_location %></td>
       <td><%= bottle.winery.name %></td>
       <td><%= bottle.grape.name %></td>
+      <td><%= bottle.vintage %></td>
+      <td><%= bottle.name %></td>
+      <td><%= bottle.vineyard %></td>
+      <td><%= bottle.drink_by_year %></td>
       <td id='<%= bottle.id.to_s + 'avail' %>' ><%= bottle.availability %></td>
       <% if bottle.available %>
       <td id='<%= bottle.id.to_s + 'consume' %>' ><%= link_to "Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " +

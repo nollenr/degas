@@ -4,13 +4,6 @@
 
 <%= link_to "Showing All (toggle)", bottle_index_path(show_avail_next: true), id: 'toggle', remote: true %>
 
-<table class="table table-hover" id='bottle'>
-  <tr>
-    <th><%= sortable "bottle_id",     "Bottle Id" %></th>
-    <th><%= sortable "wineries.name", "Winery" %></th>
-    <th><%= sortable "grapes.name",   "Grape" %></th>
-  </tr>
+<%= render partial: "bottle_header" %>
 
-  <%= render @bottles %>
 
-</table>
