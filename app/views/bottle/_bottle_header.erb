@@ -1,0 +1,17 @@
+
+<table class="table table-hover" id='bottle'>
+  <tr>
+    <th><%= sortable "bottle_id",     "Bottle Id " %><%= sort_icon("bottle_id") %></th>
+    <th><%= sortable "cellar_location" %><%= sort_icon("cellar_location") %></th>
+    <th><%= sortable "wineries.name", "Winery " %><%= sort_icon("wineries.name") %></th>
+    <th><%= sortable "grapes.name",   "Grape " %><%= sort_icon("grapes.name") %></th>
+    <th><%= sortable "vintage" %><%= sort_icon("vintage") %></th>
+    <th><%= sortable "name" %><%= sort_icon("name") %></th>
+    <th><%= sortable "vineyard" %><%= sort_icon("vineyard") %></th>
+    <th><%= sortable "drink_by_year", "Drink By Year" %><%= sort_icon("drink_by_year") %></th>
+    <th>Consumed or Available</th>
+  </tr>
+
+  <%= render @bottles %>
+
+</table>

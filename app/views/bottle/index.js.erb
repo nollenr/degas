@@ -3,6 +3,6 @@
 
 $("#toggle").html("Showing <%= link_text %> (toggle)");
 $("#toggle").attr("href", "<%= href %>");
-$("#bottle").html('<%= escape_javascript(render @bottles) %>');
+$("#bottle").html('<%= j render partial: "bottle_header" %>');
 
 

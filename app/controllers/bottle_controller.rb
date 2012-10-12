@@ -3,17 +3,13 @@ class BottleController < ApplicationController
 
   def index
 
-    @before_changes = params[:show_avail_next]
-    @params_has_key = params.has_key?(:show_avail_next)
     v_find_hash = {}
     v_find_hash[:include] = [:grape, :winery]
     v_find_hash[:order] = sort_column + " " + sort_direction
-    if params[:show_avail_next] == 'true'
+    if show_avail == 'true'
       v_find_hash[:conditions] = {available: true} 
     end
     @bottles = Bottle.all(v_find_hash)
-
-    @after_changes = params[:show_avail_next]
 
     respond_to do |format|
       format.html #index.html.erb
