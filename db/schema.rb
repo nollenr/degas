@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20121009152428) do
     t.string   "name",         :null => false
     t.string   "country",      :null => false
     t.string   "location1",    :null => false
-    t.string   "location2",    :null => false
+    t.string   "location2"
     t.string   "location3"
     t.string   "facebook_url"
     t.string   "twitter_url"
