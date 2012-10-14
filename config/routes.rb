@@ -1,8 +1,11 @@
 Degas::Application.routes.draw do
   match "grapes" => "grape#index"
-  # match "bottles" => "bottle#index"
+  match "bottles" => "bottle#index", :via => :get
+  match "bottles" => "bottle#create", :via => :post
 
-  resources :bottle, except: [:create, :new, :show, :update, :edit, :destroy] do
+
+  resources :bottle, except: [:show, :update, :edit, :destroy] do
+  # resources :bottle  do
     put :consume, on: :member
   end
 

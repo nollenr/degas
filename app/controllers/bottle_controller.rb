@@ -1,8 +1,20 @@
 class BottleController < ApplicationController
   helper_method :sort_column, :sort_direction, :show_avail
 
-  def index
+  def new
+    @bottle = Bottle.new
+  end
 
+  def create
+    @bottle = Bottle.new(params[:bottle])
+    if @bottle.save
+      redirect_to :bottle_index
+    else
+      render 'new'
+    end
+  end
+
+  def index
     v_find_hash = {}
     v_find_hash[:include] = [:grape, :winery]
     v_find_hash[:order] = sort_column + " " + sort_direction
