@@ -1,0 +1,34 @@
+<h1>Add Bottle To Cellar</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @bottle do |f| %>
+
+      <%= f.label :bottle_id, "Bottle Identifier" %>
+      <%= f.text_field :bottle_id %>
+
+      <%= f.label :cellar_location, "Cellar Location" %>
+      <%= f.text_field :cellar_location %>
+
+      <%= f.label :vintage, "Vintage (Year)" %>
+      <%= f.text_field :vintage %>
+
+      <%= f.label :drink_by_year, "Drink By (Year)" %>
+      <%= f.text_field :drink_by_year %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :vineyard %>
+      <%= f.text_field :vineyard %>
+
+      <%= collection_select(:bottle, :grape_id, Grape.all, :id, :name) %>
+      <%= collection_select(:bottle, :winery_id, Winery.all, :id, :name) %>
+
+      <%= f.submit "Create Bottle", class: "btn btn-large btn-primary" %>
+
+    <% end %>
+  </div>
+</div>
+
+
