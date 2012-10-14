@@ -15,6 +15,7 @@ class BottleController < ApplicationController
   end
 
   def index
+    @search = Bottle.search(params[:q])
     v_find_hash = {}
     v_find_hash[:include] = [:grape, :winery]
     v_find_hash[:order] = sort_column + " " + sort_direction
