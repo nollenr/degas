@@ -2,6 +2,12 @@
   <h2>Bottles</h2>
 </div>
 
+<%= search_form_for @search do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Search" %>
+<% end %>
+
 <%= link_to "Showing All (toggle)", bottle_index_path(show_avail_next: true), id: 'toggle', remote: true %>
 
 <%= render partial: "bottle_header" %>
