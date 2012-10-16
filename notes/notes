@@ -22,28 +22,38 @@ Done:  Use attr_writer rather than trying to set an attribute on the model (oops
        along with the after find.
 N/A:   When I use the consume function after I've toggled to only available bottles, the display 
        reverts to "all" bottles.  Now that the consume function is Ajaxed, this may be unnecessary.
-Done:  What about adding bottles - Autocomplete on grapes, wineries
-              Okay... start with building a simple form according to the rails tutorial (Hartl).  Then
-              figure out autocomplete... maybe formtastic and formtastic-bootstrap?  Phase 1 looks done.
+Done:  What about adding bottles
+       Okay... start with building a simple form according to the rails tutorial (Hartl).  Then
+       figure out autocomplete... maybe formtastic and formtastic-bootstrap?  Phase 1 looks done.
 Done:  Wineries
 Done:  Names
 Done:  Vintages
 Done:  Cellar locations
-Hold:  Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
-       Ajax consume function and go to a page to update the date/message when consuming... then go back
-       to the index page.  What would that user experience be like?  Would that make adding a pop-up 
-       later easier?  It think so.
-To Do: Rating wines
-To Do: Un-consuming a bottle
-In Progress: Add searches... for just a winery/grape/bottle_id, etc.  Going to try Ransack!
 Done:  Add sorts (with arrows, etc).  How do I sort by a "lookup" column?  (i.e. grape name in the bottles index view)
 Done:  Adding wineries
 Done:  Ajax looses the table headings.  That's gotta be fixed.
 Done:  Make sort changes Ajax.  I think this is all working.  You can sort by any column and the toggle stays 'fixed'
+
+In Progress: Add searches... for just a winery/grape/bottle_id, etc.  Going to try Ransack!
+             Not working!  When changed avail/consumed search goes away.  Need to change the "available".
+             Now... make it do a post instead of a get.  Then try ajax.
+
 To Do: Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
        I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
 To Do: Price on bottles
 To Do: Authentication (what about username on bottles, wineries and grapes?  unions for wineries and grapes?)
+To Do: Flash a consume... so the user sees the status change.
+To Do: Rating wines
+To Do: Un-consuming a bottle
+To Do: Add autocomplete on bottle entry
+To Do: Add a "copy" function for entering bottles of wine.  Should be easy.  Go to the entry
+       form with values for the bottle info.
+Hold:  Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
+       Ajax consume function and go to a page to update the date/message when consuming... then go back
+       to the index page.  What would that user experience be like?  Would that make adding a pop-up 
+       later easier?  It think so.
+To Do: Pretty everything up.
+To Do: Clear search fields after search is complete
 
 
 BTW:

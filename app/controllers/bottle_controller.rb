@@ -15,14 +15,16 @@ class BottleController < ApplicationController
   end
 
   def index
+    @param_string = params.to_s
     @search = Bottle.search(params[:q])
-    v_find_hash = {}
-    v_find_hash[:include] = [:grape, :winery]
-    v_find_hash[:order] = sort_column + " " + sort_direction
+    @search_result = @search.result.to_sql
     if show_avail == 'true'
-      v_find_hash[:conditions] = {available: true} 
+      @bottles = @search.result.order(sort_column + " " + sort_direction).where(available: true).joins(:grape, :winery)
+      @query =   @search.result.order(sort_column + " " + sort_direction).where(available: true).joins(:grape, :winery).to_sql
+    else
+      @bottles = @search.result.order(sort_column + " " + sort_direction).where(available: true).joins(:grape, :winery)
+      @query =   @search.result.order(sort_column + " " + sort_direction).where(available: true).joins(:grape, :winery).to_sql
     end
-    @bottles = Bottle.all(v_find_hash)
 
     respond_to do |format|
       format.html #index.html.erb
