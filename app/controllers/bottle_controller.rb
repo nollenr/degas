@@ -18,13 +18,8 @@ class BottleController < ApplicationController
     @param_string = params.to_s
     @search = Bottle.search(params[:q])
     @search_result = @search.result.to_sql
-    if show_avail == 'true'
-      @bottles = @search.result.order(sort_column + " " + sort_direction).where(available: true).joins(:grape, :winery)
-      @query =   @search.result.order(sort_column + " " + sort_direction).where(available: true).joins(:grape, :winery).to_sql
-    else
-      @bottles = @search.result.order(sort_column + " " + sort_direction).where(available: true).joins(:grape, :winery)
-      @query =   @search.result.order(sort_column + " " + sort_direction).where(available: true).joins(:grape, :winery).to_sql
-    end
+      @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
+      @query =   @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery).to_sql
 
     respond_to do |format|
       format.html #index.html.erb
