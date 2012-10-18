@@ -3,6 +3,7 @@
 </div>
 
 <%= search_form_for @search, html: {class: "form-inline"}, remote:true do |f| %>
+
   <label>Winery Name</label>
   <%= f.text_field :winery_name_cont, class: "input-small search-query", placeholder: "Wine Name"%>
 
@@ -11,6 +12,9 @@
 
   <label>Show Only Available Bottles</label>
   <%= f.check_box :available_true, class: "input-small search-query" %>
+
+  <%= hidden_field_tag :direction, sort_direction %>
+  <%= hidden_field_tag :sort, sort_column  %>
 
   <%= f.submit "Search"%>
 <% end %>

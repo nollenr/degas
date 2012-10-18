@@ -2,7 +2,7 @@ module ApplicationHelper
   def sortable(column, title = nil)
     title ||= column.titleize
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    link_to title, {sort: column, direction: direction, show_avail_next: show_avail}, remote: true
+    link_to title, params.merge(sort: column, direction: direction), remote: true
   end
 
   def sort_icon (column)

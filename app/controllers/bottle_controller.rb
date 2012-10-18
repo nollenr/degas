@@ -48,8 +48,4 @@ private
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
-  def show_avail
-    params[:show_avail_next] || false
-  end
-
 end

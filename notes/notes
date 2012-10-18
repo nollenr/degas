@@ -34,9 +34,10 @@ Done:  Adding wineries
 Done:  Ajax looses the table headings.  That's gotta be fixed.
 Done:  Make sort changes Ajax.  I think this is all working.  You can sort by any column and the toggle stays 'fixed'
 
-Done: Add searches... for just a winery/grape/bottle_id, etc.  Going to try Ransack!
+In Progress: Add searches... for just a winery/grape/bottle_id, etc.  Going to try Ransack!
              Not working!  When changed avail/consumed search goes away.  Need to change the "available".
-             Now... make it do a post instead of a get.  Then try ajax. This all seems to be working.
+             Now... make it do a post instead of a get.  Then try ajax. 
+             Consumed checkbox doesn't get carried over with a sort and ajax.
 
 To Do: Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
        I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
