@@ -1,7 +1,7 @@
-<% link_text = params[:show_avail_next] == 'true' ? "Only Available" : "All" %>
-<% href = params[:show_avail_next] == 'true' ? bottle_index_path(show_avail_next: false) : bottle_index_path(show_avail_next: true) %>
 
 
+$("#direction").attr("value", "<%= sort_direction %>");
+$("#sort").attr("value", "<%= sort_column %>");
 $("#bottle").html('<%= j render partial: "bottle_header" %>');
 
 
