@@ -44,15 +44,19 @@ Done:  Add searches... for just a winery/grape/bottle_id, etc.  Going to try Ran
 Done:  Add trigger for availability change.  When a record "availability" is changed", the
        trigger fires and updates the availability_change_date with the current timestamp
        unless a timestamp is supplied.  This is accomplished via a db:migration.
-
-In Progress: Price on bottles.  Price has been added to the model, index page, and
-             bottle entry page.  Sorting on the field works.  Going to try using the
-             money gem for input and display.  
+Done:  Price on bottles.  Price has been added to the model, index page, and
+             bottle entry page.  Sorting on the field works.  Instead of the money gem
+             I'm going to use the currency helpers (in rails).  Don't have to worry
+             about the "not null and default value of 0.  Added validation.  Error message
+             not displaying -- will work on that when implementing authentication (from Hartl).
+             http://stackoverflow.com/questions/1019939/ruby-on-rails-best-method-of-handling-currency-money
+             http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#M001969  
 
 To Do: Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
        I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
 To Do: Work out sorting
 To Do: Authentication (what about username on bottles, wineries and grapes?  unions for wineries and grapes?)
+To Do: Error message displays (from the tutorial by M. Hartl)
 To Do: Flash a consume... so the user sees the status change.
 To Do: Rating wines... what's this look like... does "everything" have to match... even vintage?
        can I display this rating on the index if it exists?
