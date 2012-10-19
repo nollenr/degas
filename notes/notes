@@ -35,19 +35,27 @@ Done:  Adding wineries
 Done:  Ajax looses the table headings.  That's gotta be fixed.
 Done:  Make sort changes Ajax.  I think this is all working.  You can sort by any column and the 
        toggle stays 'fixed'
-Done: Add searches... for just a winery/grape/bottle_id, etc.  Going to try Ransack!
+Done:  Add searches... for just a winery/grape/bottle_id, etc.  Going to try Ransack!
              Not working!  When changed avail/consumed search goes away.  Need to change the "available".
              Now... make it do a post instead of a get.  Then try ajax. 
              Consumed checkbox doesn't get carried over with a sort and ajax.  Okay... I think this is
              seriously working now.  I've added some javascript stuff to the index.js.erb
              which sets the hidden field values as the user changes sort column and direction.
+Done:  Add trigger for availability change.  When a record "availability" is changed", the
+       trigger fires and updates the availability_change_date with the current timestamp
+       unless a timestamp is supplied.  This is accomplished via a db:migration.
+
+In Progress: Price on bottles.  Price has been added to the model, index page, and
+             bottle entry page.  Sorting on the field works.  Going to try using the
+             money gem for input and display.  
 
 To Do: Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
        I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
-To Do: Price on bottles / add trigger for availability change
+To Do: Work out sorting
 To Do: Authentication (what about username on bottles, wineries and grapes?  unions for wineries and grapes?)
 To Do: Flash a consume... so the user sees the status change.
-To Do: Rating wines
+To Do: Rating wines... what's this look like... does "everything" have to match... even vintage?
+       can I display this rating on the index if it exists?
 To Do: Un-consuming a bottle
 To Do: Add autocomplete on bottle entry
 To Do: Add a "copy" function for entering bottles of wine.  Should be easy.  Go to the entry
@@ -55,7 +63,7 @@ To Do: Add a "copy" function for entering bottles of wine.  Should be easy.  Go 
 Hold:  Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
        Ajax consume function and go to a page to update the date/message when consuming... then go back
        to the index page.  What would that user experience be like?  Would that make adding a pop-up 
-       later easier?  It think so.
+       later easier?  It think so.  Also... can the wine be rated at the same time?
 To Do: Pretty everything up.
 To Do: Clear search fields after search is complete
 

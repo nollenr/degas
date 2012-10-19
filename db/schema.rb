@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018200136) do
+ActiveRecord::Schema.define(:version => 20121019173946) do
 
   create_table "bottles", :force => true do |t|
     t.integer  "bottle_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20121018200136) do
     t.string   "vineyard"
     t.string   "name"
     t.string   "cellar_location",             :limit => 30
+    t.float    "price"
   end
 
   add_index "bottles", ["grape_id"], :name => "index_bottles_on_grape_id"

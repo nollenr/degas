@@ -22,6 +22,9 @@
       <%= f.label :vineyard %>
       <%= f.text_field :vineyard %>
 
+      <%= f.label :price %>
+      <%= f.text_field :price %>
+
       <%= collection_select(:bottle, :grape_id, Grape.all, :id, :name) %>
       <%= collection_select(:bottle, :winery_id, Winery.all, :id, :name) %>
 
