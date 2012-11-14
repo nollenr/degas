@@ -25,8 +25,8 @@
       <%= f.label :price %>
       <%= f.text_field :price %>
 
-      <%= collection_select(:bottle, :grape_id, Grape.all, :id, :name) %>
-      <%= collection_select(:bottle, :winery_id, Winery.all, :id, :name) %>
+      <%= collection_select :bottle, :grape_id, Grape.all, :id, :name, selected: @bottle.grape_id %>
+      <%= collection_select :bottle, :winery_id, Winery.all, :id, :name, selected: @bottle.winery_id %>
 
       <%= f.submit "Create Bottle", class: "btn btn-large btn-primary" %>
 

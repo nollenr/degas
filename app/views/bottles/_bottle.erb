@@ -12,7 +12,10 @@
       <td id='<%= bottle.id.to_s + 'avail' %>' ><%= bottle.availability %></td>
       <% if bottle.available %>
       <td id='<%= bottle.id.to_s + 'consume' %>' ><%= link_to "Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " +
-        bottle.bottle_id.to_s + "?", remote: true %>
+        bottle.bottle_id.to_s + "?", remote: true %></td>
+      <% else %>
+      <td></td>
       <% end %>
+			<td><%= link_to "Copy", '#' %></td>
     </tr>
 

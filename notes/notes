@@ -55,6 +55,8 @@ Done:  Price on bottles.  Price has been added to the model, index page, and
              http://stackoverflow.com/questions/1019939/ruby-on-rails-best-method-of-handling-currency-money
              http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#M001969  
 
+To Do: Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
+       A great example is the wine I just purchased from Ljubljana
 To Do: Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
        I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
 To Do: Authentication (what about username on bottles, wineries and grapes?  unions for wineries and grapes?)
@@ -71,6 +73,9 @@ Hold:  Enter a message on the confirm consume pop-up... like date consumed and a
        to the index page.  What would that user experience be like?  Would that make adding a pop-up 
        later easier?  It think so.  Also... can the wine be rated at the same time?
 To Do: Pretty everything up.
+To Do: Should cellar locations be a look-up that I can add to... for instance: "12th Shelf - Left"
+       might be a look-up, but "refridgerator" might be something I want to use even tho
+       it isn't in the lookup.
 
 
 BTW:

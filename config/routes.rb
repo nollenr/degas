@@ -7,6 +7,7 @@ Degas::Application.routes.draw do
   resources :bottle, except: [:show, :update, :edit, :destroy] do
   # resources :bottle  do
     put :consume, on: :member
+    get :copy, on: :member
   end
 
   # The priority is based upon order of creation:

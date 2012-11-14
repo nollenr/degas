@@ -39,6 +39,15 @@ class BottleController < ApplicationController
     end #end repond_to
   end
 
+  def copy
+    #@bottle=Bottle.new
+    @source_bottle = Bottle.find_by_id(2710)
+    @bottle = @source_bottle.dup
+    @bottle[:bottle_id]=nil
+    @bottle[:available]=true
+    render 'new'
+  end
+
 private
   def sort_column
     params[:sort] || "bottle_id"
