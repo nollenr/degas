@@ -40,11 +40,11 @@ class BottleController < ApplicationController
   end
 
   def copy
-    #@bottle=Bottle.new
-    @source_bottle = Bottle.find_by_id(2710)
+    # available default value is "true"
+    @source_bottle = Bottle.find_by_id(params[:id])
     @bottle = @source_bottle.dup
-    @bottle[:bottle_id]=nil
-    @bottle[:available]=true
+    @bottle[:bottle_id] = nil
+    @bottle[:available] = :true
     render 'new'
   end
 

@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019173946) do
+ActiveRecord::Schema.define(:version => 20121115171257) do
 
   create_table "bottles", :force => true do |t|
     t.integer  "bottle_id"
     t.integer  "grape_id"
-    t.datetime "created_at",                                                              :null => false
-    t.datetime "updated_at",                                                              :null => false
-    t.boolean  "available"
+    t.datetime "created_at",                                                                                :null => false
+    t.datetime "updated_at",                                                                                :null => false
+    t.boolean  "available",                                                               :default => true, :null => false
     t.datetime "availability_change_date"
     t.string   "availability_change_message"
     t.integer  "winery_id"
