@@ -10,4 +10,13 @@ module ApplicationHelper
       css_icon = sort_direction == "asc" ? "<i class=\"icon-hand-up\"></i> ".html_safe : "<i class=\"icon-hand-down\"></i> ".html_safe
     end
   end
+
+  def full_title(page_title)
+    base_title = "Degas"
+    if page_title.empty?
+      base_title
+    else
+      "#{base_title} | #{page_title}"
+    end
+  end
 end
