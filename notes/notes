@@ -81,6 +81,7 @@ To Do: Pretty everything up.
 To Do: Should cellar locations be a look-up that I can add to... for instance: "12th Shelf - Left"
        might be a look-up, but "refridgerator" might be something I want to use even tho
        it isn't in the lookup.
+To Do: Validations of bottles... uniqueness, etc.
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from

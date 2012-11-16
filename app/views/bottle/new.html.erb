@@ -4,6 +4,8 @@
   <div class="span6 offset3">
     <%= form_for @bottle do |f| %>
 
+      <%= render 'shared/error_messages', object: f.object %>
+
       <%= f.label :bottle_id, "Bottle Identifier" %>
       <%= f.text_field :bottle_id %>
 
