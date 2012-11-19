@@ -5,6 +5,7 @@ class Bottle < ActiveRecord::Base
   # attr_accessible :bottle_id, :available, :availability, :grape_id
 
   validates :price, allow_nil: true, numericality: { greater_than: 0.01 }
+  validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }
   attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_id, :winery_id, :price
 
   def availability
