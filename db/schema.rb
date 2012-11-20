@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115171257) do
+ActiveRecord::Schema.define(:version => 20121120213419) do
 
   create_table "bottles", :force => true do |t|
-    t.integer  "bottle_id"
+    t.integer  "bottle_id",                                                                                 :null => false
     t.integer  "grape_id"
     t.datetime "created_at",                                                                                :null => false
     t.datetime "updated_at",                                                                                :null => false
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(:version => 20121115171257) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "username",        :limit => 35,                    :null => false
+    t.string   "email",                                            :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.boolean  "approved_user",                 :default => false, :null => false
+    t.string   "password_digest"
+  end
+
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "wineries", :force => true do |t|
     t.string   "name",         :null => false

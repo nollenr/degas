@@ -6,10 +6,12 @@ rails generate model Bottle bottle_id:integer, grape:belongs_to
 rails generate controller Bottle
 
 Saturday 10/06
-rails generate migration AddAvailStatusToBottle availability_change_date:date availability__change_message:string
+rails generate migration AddAvailStatusToBottle availability_change_date:date availability_change_message:string
 (Note:  the word bottle must be in the "name".  ActiveRecord uses that key to create the correct migration.  It
 will be empty if you don't.)
 
+Annotate
+bundle exec annotate
 
 Done:  Ajax the "consume" function
 Done:  Flash messages
@@ -82,6 +84,7 @@ To Do: Should cellar locations be a look-up that I can add to... for instance: "
        might be a look-up, but "refridgerator" might be something I want to use even tho
        it isn't in the lookup.
 To Do: Validations of bottles... uniqueness, etc.
+To Do: MS Excel Export
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
