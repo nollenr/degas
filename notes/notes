@@ -85,6 +85,10 @@ To Do: Should cellar locations be a look-up that I can add to... for instance: "
        it isn't in the lookup.
 To Do: Validations of bottles... uniqueness, etc.
 To Do: MS Excel Export
+To Do: Routes.  These _MUST_ be fixed.
+
+Working: Adding new users.  Logging in.  Signing up.  Need a new 1st page with login/signup
+         "authorized user" bit.
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from

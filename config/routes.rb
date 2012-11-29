@@ -1,4 +1,10 @@
 Degas::Application.routes.draw do
+  resources :users, only: [:new, :create, :index]
+
+  # match "users/new" => "users#new", :via => :get
+  # match "users" => "users#create", :via => :post
+  # match "users" => "users#index", :via => :get
+
   match "grapes" => "grape#index"
   match "bottles" => "bottle#index", :via => :get
   match "bottles" => "bottle#create", :via => :post
