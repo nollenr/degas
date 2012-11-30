@@ -6,7 +6,7 @@
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :username %>
+      <%= f.label :username, "Username (lowercase)" %>
       <%= f.text_field :username %>
 
       <%= f.label :email %>

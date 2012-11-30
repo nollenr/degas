@@ -86,9 +86,11 @@ To Do: Should cellar locations be a look-up that I can add to... for instance: "
 To Do: Validations of bottles... uniqueness, etc.
 To Do: MS Excel Export
 To Do: Routes.  These _MUST_ be fixed.  What's the difference between ROUTES and MATCH?
+To Do: Deploy with SSL (see 7.4.4 of the Hartl book).
 
 Working: Adding new users.  Logging in.  Signing up.  Need a new 1st page with login/signup
-         "authorized user" bit.
+         "authorized user" bit.  New users is complete.  1st page is complete.  Working on 
+         chapter 8.  
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from

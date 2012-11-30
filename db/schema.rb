@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120213419) do
+ActiveRecord::Schema.define(:version => 20121130210717) do
 
   create_table "bottles", :force => true do |t|
     t.integer  "bottle_id",                                                                                 :null => false
@@ -47,8 +47,10 @@ ActiveRecord::Schema.define(:version => 20121120213419) do
     t.datetime "updated_at",                                       :null => false
     t.boolean  "approved_user",                 :default => false, :null => false
     t.string   "password_digest"
+    t.string   "remember_token"
   end
 
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "wineries", :force => true do |t|
