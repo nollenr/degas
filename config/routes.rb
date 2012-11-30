@@ -11,7 +11,8 @@ Degas::Application.routes.draw do
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  resources :users, only: [:new, :create, :index]
+  # resources :users, only: [:new, :create, :index, :edit]
+  resources :users
 
   # match "users/new" => "users#new", :via => :get
   # match "users" => "users#create", :via => :post

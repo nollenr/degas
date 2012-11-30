@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      sign_in @user
       redirect_to :users
     else
       render 'new'
@@ -14,6 +15,19 @@ class UsersController < ApplicationController
 
   def index
     @users = User.order("username")
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      redirect_to bottles_path
+    else
+      render 'edit'
+    end
   end
 
 end
