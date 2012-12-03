@@ -1,6 +1,8 @@
 class BottleController < ApplicationController
   helper_method :sort_column, :sort_direction, :show_avail
 
+  before_filter :signed_in_user
+
   def new
     @bottle = Bottle.new
   end

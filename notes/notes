@@ -61,14 +61,14 @@ Done:  bottles.available should be not null.  All rows where avialable is null n
        deleted.
 Done:  Add a "copy" function for entering bottles of wine.  Should be easy.  Go to the entry
        form with values for the bottle info.
-
+Done:  Authentication (what about username on bottles, wineries and grapes?  unions for wineries and grapes?)
+       as done by M. Hartl.
+Done:  Authorization as done by M. Hartl.
 
 To Do: Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
        A great example is the wine I just purchased from Ljubljana
 To Do: Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
        I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
-To Do: Authentication (what about username on bottles, wineries and grapes?  unions for wineries and grapes?)
-       as done by M. Hartl.
 To Do: Error message displays (from the tutorial by M. Hartl)
 To Do: Flash a consume... so the user sees the status change.
 To Do: Rating wines... what's this look like... does "everything" have to match... even vintage?
@@ -91,7 +91,8 @@ To Do: Deploy with SSL (see 7.4.4 of the Hartl book).
 Working: Adding new users.  Logging in.  Signing up.  Working on chapter 9 - Updating Users. 
          NEED TO LOOK AT USER ROUTES.  I'm getting an error during edit which I believe
          is becuase of routes. It is becuase of routes.  Do I need to do something like
-         sessions with the "form_for"? 
+         sessions with the "form_for"?  I'm going to use the model I have for now and 
+         work on authorization (9.2). 
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
