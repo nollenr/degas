@@ -5,6 +5,7 @@
 /* -------------------------- */
 
 $grayMediumLight: #eaeaea;
+$blueHeroBackground: #CEDEF4;
 
 /* -------------------------- */
 /* universal settings         */
@@ -132,3 +133,10 @@ footer ul li {
   @extend .control-group;
   @extend .error;
  }
+
+/* -------------------------- */
+/* bottle index               */
+/* -------------------------- */
+.hero-unit-bottle-index {
+  background-color: $blueHeroBackground;
+}

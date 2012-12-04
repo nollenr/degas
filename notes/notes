@@ -61,8 +61,7 @@ Done:  bottles.available should be not null.  All rows where avialable is null n
        deleted.
 Done:  Add a "copy" function for entering bottles of wine.  Should be easy.  Go to the entry
        form with values for the bottle info.
-Done:  Authentication (what about username on bottles, wineries and grapes?  unions for wineries and grapes?)
-       as done by M. Hartl.
+Done:  Authentication as done by M. Hartl.
 Done:  Authorization as done by M. Hartl.
 
 To Do: Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
@@ -93,6 +92,9 @@ Working: Adding new users.  Logging in.  Signing up.  Working on chapter 9 - Upd
          is becuase of routes. It is becuase of routes.  Do I need to do something like
          sessions with the "form_for"?  I'm going to use the model I have for now and 
          work on authorization (9.2). 
+Working: Adding field to bottles to identify them as belonging to a specific user.
+         Need to make it work like microposts.  Dump all of the data from the bottles
+         table.  Change the model so that it is a belongs_to/has_many relationship
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from

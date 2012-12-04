@@ -16,8 +16,8 @@
                   <li><%= link_to "Profile", '#' %></li>
                   <li><%= link_to "Settings", edit_user_path(current_user) %></li>
                   <li class="divider"></li>
-                  <li><%= link_to "Bottle List", '#' %></li>
-                  <li><%= link_to "Bottle Entry", '#' %></li>
+                  <li><%= link_to "Bottle List", bottles_path %></li>
+                  <li><%= link_to "Bottle Entry", new_bottle_path %></li>
                   <li class="divider"></li>
                   <li>
                     <%= link_to "Sign out", signout_path, method: "delete" %>
