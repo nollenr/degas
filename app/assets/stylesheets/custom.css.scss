@@ -6,6 +6,7 @@
 
 $grayMediumLight: #eaeaea;
 $blueHeroBackground: #CEDEF4;
+$yellowHeroBackground: #FFFF99;
 
 /* -------------------------- */
 /* universal settings         */
@@ -138,5 +139,5 @@ footer ul li {
 /* bottle index               */
 /* -------------------------- */
 .hero-unit-bottle-index {
-  background-color: $blueHeroBackground;
+  background-color: $yellowHeroBackground;
 }

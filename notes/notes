@@ -106,6 +106,7 @@ Working: Adding field to bottles to identify them as belonging to a specific use
          Changed bottle index search
          from: @search = Bottle.search(params[:q])
          to: @search = current_user.bottles.search(params[:q])
+         Changing "consume" and "copy" methods with the same changes as above.
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from

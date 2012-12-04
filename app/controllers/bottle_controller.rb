@@ -32,7 +32,7 @@ class BottleController < ApplicationController
 
   def consume
     @bottleid = params[:id].to_s
-    bottle = Bottle.update(params[:id], available: :false)
+    bottle = current_user.bottles.update(params[:id], available: :false)
     bottle.save
     flash[:success] = "You have successfully consumed bottle " + bottle.bottle_id.to_s + "!"
     # redirect_to bottle_index_path
@@ -44,7 +44,7 @@ class BottleController < ApplicationController
 
   def copy
     # available default value is "true"
-    @source_bottle = Bottle.find_by_id(params[:id])
+    @source_bottle = current_user.bottles.find_by_id(params[:id])
     @bottle = @source_bottle.dup
     @bottle[:bottle_id] = nil
     @bottle[:available] = :true
