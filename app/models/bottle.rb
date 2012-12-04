@@ -17,16 +17,19 @@
 #  name                        :string(255)
 #  cellar_location             :string(30)
 #  price                       :decimal(8, 2)
+#  user_id                     :integer          not null
 #
 
 class Bottle < ActiveRecord::Base
   belongs_to :grape
   belongs_to :winery
+  belongs_to :user
   # In order to run seed, grape_id needs to be accessible
   # attr_accessible :bottle_id, :available, :availability, :grape_id
 
   validates :price, allow_nil: true, numericality: { greater_than: 0.01 }
   validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }
+  validates :user_id, presence: true
   attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_id, :winery_id, :price
 
   def availability

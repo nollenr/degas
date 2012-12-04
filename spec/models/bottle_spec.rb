@@ -17,6 +17,7 @@
 #  name                        :string(255)
 #  cellar_location             :string(30)
 #  price                       :decimal(8, 2)
+#  user_id                     :integer          not null
 #
 
 require 'spec_helper'

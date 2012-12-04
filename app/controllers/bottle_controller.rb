@@ -8,8 +8,9 @@ class BottleController < ApplicationController
   end
 
   def create
-    @bottle = Bottle.new(params[:bottle])
+    @bottle = current_user.bottles.new(params[:bottle])
     if @bottle.save
+      flash[:success] = "Bottle created."
       redirect_to :bottle_index
     else
       render 'new'
