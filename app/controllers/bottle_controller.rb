@@ -19,7 +19,7 @@ class BottleController < ApplicationController
 
   def index
     @param_string = params.to_s
-    @search = Bottle.search(params[:q])
+    @search = current_user.bottles.search(params[:q])
     @search_result = @search.result.to_sql
       @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
       @query =   @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery).to_sql

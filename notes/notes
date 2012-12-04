@@ -88,6 +88,8 @@ To Do: Routes.  These _MUST_ be fixed.  What's the difference between ROUTES and
 To Do: Deploy with SSL (see 7.4.4 of the Hartl book).
 To Do: Should user.password_digest and user.remember_token be "not null"?
 To Do: bottle.grape_id not null and validates presence?
+To Do: bottle controller index method has a bunch of unnecessary de-bugging
+       stuff that should be cleaned up.
 
 Working: Adding new users.  Logging in.  Signing up.  Working on chapter 9 - Updating Users. 
          NEED TO LOOK AT USER ROUTES.  I'm getting an error during edit which I believe
@@ -98,8 +100,12 @@ Working: Adding field to bottles to identify them as belonging to a specific use
          Need to make it work like microposts.  Dump all of the data from the bottles
          table.  Change the model so that it is a belongs_to/has_many relationship
          Added user_id to bottles table.  Added validates presence: true.  Added has_many
-         to user model and belongs_to to the bottle model.  Changed bottle create from: 
+         to user model and belongs_to to the bottle model.  Changed bottle create 
+         from: @bottle = Bottle.new(params[:bottle]) 
          to: @bottle = current_user.bottles.new(params[:bottle]).
+         Changed bottle index search
+         from: @search = Bottle.search(params[:q])
+         to: @search = current_user.bottles.search(params[:q])
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
