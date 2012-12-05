@@ -27,6 +27,8 @@ Degas::Application.routes.draw do
   # resources :bottle  do
     put :consume, on: :member
     get :copy, on: :member
+    get :rate_edit, on: :member
+    put :rate_update, on: :member
   end
 
   # The priority is based upon order of creation:

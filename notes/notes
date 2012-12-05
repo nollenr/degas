@@ -86,8 +86,6 @@ To Do:3:Can't add a new winery on the fly.  That might be okay for grapes... but
 To Do: :Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
         I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
 To Do: :Flash a consume... so the user sees the status change.
-To Do:0:Rating wines... what's this look like... does "everything" have to match... even vintage?
-        can I display this rating on the index if it exists?
 To Do:1:Un-consuming a bottle
 To Do: :Add autocomplete on bottle entry
 Hold:  :Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
@@ -110,9 +108,25 @@ To Do:9:bottle controller index method has a bunch of unnecessary de-bugging
 To Do: :approved user bit... do I want to use that?  How?  What do I message
         to users?  Do I list that attribute on the index page?
 To Do: :Am I forced to have a grape/winery?  Not sure if this is good or bad
-Working :bottle_id should be unique across user_id, not across all bottles!
 To Do: :menu... bottle/new and bottle/list should not be under account!
 
+================ Next Version Ideas ====================================
+submit bug reports
+submit upgrade requests
+pop-up for rating wines
+allow multiple ratings per bottle.
+========================================================================
+
+Working:Rating wines... what's this look like... does "everything" have to match... even vintage?
+        can I display this rating on the index if it exists?  
+        I think I'm going to make it another link
+        off the bottles page... so that I can rate consumed wines as well available wines.  
+        how do I want to handle rating wines?  A simple database column on bottles?
+        what if I want to allow multiple people to rate a single bottle (greg/ron etc). 
+        For this version a simple database column, simple page, one rating per bottle.
+        Now that I've added a "form_for", the "rate" link on the bottles page no longer
+        works... "undefined method 'bottle_path' ".  Either routes is wrong (in this
+        case I don't think so), or, I need to use something else in the "form_for" (probably)
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from

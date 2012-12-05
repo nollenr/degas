@@ -34,7 +34,7 @@ class BottleController < ApplicationController
     @bottleid = params[:id].to_s
     bottle = current_user.bottles.update(params[:id], available: :false)
     bottle.save
-    flash[:success] = "You have successfully consumed bottle " + bottle.bottle_id.to_s + "!"
+    flash.now[:success] = "You have successfully consumed bottle " + bottle.bottle_id.to_s + "!"
     # redirect_to bottle_index_path
     respond_to do |format|
       format.html { redirect_to bottle_index_path } #index.html.erb
@@ -50,6 +50,11 @@ class BottleController < ApplicationController
     @bottle[:available] = :true
     render 'new'
   end
+
+  def rate_edit
+    @bottle = current_user.bottles.find_by_id(params[:id])
+  end
+
 
 private
   def sort_column

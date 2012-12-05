@@ -1,0 +1,45 @@
+<% provide(:title, 'Rate a Bottle') %>
+
+<div class="hero-unit hero-unit-bottle-index">
+    <h1>Rate a Bottle</h1>
+</div>
+
+<table class="table table-hover">
+  <tr>
+    <th>Bottle Id</th>
+    <th>Cellar Location</th>
+    <th>Winery</th>
+    <th>Grape</th>
+    <th>Vintage</th>
+    <th>Name</th>
+    <th>Vineyard</th>
+    <th>Drink By Year</th>
+    <th>Price</th>
+    <th>Consumed or Available</th>
+  </tr>
+  <tr>
+    <td><%= @bottle.bottle_id %></td>
+    <td><%= @bottle.cellar_location %></td>
+    <td><%= @bottle.winery.name %></td>
+    <td><%= @bottle.grape.name %></td>
+    <td><%= @bottle.vintage %></td>
+    <td><%= @bottle.name %></td>
+    <td><%= @bottle.vineyard %></td>
+    <td><%= @bottle.drink_by_year %></td>
+    <td><%= number_to_currency(@bottle.price) %></td>
+    <td>Consumed or Available</td>
+  </tr>
+</table>
+
+<%= form_for @bottle do |f| %>
+  radio_button("bottle", "rating", "0")
+  radio_button("bottle", "rating", "1")
+  radio_button("bottle", "rating", "2")
+  radio_button("bottle", "rating", "3")
+  radio_button("bottle", "rating", "4")
+  radio_button("bottle", "rating", "5")
+  radio_button("bottle", "rating", "6")
+  radio_button("bottle", "rating", "7")
+  radio_button("bottle", "rating", "8")
+  radio_button("bottle", "rating", "9")
+<% end %>
