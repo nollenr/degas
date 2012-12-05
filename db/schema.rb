@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204164916) do
+ActiveRecord::Schema.define(:version => 20121205175336) do
 
   create_table "bottles", :force => true do |t|
     t.integer  "bottle_id",                                                                                 :null => false
-    t.integer  "grape_id"
+    t.integer  "grape_id",                                                                                  :null => false
     t.datetime "created_at",                                                                                :null => false
     t.datetime "updated_at",                                                                                :null => false
     t.boolean  "available",                                                               :default => true, :null => false
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20121204164916) do
   end
 
   add_index "bottles", ["grape_id"], :name => "index_bottles_on_grape_id"
+  add_index "bottles", ["user_id", "bottle_id"], :name => "index_bottles_on_user_id_and_bottle_id", :unique => true
 
   create_table "grapes", :force => true do |t|
     t.string   "name",        :limit => 100, :null => false
@@ -47,8 +48,8 @@ ActiveRecord::Schema.define(:version => 20121204164916) do
     t.datetime "created_at",                                       :null => false
     t.datetime "updated_at",                                       :null => false
     t.boolean  "approved_user",                 :default => false, :null => false
-    t.string   "password_digest"
-    t.string   "remember_token"
+    t.string   "password_digest",                                  :null => false
+    t.string   "remember_token",                                   :null => false
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

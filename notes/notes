@@ -75,6 +75,10 @@ Done: Adding field to bottles to identify them as belonging to a specific user.
          from: @search = Bottle.search(params[:q])
          to: @search = current_user.bottles.search(params[:q])
          Changing "consume" and "copy" methods with the same changes as above.
+Done: Should user.password_digest and user.remember_token be "not null"?
+Done: bottle.grape_id not null and validates presence?
+Done: bottle_id should be unique across user_id, not across all bottles!  Created a "validate"
+      and an index.
 
 
 To Do:3:Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
@@ -101,10 +105,13 @@ To Do:6:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES an
         "form_for" to work.  Do I need to do something like sessions with "form_for"?
         Also, the bottle/bottles thing needs to get worked out, too.  That seems really broken.
 To Do: :Deploy with SSL (see 7.4.4 of the Hartl book).
-To Do:0:Should user.password_digest and user.remember_token be "not null"?
-To Do:0:bottle.grape_id not null and validates presence?
 To Do:9:bottle controller index method has a bunch of unnecessary de-bugging
         stuff that should be cleaned up.
+To Do: :approved user bit... do I want to use that?  How?  What do I message
+        to users?  Do I list that attribute on the index page?
+To Do: :Am I forced to have a grape/winery?  Not sure if this is good or bad
+Working :bottle_id should be unique across user_id, not across all bottles!
+To Do: :menu... bottle/new and bottle/list should not be under account!
 
 
 BTW:
