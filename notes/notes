@@ -57,46 +57,14 @@ Done:  Price on bottles.  Price has been added to the model, index page, and
              http://stackoverflow.com/questions/1019939/ruby-on-rails-best-method-of-handling-currency-money
              http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#M001969  
 Done:  Default value for available should be true!
+Done:  Error message displays (from the tutorial by M. Hartl)
 Done:  bottles.available should be not null.  All rows where avialable is null need to be
        deleted.
 Done:  Add a "copy" function for entering bottles of wine.  Should be easy.  Go to the entry
        form with values for the bottle info.
 Done:  Authentication as done by M. Hartl.
 Done:  Authorization as done by M. Hartl.
-
-To Do: Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
-       A great example is the wine I just purchased from Ljubljana
-To Do: Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
-       I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
-To Do: Error message displays (from the tutorial by M. Hartl)
-To Do: Flash a consume... so the user sees the status change.
-To Do: Rating wines... what's this look like... does "everything" have to match... even vintage?
-       can I display this rating on the index if it exists?
-To Do: Un-consuming a bottle
-To Do: Add autocomplete on bottle entry
-Hold:  Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
-       Ajax consume function and go to a page to update the date/message when consuming... then go back
-       to the index page.  What would that user experience be like?  Would that make adding a pop-up 
-       later easier?  It think so.  Also... can the wine be rated at the same time?
-To Do: Pretty everything up.
-To Do: Should cellar locations be a look-up that I can add to... for instance: "12th Shelf - Left"
-       might be a look-up, but "refridgerator" might be something I want to use even tho
-       it isn't in the lookup.
-To Do: Validations of bottles... uniqueness, etc.
-To Do: MS Excel Export
-To Do: Routes.  These _MUST_ be fixed.  What's the difference between ROUTES and MATCH?
-To Do: Deploy with SSL (see 7.4.4 of the Hartl book).
-To Do: Should user.password_digest and user.remember_token be "not null"?
-To Do: bottle.grape_id not null and validates presence?
-To Do: bottle controller index method has a bunch of unnecessary de-bugging
-       stuff that should be cleaned up.
-
-Working: Adding new users.  Logging in.  Signing up.  Working on chapter 9 - Updating Users. 
-         NEED TO LOOK AT USER ROUTES.  I'm getting an error during edit which I believe
-         is becuase of routes. It is becuase of routes.  Do I need to do something like
-         sessions with the "form_for"?  I'm going to use the model I have for now and 
-         work on authorization (9.2). 
-Working: Adding field to bottles to identify them as belonging to a specific user.
+Done: Adding field to bottles to identify them as belonging to a specific user.
          Need to make it work like microposts.  Dump all of the data from the bottles
          table.  Change the model so that it is a belongs_to/has_many relationship
          Added user_id to bottles table.  Added validates presence: true.  Added has_many
@@ -107,6 +75,37 @@ Working: Adding field to bottles to identify them as belonging to a specific use
          from: @search = Bottle.search(params[:q])
          to: @search = current_user.bottles.search(params[:q])
          Changing "consume" and "copy" methods with the same changes as above.
+
+
+To Do:3:Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
+        A great example is the wine I just purchased from Ljubljana
+To Do: :Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
+        I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
+To Do: :Flash a consume... so the user sees the status change.
+To Do:0:Rating wines... what's this look like... does "everything" have to match... even vintage?
+        can I display this rating on the index if it exists?
+To Do:1:Un-consuming a bottle
+To Do: :Add autocomplete on bottle entry
+Hold:  :Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
+        Ajax consume function and go to a page to update the date/message when consuming... then go back
+        to the index page.  What would that user experience be like?  Would that make adding a pop-up 
+        later easier?  It think so.  Also... can the wine be rated at the same time?
+To Do:9:Pretty everything up.
+To Do:8:Should cellar locations be a look-up that I can add to... for instance: "12th Shelf - Left"
+        might be a look-up, but "refridgerator" might be something I want to use even tho
+        it isn't in the lookup.
+To Do:7:Validations of bottles... uniqueness, etc.
+To Do:2:MS Excel Export
+To Do:6:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES and MATCH?
+        I had to add a route for users (which I didn't want) in order to get the 
+        "form_for" to work.  Do I need to do something like sessions with "form_for"?
+        Also, the bottle/bottles thing needs to get worked out, too.  That seems really broken.
+To Do: :Deploy with SSL (see 7.4.4 of the Hartl book).
+To Do:0:Should user.password_digest and user.remember_token be "not null"?
+To Do:0:bottle.grape_id not null and validates presence?
+To Do:9:bottle controller index method has a bunch of unnecessary de-bugging
+        stuff that should be cleaned up.
+
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
