@@ -2,35 +2,32 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for @bottle do |f| %>
+    <%= simple_form_for @bottle do |f| %>
 
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :bottle_id, "Bottle Identifier" %>
-      <%= f.text_field :bottle_id %>
+      <%= f.input :bottle_id, label: 'Bottle Identifier'%>
 
-      <%= f.label :cellar_location, "Cellar Location" %>
-      <%= f.text_field :cellar_location %>
+      <%= f.input :cellar_location %>
 
-      <%= f.label :vintage, "Vintage (Year)" %>
-      <%= f.text_field :vintage %>
+      <%= f.input :vintage, label: "Vintage (Year)" %>
 
-      <%= f.label :drink_by_year, "Drink By (Year)" %>
-      <%= f.text_field :drink_by_year %>
+      <%= f.input :drink_by_year, label: "Drink By (Year)" %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.input :name %>
 
-      <%= f.label :vineyard %>
-      <%= f.text_field :vineyard %>
+      <%= f.input :vineyard %>
 
-      <%= f.label :price %>
-      <%= f.text_field :price %>
+      <%= f.input :price %>
 
-      <%= collection_select :bottle, :grape_id, Grape.all, :id, :name, selected: @bottle.grape_id %>
-      <%= collection_select :bottle, :winery_id, Winery.all, :id, :name, selected: @bottle.winery_id %>
+      <%= f.association :grape,  collection: Grape.all(order: 'name'), include_blank: false %>
 
-      <%= f.submit "Create Bottle", class: "btn btn-large btn-primary" %>
+      <%= f.association :winery, collection: Winery.all(order: 'name'), include_blank: true %>
+
+      <%= f.button :submit, label: "Create Bottle", class: "btn btn-large btn-primary" %>
+      <%= link_to "Cancel", bottles_path, class: 'btn btn-large' %>
+
+      <!-- <%= collection_select :bottle, :grape_id, Grape.all, :id, :name, selected: @bottle.grape_id %> -->
 
     <% end %>
   </div>

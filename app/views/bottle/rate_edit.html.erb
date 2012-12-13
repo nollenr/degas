@@ -31,15 +31,17 @@
   </tr>
 </table>
 
-<%= form_for @bottle do |f| %>
-  radio_button("bottle", "rating", "0")
-  radio_button("bottle", "rating", "1")
-  radio_button("bottle", "rating", "2")
-  radio_button("bottle", "rating", "3")
-  radio_button("bottle", "rating", "4")
-  radio_button("bottle", "rating", "5")
-  radio_button("bottle", "rating", "6")
-  radio_button("bottle", "rating", "7")
-  radio_button("bottle", "rating", "8")
-  radio_button("bottle", "rating", "9")
+<%= simple_form_for @bottle do |f| %>
+  <div class = 'form-vertical well'>
+    <fieldset>
+      <legend>Rate This Bottle</legend>
+      <%= f.input :rating, :collection => 0..9, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %>
+
+    <div class="form-actions">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+
+    </div>
+
+    </fieldset>
+  </div>
 <% end %>

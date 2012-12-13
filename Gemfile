@@ -31,3 +31,6 @@ gem 'jquery-rails', '2.1.3'
 gem 'will_paginate', '3.0.3'
 gem 'faker', '1.1.2'
 gem 'ransack', '0.7.0'
+
+# gem used for creating forms
+gem 'simple_form', '2.0.4'

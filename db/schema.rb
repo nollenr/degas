@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205175336) do
+ActiveRecord::Schema.define(:version => 20121212205210) do
 
   create_table "bottles", :force => true do |t|
     t.integer  "bottle_id",                                                                                 :null => false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20121205175336) do
     t.string   "cellar_location",             :limit => 30
     t.decimal  "price",                                     :precision => 8, :scale => 2
     t.integer  "user_id",                                                                                   :null => false
+    t.integer  "rating"
   end
 
   add_index "bottles", ["grape_id"], :name => "index_bottles_on_grape_id"
