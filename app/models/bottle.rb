@@ -31,7 +31,7 @@ class Bottle < ActiveRecord::Base
   validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }, uniqueness: { scope: :user_id, message: "bottle_id should be unique and this identifier was found in your history."}
   validates :user_id, presence: true
   validates :grape_id, presence: {message: "grape cannot be null.  Bottle not created." }
-  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_id, :winery_id, :price
+  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_id, :winery_id, :price, :rating
 
   def availability
     return @availability

@@ -13,23 +13,19 @@ Degas::Application.routes.draw do
 
   # resources :users, only: [:new, :create, :index, :edit]
   resources :users
-  resources :bottles
 
   # match "users/new" => "users#new", :via => :get
   # match "users" => "users#create", :via => :post
   # match "users" => "users#index", :via => :get
 
   match "grapes" => "grape#index"
-  match "bottles" => "bottle#index", :via => :get
-  match "bottles" => "bottle#create", :via => :post
 
-
-  resources :bottle, except: [:show, :update, :edit, :destroy] do
-  # resources :bottle  do
+  # resources :bottles, except: [:show, :update, :edit, :destroy] do
+  # resources :bottles, except: [:show, :update, :edit, :destroy] do
+  resources :bottles  do
     put :consume, on: :member
     get :copy, on: :member
     get :rate_edit, on: :member
-    put :rate_update, on: :member
   end
 
   # The priority is based upon order of creation:

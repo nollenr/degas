@@ -11,7 +11,7 @@ class BottlesController < ApplicationController
     @bottle = current_user.bottles.new(params[:bottle])
     if @bottle.save
       flash[:success] = "Bottle created."
-      redirect_to :bottle_index
+      redirect_to :bottles
     else
       render 'new'
     end
@@ -30,12 +30,27 @@ class BottlesController < ApplicationController
     end #end repond_to
   end   #end index method
 
+  def update
+    if !params.has_key?(:bottle) 
+      flash.now[:error] = "Please choose a rating 0-9."
+      @bottle = current_user.bottles.find_by_id(params[:id])
+      render 'rate_edit'
+    else
+      bottle = current_user.bottles.update(params[:id], rating: params[:bottle][:rating])
+      if bottle.save
+        flash[:success] = "Bottle rating updated."
+        redirect_to :bottles
+      else
+        render 'rate_edit'
+      end
+    end
+  end
+
   def consume
     @bottleid = params[:id].to_s
     bottle = current_user.bottles.update(params[:id], available: :false)
     bottle.save
     flash.now[:success] = "You have successfully consumed bottle " + bottle.bottle_id.to_s + "!"
-    # redirect_to bottle_index_path
     respond_to do |format|
       format.html { redirect_to bottle_index_path } #index.html.erb
       format.js   #consume.js.erb

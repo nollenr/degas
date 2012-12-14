@@ -90,6 +90,20 @@ Done: Should user.password_digest and user.remember_token be "not null"?
 Done: bottle.grape_id not null and validates presence?
 Done: bottle_id should be unique across user_id, not across all bottles!  Created a "validate"
       and an index.
+Done:   Rating wines (version 0.1)
+        ... what's this look like... does "everything" have to match... even vintage?
+        can I display this rating on the index if it exists?  
+        I think I'm going to make it another link
+        off the bottles page... so that I can rate consumed wines as well available wines.  
+        how do I want to handle rating wines?  A simple database column on bottles?
+        what if I want to allow multiple people to rate a single bottle (greg/ron etc). 
+        For this version a simple database column, simple page, one rating per bottle.
+        Now that I've added a "form_for", the "rate" link on the bottles page no longer
+        works... "undefined method 'bottle_path' ".  Either routes is wrong (in this
+        case I don't think so), or, I need to use something else in the "form_for" (probably).
+        Added rating on the bottle index including sorting.
+Done:  :menu... bottle/new and bottle/list should not be under account!
+
 
 
 To Do:3:Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
@@ -110,17 +124,13 @@ To Do:8:Should cellar locations be a look-up that I can add to... for instance: 
         it isn't in the lookup.
 To Do:7:Validations of bottles... uniqueness, etc.
 To Do:2:MS Excel Export
-To Do:6:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES and MATCH?
-        I had to add a route for users (which I didn't want) in order to get the 
-        "form_for" to work.  Do I need to do something like sessions with "form_for"?
-        Also, the bottle/bottles thing needs to get worked out, too.  That seems really broken.
 To Do: :Deploy with SSL (see 7.4.4 of the Hartl book).
 To Do:9:bottle controller index method has a bunch of unnecessary de-bugging
         stuff that should be cleaned up.
 To Do: :approved user bit... do I want to use that?  How?  What do I message
         to users?  Do I list that attribute on the index page?
 To Do: :Am I forced to have a grape/winery?  Not sure if this is good or bad
-To Do: :menu... bottle/new and bottle/list should not be under account!
+To Do: :I have to add "type"... port/wine/champagne/liquor
 
 ================ Next Version Ideas ====================================
 submit bug reports
@@ -129,16 +139,12 @@ pop-up for rating wines
 allow multiple ratings per bottle.
 ========================================================================
 
-Working:Rating wines... what's this look like... does "everything" have to match... even vintage?
-        can I display this rating on the index if it exists?  
-        I think I'm going to make it another link
-        off the bottles page... so that I can rate consumed wines as well available wines.  
-        how do I want to handle rating wines?  A simple database column on bottles?
-        what if I want to allow multiple people to rate a single bottle (greg/ron etc). 
-        For this version a simple database column, simple page, one rating per bottle.
-        Now that I've added a "form_for", the "rate" link on the bottles page no longer
-        works... "undefined method 'bottle_path' ".  Either routes is wrong (in this
-        case I don't think so), or, I need to use something else in the "form_for" (probably)
+Working:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES and MATCH?
+        I had to add a route for users (which I didn't want) in order to get the 
+        "form_for" to work.  Do I need to do something like sessions with "form_for"?
+        Also, the bottle/bottles thing needs to get worked out, too.  That seems really broken.
+        Routes for bottles seems to be fixed.  Need to work on routes for grapes and wineries.
+
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
