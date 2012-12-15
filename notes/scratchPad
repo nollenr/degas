@@ -1,0 +1,10 @@
+      <%= f.association :grape,  collection: Grape.all(order: 'name'), include_blank: false %>
+
+
+Petit Verdot
+Petit Verdot
+Alicante Ganzin
+
+
+   <%= simple_form_for @bottle, html: {class: 'form-horizontal'} do |f| %>
+source: ['Pinot Meunier / Schwarzriesling / Müllerebe', 'Pinot Noir / Spätburgunder / Blauburgunder / Pinot Nero','Pinotage','Pinot St. George']

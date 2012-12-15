@@ -4,7 +4,10 @@ class BottlesController < ApplicationController
   before_filter :signed_in_user
 
   def new
+    logger.debug "In the controller before @bottle"
     @bottle = Bottle.new
+    logger.debug "In the controller after  @bottle"
+    logger.debug "Controller: #{@bottle.attributes.inspect}"
   end
 
   def create
@@ -63,6 +66,7 @@ class BottlesController < ApplicationController
     @bottle = @source_bottle.dup
     @bottle[:bottle_id] = nil
     @bottle[:available] = :true
+    logger.debug "************************************************************************************Controller: #{@bottle.attributes.inspect}"
     render 'new'
   end
 
