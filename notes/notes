@@ -21,6 +21,11 @@ gem install simple_form
 bundle install
 rails generate simple_form:install --bootstrap
 
+Sunday 12/16
+logger.debug "In the controller after  @bottle"
+logger.debug "Controller: #{@bottle.attributes.inspect}"
+
+
 Annotate
 bundle exec annotate
 
