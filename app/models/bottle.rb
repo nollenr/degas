@@ -30,7 +30,8 @@ class Bottle < ActiveRecord::Base
   validates :price, allow_nil: true, numericality: { greater_than: 0.01 }
   validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }, uniqueness: { scope: :user_id, message: "bottle_id should be unique and this identifier was found in your history."}
   validates :user_id, presence: true
-  validates :grape_id, presence: {message: "grape cannot be null.  Bottle not created." }
+  validates :grape_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created."}
+  validates :winery_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created." }
   
   attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_name, :winery_name, :price, :rating
 
@@ -60,7 +61,7 @@ class Bottle < ActiveRecord::Base
   # this setter is executed.  This sets the 
   # database column value. 
   def grape_name= name
-    self.grape = Grape.find_or_create_by_name(name)
+    self.grape = Grape.find_by_name(name)
   end
 
   def winery_name

@@ -2,8 +2,8 @@
     <tr>
       <td><%= bottle.bottle_id %></td>
       <td><%= bottle.cellar_location %></td>
-      <td><%= bottle.winery.name %></td>
-      <td><%= bottle.grape.name %></td>
+      <td><%= bottle.winery.try(:name) %></td>
+      <td><%= bottle.grape.try(:name) %></td>
       <td><%= bottle.vintage %></td>
       <td><%= bottle.name %></td>
       <td><%= bottle.vineyard %></td>

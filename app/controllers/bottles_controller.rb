@@ -24,8 +24,10 @@ class BottlesController < ApplicationController
     @param_string = params.to_s
     @search = current_user.bottles.search(params[:q])
     @search_result = @search.result.to_sql
-      @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
-      @query =   @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery).to_sql
+      # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
+      # @query =   @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery).to_sql
+      @bottles = @search.result.order(sort_column + " " + sort_direction)
+      @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
 
     respond_to do |format|
       format.html #index.html.erb
@@ -66,7 +68,7 @@ class BottlesController < ApplicationController
     @bottle = @source_bottle.dup
     @bottle[:bottle_id] = nil
     @bottle[:available] = :true
-    logger.debug "************************************************************************************Controller: #{@bottle.attributes.inspect}"
+    @bottle[:rating] = nil
     render 'new'
   end
 
