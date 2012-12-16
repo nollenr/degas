@@ -2,8 +2,8 @@
     <tr>
       <td><%= bottle.bottle_id %></td>
       <td><%= bottle.cellar_location %></td>
-      <td><%= bottle.winery.name %></td>
-      <td><%= bottle.grape.name %></td>
+      <td><%= bottle.winery.try(:name) %></td>
+      <td><%= bottle.grape.try(:name) %></td>
       <td><%= bottle.vintage %></td>
       <td><%= bottle.name %></td>
       <td><%= bottle.vineyard %></td>
@@ -12,12 +12,12 @@
       <td><%= bottle.rating %></td>
       <td id='<%= bottle.id.to_s + 'avail' %>' ><%= bottle.availability %></td>
       <% if bottle.available %>
-      <td id='<%= bottle.id.to_s + 'consume' %>' ><%= link_to "Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " +
+        <td id='<%= bottle.id.to_s + 'consume' %>' ><%= link_to "Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " +
         bottle.bottle_id.to_s + "?", remote: true %></td>
       <% else %>
-      <td></td>
+        <td></td>
       <% end %>
-			<td><%= link_to "Copy", copy_bottle_path(bottle.id) %></td>
+      <td><%= link_to "Copy", copy_bottle_path(bottle.id) %></td>
       <td><%= link_to "Rate", rate_edit_bottle_path(bottle.id) %></td>
     </tr>
 

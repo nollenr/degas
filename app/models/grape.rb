@@ -13,4 +13,6 @@
 class Grape < ActiveRecord::Base
   has_many :bottles
   attr_accessible :color, :name
+
+  Color = Grape.select(:color).uniq
 end

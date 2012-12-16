@@ -19,6 +19,8 @@ Degas::Application.routes.draw do
   # match "users" => "users#index", :via => :get
 
   match "grapes" => "grape#index"
+  match "grapes_list" => "grape#list"
+  match "wineries_list" => "wineries#list"
 
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do

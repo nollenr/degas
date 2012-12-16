@@ -30,8 +30,10 @@ class Bottle < ActiveRecord::Base
   validates :price, allow_nil: true, numericality: { greater_than: 0.01 }
   validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }, uniqueness: { scope: :user_id, message: "bottle_id should be unique and this identifier was found in your history."}
   validates :user_id, presence: true
-  validates :grape_id, presence: {message: "grape cannot be null.  Bottle not created." }
-  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_id, :winery_id, :price, :rating
+  validates :grape_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created."}
+  validates :winery_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created." }
+  
+  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_name, :winery_name, :price, :rating
 
   def availability
     return @availability
@@ -45,6 +47,29 @@ class Bottle < ActiveRecord::Base
 
   def set_availability
     self.availability= self.available
+  end
+
+  # getter for virtual attribute grape_name
+  # when a bottle is loaded from the database
+  # this getter is executed and "gets" the grape_name.  
+  def grape_name
+    return grape.try(:name)
+  end
+
+  # setter for virtual attribute grape_name
+  # When a record is saved to the database
+  # this setter is executed.  This sets the 
+  # database column value. 
+  def grape_name= name
+    self.grape = Grape.find_by_name(name)
+  end
+
+  def winery_name
+    return winery.try(:name)
+  end
+
+  def winery_name= name
+    self.winery = Winery.find_by_name(name)
   end
 
 end
