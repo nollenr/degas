@@ -21,6 +21,11 @@ gem install simple_form
 bundle install
 rails generate simple_form:install --bootstrap
 
+Sunday 12/16
+logger.debug "In the controller after  @bottle"
+logger.debug "Controller: #{@bottle.attributes.inspect}"
+
+
 Annotate
 bundle exec annotate
 
@@ -103,16 +108,24 @@ Done:   Rating wines (version 0.1)
         case I don't think so), or, I need to use something else in the "form_for" (probably).
         Added rating on the bottle index including sorting.
 Done:  :menu... bottle/new and bottle/list should not be under account!
-
-
-
-To Do:3:Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
-        A great example is the wine I just purchased from Ljubljana
-To Do: :Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
+Done:  :Index page doesn't work (with :include nor :joins if a foreign key doesn't exist.  In one case
         I get the "nil method" (joins) and in the other case I don't get records with a null fk (include)
+        Don't need to do ANY "joins".  Active record takes care of all of that for me and automatically
+        queries records with has/belongs to.  So much magic built into active record.  WOW.  What I
+        did need to do was add a "try" for records with a null foreign key.  For example on 
+        the bottles index page, I needed to add a "bottle.winery.try(:name)" so that if there was
+        no winery, I didn't receive a "nil" class error.  Very cool.  No "joins", etc.
+Done:  :Add autocomplete on bottle entry.  Grapes and wineries now have a very nice autocomplete.
+        I did cheat tho... I used rails autocomlete and then added css to make it "look" like
+        bootstrap.  Did not figure out bootstrap typeahead.
+Done:  :Am I forced to have a grape/winery?  Not sure if this is good or bad.  For this realease
+        both a grape and winery are required.
+
+
+
+
 To Do: :Flash a consume... so the user sees the status change.
 To Do:1:Un-consuming a bottle
-To Do: :Add autocomplete on bottle entry
 Hold:  :Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
         Ajax consume function and go to a page to update the date/message when consuming... then go back
         to the index page.  What would that user experience be like?  Would that make adding a pop-up 
@@ -129,8 +142,21 @@ To Do:9:bottle controller index method has a bunch of unnecessary de-bugging
         stuff that should be cleaned up.
 To Do: :approved user bit... do I want to use that?  How?  What do I message
         to users?  Do I list that attribute on the index page?
-To Do: :Am I forced to have a grape/winery?  Not sure if this is good or bad
 To Do: :I have to add "type"... port/wine/champagne/liquor
+To Do: :Query by grape color.  List grape color on bottles
+To Do: :Location of winery/bottle... I may have a winery in Walla Walla (US/Washington), but 
+        the grape might be from columbia valley, or from an estate, etc.  Is that the vineyard?
+        No... the vineyard would be "Red Horse Hills", but I might want to find all
+        Oregon Pinots... what level do I want to track the location?  Maybe make a locations
+        model?
+To Do: :Should folks be able to load new wineries/grapes on demand?  That would mean
+        default values for not null columns like "color" for grapes.  If not, then
+        how do I restrict them on the entry form?   Maybe grapes and wineries should
+        be very intensional.  If grapes and wineries are allowed to be entered
+        on the fly, the data could get very sloppy.  So, I'll have to figure out a way
+        to force a selection from the autoselect.
+        Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
+        A great example is the wine I just purchased from Ljubljana.
 
 ================ Next Version Ideas ====================================
 submit bug reports

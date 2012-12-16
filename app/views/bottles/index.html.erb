@@ -5,6 +5,7 @@
 </div>
 
 <%= search_form_for @search, html: {class: "form-inline"}, remote: true do |f| %>
+  <%= Grape::Color[0].color %>
 
   <label>Winery Name</label>
   <%= f.text_field :winery_name_cont, class: "input-small search-query", placeholder: "Wine Name"%>
