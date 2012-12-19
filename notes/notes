@@ -157,6 +157,9 @@ To Do: :Should folks be able to load new wineries/grapes on demand?  That would 
         to force a selection from the autoselect.
         Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
         A great example is the wine I just purchased from Ljubljana.
+To Do: :Index page - if no results are returned set a message to the user to 
+        make the functionality clearer.
+To Do: :I've got to be able to edit a bottle... price, name, availability, etc.
 
 ================ Next Version Ideas ====================================
 submit bug reports
@@ -170,6 +173,11 @@ Working:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES an
         "form_for" to work.  Do I need to do something like sessions with "form_for"?
         Also, the bottle/bottles thing needs to get worked out, too.  That seems really broken.
         Routes for bottles seems to be fixed.  Need to work on routes for grapes and wineries.
+
+Working:Change loayout of index... remove table... add bootstrap
+
+Working:add search by grape color... if I was looking for a bottle of wine, what else
+        would I use?
 
 
 BTW:

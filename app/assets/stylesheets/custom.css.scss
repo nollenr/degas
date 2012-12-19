@@ -139,5 +139,25 @@ footer ul li {
 /* bottle index               */
 /* -------------------------- */
 .hero-unit-bottle-index {
-  background-color: $yellowHeroBackground;
+  background-color: #75B4FF;
+}
+
+.search-title{
+  text-align: left;
+}
+
+.bottle-title {
+  color: DarkSlateGray;
+  text-align: left;
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  font-weight: heavy;
+}
+
+.bottle-title-postfix {
+}
+
+.attribute-name {
+  
 }

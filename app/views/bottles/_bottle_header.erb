@@ -1,19 +1,23 @@
-<!-- <p>params <%= @param_string %></p> -->
-<table class="table table-hover" id='bottle'>
-  <tr>
-    <th><%= sortable "bottle_id",     "Bottle Id " %>   <%= sort_icon("bottle_id") %></th>
-    <th><%= sortable "cellar_location" %>               <%= sort_icon("cellar_location") %></th>
-    <th><%= sortable "wineries.name", "Winery " %>      <%= sort_icon("wineries.name") %></th>
-    <th><%= sortable "grapes.name",   "Grape " %>       <%= sort_icon("grapes.name") %></th>
-    <th><%= sortable "vintage" %>                       <%= sort_icon("vintage") %></th>
-    <th><%= sortable "name" %>                          <%= sort_icon("name") %></th>
-    <th><%= sortable "vineyard" %>                      <%= sort_icon("vineyard") %></th>
-    <th><%= sortable "drink_by_year", "Drink By Year" %><%= sort_icon("drink_by_year") %></th>
-    <th><%= sortable "price" %><%= sort_icon("price") %></th>
-    <th><%= sortable "rating" %><%= sort_icon("rating") %></th>
-    <th>Consumed or Available</th>
-  </tr>
+<div id="bottle">
+  <div class="well well-small" >
+    <h2 class="search-title">Sort</h2>
+  
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= sortable_button "bottle_id",     "Bottle Id " %>
+        <%= sortable_button "cellar_location" %>
+        <%= sortable_button "wineries.name", "Winery " %>
+        <%= sortable_button "grapes.name",   "Grape " %>
+        <%= sortable_button "vintage" %>
+        <%= sortable_button "name" %>
+        <%= sortable_button "vineyard" %>
+        <%= sortable_button "drink_by_year", "Drink By Year" %>
+        <%= sortable_button "price" %>
+        <%= sortable_button "rating" %>
+      </div>
+    </div>
+  </div>
 
   <%= render @bottles %>
 
-</table>
+</div>

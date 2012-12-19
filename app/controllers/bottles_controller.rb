@@ -83,6 +83,7 @@ private
   end
 
   def sort_direction
+    # sanitize the direction... only 2 directions should be allowed
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
