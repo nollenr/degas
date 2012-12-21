@@ -6,27 +6,49 @@
 
 <hr />
 
-<div class="well well-small">
+<div class="row">                    <!-- enclosing row start -->
+  <div class="span12">                <!-- enclosing row size start -->
+    <div class="well well-small" >    <!-- well opening -->
 
-  <h2 class="search-title">Search</h2>
+      <h2 class="search-title">Search</h2>
 
-  <%= search_form_for @search, html: {class: "form-inline"}, remote: true do |f| %>
+      <%= search_form_for @search, html: {class: "form-inline"}, remote: true do |f| %>
+        <div class="row">                <!-- search row start-->
+          <div class="span10">            <!-- search options column size start --> 
+            <div class="search-inputs">
+              <label>Bottle Id</label>
+              <%= f.text_field :bottle_id_eq, class: "input-small search-query", placeholder: "Bottle Id"%>
 
-    <label>Winery Name</label>
-    <%= f.text_field :winery_name_cont, class: "input-small search-query", placeholder: "Wine Name"%>
+              <label>Winery Name</label>  
+              <%= f.text_field :winery_name_cont, class: "input-small search-query", placeholder: "Wine Name"%>
 
-    <label>Grape</label>
-    <%= f.text_field :grape_name_cont, class: "input-small search-query", placeholder: "Grape"%>
+              <label>Grape</label>
+              <%= f.text_field :grape_name_cont, class: "input-small search-query", placeholder: "Grape"%>
+            </div>
 
-    <label>Show Only Available Bottles</label>
-    <%= f.check_box :available_true, class: "input-small search-query" %>
+            <div class="search-checkbox">
+              <label>Show Only Available Bottles</label>
+              <%= f.check_box :available_true, class: "input-small search-query" %>
+            </div>
 
-    <%= hidden_field_tag :direction, params[:direction] %>
-    <%= hidden_field_tag :sort, sort_column  %>
+            <div class="search-dropdown">    
+						  <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'} %>
+            </div>
 
-    <%= f.submit "Update List"%>  
-<% end %>
-</div>
+          </div>                <!-- search options column size end -->
+
+          <div class="span1">   <!-- serach button column size start -->
+            <%= f.submit "Update List"%> 
+          </div>                <!-- serach button column size start -->
+        </div>                  <!-- search row end-->
+
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :sort, sort_column  %>
+    
+      <% end %>
+    </div>                    <!-- well close -->
+  </div>                      <!-- enclosing row size end -->
+</div>                        <!-- enclosing row end -->
 
 <hr />
 

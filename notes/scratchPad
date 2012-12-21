@@ -42,3 +42,6 @@ _bottle.erb
       <td><%= link_to "Copy", copy_bottle_path(bottle.id) %></td>
       <td><%= link_to "Rate", rate_edit_bottle_path(bottle.id) %></td>
     </tr>
+
+new.html.erb (Bottles)
+<!--  collection_select :bottle, :grape_id, Grape.all, :id, :name, selected: @bottle.grape_id  -->

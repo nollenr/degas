@@ -18,16 +18,14 @@ class BottlesController < ApplicationController
   end
 
   def index
-    logger.debug "************************** Index #{Grape::Color.inspect}"
     @param_string = params.to_s
-    @search = current_user.bottles.search(params[:q])
-    @search_result = @search.result.to_sql
-    logger.debug "************************** Index #{@search_result}"
+    @search = current_user.bottles.includes(:winery, :grape).search(params[:q])
       # This was a huge mistake and a mis-comprehension regarding active record.
       # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
-      # @query =   @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery).to_sql
+      # To see what the query looks like add the following 2 lines
+      # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
+      # logger.debug "************************** Index #{@query}"
       @bottles = @search.result.order(sort_column + " " + sort_direction)
-      @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
 
     respond_to do |format|
       format.html #index.html.erb
