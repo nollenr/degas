@@ -34,19 +34,32 @@ class BottlesController < ApplicationController
   end   #end index method
 
   def update
-    if !params.has_key?(:bottle) 
-      flash.now[:error] = "Please choose a rating 0-9."
+    logger.debug "*****************   Controller: #{params.inspect}"
+    if params.has_key?(:rating) # Rating Update Begin
+      if !params.has_key?(:bottle) 
+        flash.now[:error] = "Please choose a rating 0-9."
+        @bottle = current_user.bottles.find_by_id(params[:id])
+        render 'rate_edit'
+      else
+        bottle = current_user.bottles.update(params[:id], rating: params[:bottle][:rating])
+        if bottle.save
+          flash[:success] = "Bottle rating updated."
+          redirect_to :bottles
+        else
+          render 'rate_edit'
+        end
+      end 
+    # Rating Update End
+    else #Bottle Update Begin
       @bottle = current_user.bottles.find_by_id(params[:id])
-      render 'rate_edit'
-    else
-      bottle = current_user.bottles.update(params[:id], rating: params[:bottle][:rating])
-      if bottle.save
-        flash[:success] = "Bottle rating updated."
+      if @bottle.update_attributes(params[:bottle])
+        flash[:success] = "Bottle updated"
         redirect_to :bottles
       else
-        render 'rate_edit'
+        flash[:error] = "Update unsuccessful."
+        render 'edit'
       end
-    end
+    end #Bottle Update End
   end
 
   def consume
@@ -67,6 +80,11 @@ class BottlesController < ApplicationController
     @bottle[:bottle_id] = nil
     @bottle[:available] = :true
     @bottle[:rating] = nil
+    render 'new'
+  end
+
+  def edit
+    @bottle = current_user.bottles.find_by_id(params[:id])
     render 'new'
   end
 

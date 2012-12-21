@@ -36,7 +36,7 @@
     <fieldset>
       <legend>Rate This Bottle</legend>
       <%= f.input :rating, :collection => 0..9, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %>
-
+      <%= hidden_field_tag(:rating, "1") %>
     <div class="form-actions">
       <%= f.button :submit, class: 'btn btn-primary' %>
 

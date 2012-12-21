@@ -12,7 +12,7 @@
 
       <h2 class="search-title">Search</h2>
 
-      <%= search_form_for @search, html: {class: "form-inline"}, remote: true do |f| %>
+      <%= search_form_for @search, html: {class: "form-inline search-form"}, remote: true do |f| %>
         <div class="row">                <!-- search row start-->
           <div class="span10">            <!-- search options column size start --> 
             <div class="search-inputs">
@@ -26,13 +26,13 @@
               <%= f.text_field :grape_name_cont, class: "input-small search-query", placeholder: "Grape"%>
             </div>
 
-            <div class="search-checkbox">
-              <label>Show Only Available Bottles</label>
-              <%= f.check_box :available_true, class: "input-small search-query" %>
-            </div>
-
-            <div class="search-dropdown">    
-						  <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'} %>
+            <div class="search-checkbox-dropdown">
+              <label class="checkbox inline">
+                <%= f.check_box :available_true, class: "input-small search-query" %> Show Only Available Bottles
+              </label>
+              <span class="search-dropdown">
+						    <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'} %>
+              </span>
             </div>
 
           </div>                <!-- search options column size end -->

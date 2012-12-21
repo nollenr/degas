@@ -1,4 +1,10 @@
-<h1>Add Bottle To Cellar</h1>
+<h1>
+  <% if @bottle.id.blank? %>
+    Add Bottle To Cellar
+  <% else %>
+    Edit Bottle In Cellar
+  <% end %>
+</h1>
 
 <div class="row">
   <div class="span6 offset3">
@@ -23,6 +29,10 @@
       <%= f.input :grape_name, input_html: { data: { autocomplete_source: grapes_list_path } } %>
 
       <%= f.input :winery_name, input_html: { data: { autocomplete_winery_source: wineries_list_path } } %>
+
+      <% if !@bottle.id.blank? %>
+        <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
+      <% end %>
 
       <%= f.button :submit, label: "Create Bottle", class: "btn btn-large btn-primary" %>
       <%= link_to "Cancel", bottles_path, class: 'btn btn-large' %>

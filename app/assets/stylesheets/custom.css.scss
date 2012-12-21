@@ -59,7 +59,7 @@ h2 {
   font-size: 1.7em;
   letter-spacing: -1px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
   font-weight: normal;
   color: $grayLight;
 }
@@ -146,12 +146,20 @@ footer ul li {
   background-color: #75B4FF;
 }
 
+.search-form{
+  margin-bottom: 0px;
+}
+
 .search-inputs {
   margin-bottom: 10px;
 }
 
-.search-title{
-  text-align: left;
+.search-checkbox-dropdown{
+  margin-bottom: 0px;
+}
+
+.search-dropdown{
+  margin-left: 50px;
 }
 
 .bottle-title {
@@ -159,13 +167,9 @@ footer ul li {
   text-align: left;
   font-size: 1.7em;
   letter-spacing: -1px;
-  margin-bottom: 30px;
   font-weight: heavy;
 }
 
 .bottle-title-postfix {
-}
-
-.attribute-name {
-  
+  color: DarkSlateGray;
 }

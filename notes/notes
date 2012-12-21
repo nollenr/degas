@@ -121,9 +121,9 @@ Done:  :Add autocomplete on bottle entry.  Grapes and wineries now have a very n
 Done:  :Am I forced to have a grape/winery?  Not sure if this is good or bad.  For this realease
         both a grape and winery are required.
 Done:   Change loayout of index... remove table... add bootstrap
-
 Done:   add search by grape color... if I was looking for a bottle of wine, what else
         would I use?
+Done:   I've got to be able to edit a bottle... price, name, availability, etc.
 
 
 
@@ -167,6 +167,7 @@ To Do: :Should folks be able to load new wineries/grapes on demand?  That would 
 To Do: :Index page - if no results are returned set a message to the user to 
         make the functionality clearer.
 
+
 ================ Next Version Ideas ====================================
 submit bug reports
 submit upgrade requests
@@ -180,7 +181,6 @@ Working:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES an
         Also, the bottle/bottles thing needs to get worked out, too.  That seems really broken.
         Routes for bottles seems to be fixed.  Need to work on routes for grapes and wineries.
 
-Working:I've got to be able to edit a bottle... price, name, availability, etc.
 
 
 BTW:
