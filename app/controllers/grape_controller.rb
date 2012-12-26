@@ -7,7 +7,7 @@ class GrapeController < ApplicationController
   end
 
   def list
-    @grapes = Grape.order(:name).where("name like ?", "%#{params[:term]}%")
+    @grapes = Grape.order(:name).where("name ilike ?", "%#{params[:term]}%")
     render json: @grapes.map(&:name)
   end
 

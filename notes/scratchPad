@@ -45,3 +45,41 @@ _bottle.erb
 
 new.html.erb (Bottles)
 <!--  collection_select :bottle, :grape_id, Grape.all, :id, :name, selected: @bottle.grape_id  -->
+
+<%= f.collection_select(:city_id, 
+        City.all, :id, :name, {},
+        {:data => {  :remote => true,
+                    :url => url_for(:controller => "locations", 
+                                    :action => "filter_by_city")
+                }
+        }
+    )
+%>
+
+ <%= collection_select :payment,
+                         :category_id,
+                         Category.find(:all, :order => 'name', :conditions => ['for_debits = 1 AND (builtin = 1 OR user_id = ?)', session[:user][:id]]),
+                         :id,
+                         :name,
+                         { :with => "'category_id='+this.value" },
+                         {:onChange => remote_function(:update => "ajaxmessage", :url => { :action => :categorise_manually }, :position => "replace") } %>
+
+
+
+Combox from Autocomplete
+rails3-jquery-autocomplete
+http://www.mcbsys.com/techblog/2012/10/convert-a-select-drop-down-box-to-an-autocomplete-in-rails/
+
+Stackoverflow that helped answer the above question.
+http://stackoverflow.com/questions/13096619/rails3-jquery-autocomplete-how-to-extend-select-function/13096823#13096823
+
+CoffeeScript Page:
+http://jashkenas.github.com/coffee-script/
+
+
+ `$('#bottle_grape_name').bind('autocompletechange', function(event, ui) {
+    if(!ui.item) {
+        alert('User clicked on "foo."');
+    }
+});`
+
