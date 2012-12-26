@@ -27,6 +27,7 @@
       <%= f.input :price %>
 
       <%= f.input :grape_name, input_html: { data: { autocomplete_source: grapes_list_path } } %>
+      <!-- %= f.input :grape_id, collection: Grape.order("name"), selected: @bottle.grape_id  % -->
 
       <%= f.input :winery_name, input_html: { data: { autocomplete_winery_source: wineries_list_path } } %>
 

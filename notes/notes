@@ -166,7 +166,7 @@ To Do: :Should folks be able to load new wineries/grapes on demand?  That would 
         A great example is the wine I just purchased from Ljubljana.
 To Do: :Index page - if no results are returned set a message to the user to 
         make the functionality clearer.
-
+To Do: :Should the bottle ID be a text field?
 
 ================ Next Version Ideas ====================================
 submit bug reports
@@ -180,6 +180,10 @@ Working:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES an
         "form_for" to work.  Do I need to do something like sessions with "form_for"?
         Also, the bottle/bottles thing needs to get worked out, too.  That seems really broken.
         Routes for bottles seems to be fixed.  Need to work on routes for grapes and wineries.
+
+Working:User must select a grape and winery from the list.  So far, I've managed
+        to add some JavaScript that should do the trick (maybe)?  
+
 
 
 
