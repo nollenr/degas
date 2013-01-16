@@ -26,12 +26,18 @@
               <%= f.text_field :grape_name_cont, class: "input-small search-query", placeholder: "Grape"%>
             </div>
 
+                <div class="checkbox inline">
+                  <label> <%= check_box_tag 'q[bottle_type_name_in][]', "Wine" %>Wine</label>
+                  <label> <%= check_box_tag 'q[bottle_type_name_in][]', "Port" %>Port</label>
+                  <!-- %= f.collection_select :bottle_type_name_eq, BottleType.select(:name), :name, :name, {include_blank: 'Bottle Type'} % -->
+                </div>
+
             <div class="search-checkbox-dropdown">
               <label class="checkbox inline">
                 <%= f.check_box :available_true, class: "input-small search-query" %> Show Only Available Bottles
               </label>
               <span class="search-dropdown">
-						    <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'} %>
+                <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'} %>
               </span>
             </div>
 
