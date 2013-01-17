@@ -45,9 +45,9 @@
 #
 
 puts "Loading Bottle Types"
-  Bottle_type.find_or_create_by_name!("Wine")
-  Bottle_type.find_or_create_by_name!("Port")
-  Bottle_type.find_or_create_by_name!("Late Harvest")
-  Bottle_type.find_or_create_by_name!("Ice Wine")
-  Bottle_type.find_or_create_by_name!("Liquor")
-  Bottle_type.find_or_create_by_name!("Other")
+  BottleType.find_or_create_by_name!("Wine") { |b| b.display_order = 1 }
+  BottleType.find_or_create_by_name!("Port") { |b| b.display_order = 2 }
+  BottleType.find_or_create_by_name!("Late Harvest") { |b| b.display_order = 3 }
+  BottleType.find_or_create_by_name!("Ice Wine") { |b| b.display_order = 4 }
+  BottleType.find_or_create_by_name!("Liquor") { |b| b.display_order = 5 }
+  BottleType.find_or_create_by_name!("Other") { |b| b.display_order = 6 }
