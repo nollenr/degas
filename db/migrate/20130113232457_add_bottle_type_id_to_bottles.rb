@@ -9,7 +9,7 @@ class AddBottleTypeIdToBottles < ActiveRecord::Migration
             ON UPDATE NO ACTION ON DELETE NO ACTION;
     SQL
 
-    Bottle_type.find_or_create_by_name("Wine")
+    BottleType.find_or_create_by_name!("Wine") { |b| b.display_order = 1 }
 
     execute <<-SQL
       UPDATE bottles SET bottle_type_id = (SELECT id FROM bottle_types WHERE name = 'Wine');
