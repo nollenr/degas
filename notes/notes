@@ -167,6 +167,7 @@ To Do: :Should folks be able to load new wineries/grapes on demand?  That would 
 To Do: :Index page - if no results are returned set a message to the user to 
         make the functionality clearer.
 To Do: :Should the bottle ID be a text field?
+To Do: :Tasting notes on "consume"
 
 ================ Next Version Ideas ====================================
 submit bug reports
@@ -184,6 +185,11 @@ Working:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES an
 Working:User must select a grape and winery from the list.  So far, I've managed
         to add some JavaScript that should do the trick (maybe)?  
 
+Working:I have to add "type"... port/wine/champagne/liquor/Late Harvest.  This includes
+        searching and sorting.  Add a new model (plus has many/belongs to).  
+
+Working:Date added to cellar
+Working:Notes (on enter/edit bottle)
 
 
 

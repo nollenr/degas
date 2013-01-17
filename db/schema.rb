@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212205210) do
+ActiveRecord::Schema.define(:version => 20130115012851) do
+
+  create_table "bottle_types", :force => true do |t|
+    t.string   "name",          :limit => 30, :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "display_order"
+  end
+
+  add_index "bottle_types", ["name"], :name => "index_bottle_types_on_name", :unique => true
 
   create_table "bottles", :force => true do |t|
     t.integer  "bottle_id",                                                                                 :null => false
@@ -30,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20121212205210) do
     t.decimal  "price",                                     :precision => 8, :scale => 2
     t.integer  "user_id",                                                                                   :null => false
     t.integer  "rating"
+    t.integer  "bottle_type_id",                                                                            :null => false
   end
 
   add_index "bottles", ["grape_id"], :name => "index_bottles_on_grape_id"

@@ -6,12 +6,29 @@
   <% end %>
 </h1>
 
+<%= simple_form_for @bottle, html: {class: 'form-horizontal'} do |f| %>
+
 <div class="row">
   <div class="span6 offset3">
-   <%= simple_form_for @bottle, html: {class: 'form-horizontal'} do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  </div>
+</div>
 
-      <%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+  <div class="span6 offset3">
+    <div class="control-group">
+      <div class="controls">
+        <div class="radio inline">
+    <%= f.collection_radio_buttons :bottle_type_id, BottleType.order("display_order"), :id, :name %>
+    <!-- %= f.collection_radio_buttons :bottle_type_id, Bottle_type.order("display_order"), :id, :name, item_wrapper_class: 'radio inline' % -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="row">
+  <div class="span6 offset3">
       <%= f.input :bottle_id, label: 'Bottle Identifier' %>
 
       <%= f.input :cellar_location %>
