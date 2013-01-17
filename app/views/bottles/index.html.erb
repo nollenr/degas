@@ -15,15 +15,15 @@
       <%= search_form_for @search, html: {class: "form-inline search-form"}, remote: true do |f| %>
         <div class="row">                <!-- search row start-->
           <div class="span10">            <!-- search options column size start --> 
-            <div class="search-inputs">
+            <div class="search-inputs" >
               <label>Bottle Id</label>
-              <%= f.text_field :bottle_id_eq, class: "input-small search-query", placeholder: "Bottle Id"%>
+              <%= f.text_field :bottle_id_eq, class: "input-small", placeholder: "Bottle Id"%>
 
               <label>Winery Name</label>  
-              <%= f.text_field :winery_name_cont, class: "input-small search-query", placeholder: "Wine Name"%>
+              <%= f.text_field :winery_name_cont, class: "input-small", placeholder: "Wine Name"%>
 
               <label>Grape</label>
-              <%= f.text_field :grape_name_cont, class: "input-small search-query", placeholder: "Grape"%>
+              <%= f.text_field :grape_name_cont, class: "input-small", placeholder: "Grape"%>
             </div>
 
             <div class="search-checkbox-dropdown">
@@ -31,16 +31,25 @@
                 <%= f.check_box :available_true, class: "input-small search-query" %> Show Only Available Bottles
               </label>
               <span class="search-dropdown">
-						    <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'} %>
+                <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'}, {class: "input-medium"} %>
               </span>
             </div>
-
           </div>                <!-- search options column size end -->
-
           <div class="span1">   <!-- serach button column size start -->
             <%= f.submit "Update List"%> 
           </div>                <!-- serach button column size start -->
         </div>                  <!-- search row end-->
+
+        <div class="row"> <!-- 2nd row in the well for the checkbox list of bottle types -->
+          <div class="span12 checkbox inline search-bottle-type-span">
+            <span class="search-bottle-type-label">
+            Bottle Types
+            </span>
+            <% BottleType.order(:display_order).pluck(:name).each do |xtype| %>
+              <label class="search-checkbox-type" > <%= check_box_tag 'q[bottle_type_name_in][]', xtype %><%= xtype %></label>
+            <% end %>
+          </div> <!-- end span12 -->
+        </div> <!-- end the 2nd row in the well -->
 
         <%= hidden_field_tag :direction, params[:direction] %>
         <%= hidden_field_tag :sort, sort_column  %>

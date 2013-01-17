@@ -24,6 +24,7 @@ class Bottle < ActiveRecord::Base
   belongs_to :grape
   belongs_to :winery
   belongs_to :user
+  belongs_to :bottle_type
   # In order to run seed, grape_id needs to be accessible
   # attr_accessible :bottle_id, :available, :availability, :grape_id
 
@@ -33,7 +34,7 @@ class Bottle < ActiveRecord::Base
   validates :grape_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created."}
   validates :winery_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created." }
   
-  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_name, :winery_name, :price, :rating
+  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_name, :winery_name, :price, :rating, :bottle_type_id
 
   def availability
     return @availability
