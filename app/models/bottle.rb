@@ -33,6 +33,7 @@ class Bottle < ActiveRecord::Base
   validates :user_id, presence: true
   validates :grape_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created."}
   validates :winery_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created." }
+  validates :bottle_type_id, presence: true
   
   attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_name, :winery_name, :price, :rating, :bottle_type_id
 
