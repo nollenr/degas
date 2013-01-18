@@ -191,6 +191,8 @@ Working:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES an
 
 Working:Date added to cellar
 Working:Notes (on enter/edit bottle)
+Working:Change spacing on search area of bottle index.
+
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
