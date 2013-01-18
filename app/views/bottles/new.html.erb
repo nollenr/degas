@@ -18,9 +18,9 @@
   <div class="span9 offset3">
           <% BottleType.select("id, name").order(:display_order).each do |bottletype| %>
             <% if bottletype.name == "Wine" %>
-              <label class="radio inline"> <%= f.radio_button :rating, bottletype.id, :checked => true %> <%= bottletype.name %> </label>
+              <label class="radio inline"> <%= f.radio_button :bottle_type_id, bottletype.id, :checked => true %> <%= bottletype.name %> </label>
             <% else %>
-              <label class="radio inline"> <%= f.radio_button :rating, bottletype.id %> <%= bottletype.name %> </label>
+              <label class="radio inline"> <%= f.radio_button :bottle_type_id, bottletype.id %> <%= bottletype.name %> </label>
             <% end %>
           <% end %>
   </div>
