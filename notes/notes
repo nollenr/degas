@@ -124,6 +124,13 @@ Done:   Change loayout of index... remove table... add bootstrap
 Done:   add search by grape color... if I was looking for a bottle of wine, what else
         would I use?
 Done:   I've got to be able to edit a bottle... price, name, availability, etc.
+Done:   I have to add "type"... port/wine/champagne/liquor/Late Harvest.  This includes
+        searching and sorting.  Add a new model (plus has many/belongs to).  
+Done:   User must select a grape and winery from the list.  So far, I've managed
+        to add some JavaScript that should do the trick (maybe)?  
+Done:   Fix checkboxes on the bottle entry page.  In-line would be much better (now that
+        I know how.
+Done:   Make the wine checkbox selected on the new bottle page.
 
 
 
@@ -182,16 +189,8 @@ Working:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES an
         Also, the bottle/bottles thing needs to get worked out, too.  That seems really broken.
         Routes for bottles seems to be fixed.  Need to work on routes for grapes and wineries.
 
-Working:User must select a grape and winery from the list.  So far, I've managed
-        to add some JavaScript that should do the trick (maybe)?  
-
-Working:I have to add "type"... port/wine/champagne/liquor/Late Harvest.  This includes
-        searching and sorting.  Add a new model (plus has many/belongs to).  
-
 Working:Date added to cellar
 Working:Notes (on enter/edit bottle)
-
-
 
 BTW:
 _bottle.erb... uses bottle.bottle_id NOT @bottle.bottle_id becuase it is "called" from
