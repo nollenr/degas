@@ -131,7 +131,7 @@ Done:   User must select a grape and winery from the list.  So far, I've managed
 Done:   Fix checkboxes on the bottle entry page.  In-line would be much better (now that
         I know how.
 Done:   Make the wine checkbox selected on the new bottle page.
-
+Done:   Export to cvs.  Gotta do.
 
 
 
@@ -175,6 +175,7 @@ To Do: :Index page - if no results are returned set a message to the user to
         make the functionality clearer.
 To Do: :Should the bottle ID be a text field?
 To Do: :Tasting notes on "consume"
+To Do: :Export to excel (maybe use axlsx and acts_as_axlsx)
 
 ================ Next Version Ideas ====================================
 submit bug reports
@@ -191,7 +192,7 @@ Working:Routes.  These _MUST_ be fixed.  What's the difference between ROUTES an
 
 Working:Date added to cellar
 Working:Notes (on enter/edit bottle)
-Working:Change spacing on search area of bottle index.
+Working:Layout: Change spacing on search area of bottle index.
 
 
 BTW:

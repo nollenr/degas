@@ -51,6 +51,20 @@ class Bottle < ActiveRecord::Base
     self.availability= self.available
   end
 
+# For exporting to a CSV file
+  def self.to_csv
+    CSV.generate do |csv|
+      export_set = Array.new(column_names)
+      export_set.push("bottle.winery.name","bottle.grape.name","bottle.bottle_type.name")
+      csv << export_set
+      all.each do |bottle|
+        fk = Array.new
+        fk.push(bottle.winery.name,bottle.grape.name,bottle.bottle_type.name)
+        csv << bottle.attributes.values_at(*export_set) + fk
+      end
+    end
+  end
+
   # getter for virtual attribute grape_name
   # when a bottle is loaded from the database
   # this getter is executed and "gets" the grape_name.  
