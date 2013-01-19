@@ -23,13 +23,14 @@ class BottlesController < ApplicationController
       # This was a huge mistake and a mis-comprehension regarding active record.
       # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
       # To see what the query looks like add the following 2 lines
-      @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
-      logger.debug "************************** Index #{@query}"
+      # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
+      # logger.debug "************************** Index #{@query}"
       @bottles = @search.result.order(sort_column + " " + sort_direction)
 
     respond_to do |format|
       format.html #index.html.erb
       format.js   #index.js.erb
+      format.csv  { send_data @bottles.to_csv }
     end #end repond_to
   end   #end index method
 
