@@ -181,6 +181,8 @@ To Do: :Export to excel (maybe use axlsx and acts_as_axlsx)
 To Do: :Hints about using the date added field (today, last Thursday, etc)
 To Do:1:Home page should have a "you're already signed in"... if this isn't
         you, sign out/login
+To Do:1:Fix Wineries and Grapes... need to be able to edit and export
+        via CSV.
 
 ================ Next Version Ideas ====================================
 submit bug reports
