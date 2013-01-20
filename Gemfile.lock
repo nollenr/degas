@@ -34,6 +34,7 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.1.0.0)
     builder (3.0.4)
+    chronic (0.9.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -140,6 +141,7 @@ DEPENDENCIES
   annotate (= 2.5.0)
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass (= 2.1.0.0)
+  chronic
   coffee-rails (= 3.2.2)
   execjs (= 1.4.0)
   faker (= 1.1.2)

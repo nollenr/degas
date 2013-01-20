@@ -30,6 +30,8 @@
   <div class="span6 offset3">
       <%= f.input :bottle_id, label: 'Bottle Identifier' %>
 
+      <%= f.input :date_added_to_cellar_text, label: 'Date Added to Cellar' %>
+
       <%= f.input :cellar_location %>
 
       <%= f.input :vintage, label: "Vintage (Year)" %>
@@ -46,6 +48,8 @@
       <!-- %= f.input :grape_id, collection: Grape.order("name"), selected: @bottle.grape_id  % -->
 
       <%= f.input :winery_name, input_html: { data: { autocomplete_winery_source: wineries_list_path } } %>
+
+      <%= f.input :notes, label: 'Notes', :input_html => { :rows => 3 } %>
 
       <% if !@bottle.id.blank? %>
         <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
