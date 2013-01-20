@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.9'
 gem 'bootstrap-sass', '2.1.0.0'
 
+gem 'chronic'
+
 gem 'execjs', '1.4.0'
 gem 'therubyracer', '0.10.2'
 
