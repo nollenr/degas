@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115012851) do
+ActiveRecord::Schema.define(:version => 20130119222332) do
 
   create_table "bottle_types", :force => true do |t|
     t.string   "name",          :limit => 30, :null => false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20130115012851) do
     t.integer  "user_id",                                                                                   :null => false
     t.integer  "rating"
     t.integer  "bottle_type_id",                                                                            :null => false
+    t.datetime "date_added_to_cellar"
+    t.text     "notes"
   end
 
   add_index "bottles", ["grape_id"], :name => "index_bottles_on_grape_id"

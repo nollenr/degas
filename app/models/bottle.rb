@@ -29,13 +29,21 @@ class Bottle < ActiveRecord::Base
   # attr_accessible :bottle_id, :available, :availability, :grape_id
 
   validates :price, allow_nil: true, numericality: { greater_than: 0.01 }
-  validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }, uniqueness: { scope: :user_id, message: "bottle_id should be unique and this identifier was found in your history."}
+  validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }, 
+    uniqueness: { scope: :user_id, message: "bottle_id should be unique and this identifier was found in your history."}
   validates :user_id, presence: true
   validates :grape_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created."}
   validates :winery_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created." }
   validates :bottle_type_id, presence: true
-  
-  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, :grape_name, :winery_name, :price, :rating, :bottle_type_id
+  validate  :check_date_added_to_cellar_text
+
+  before_save :save_date_added_to_cellar_text  
+
+  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, 
+    :grape_name, :winery_name, :price, :rating, :bottle_type_id, :date_added_to_cellar_text, :notes
+
+  #This creates the setter (writer)... correct?
+  attr_writer :date_added_to_cellar_text 
 
   def availability
     return @availability
@@ -54,13 +62,13 @@ class Bottle < ActiveRecord::Base
 # For exporting to a CSV file
   def self.to_csv
     CSV.generate do |csv|
-      export_set = Array.new(column_names)
-      export_set.push("bottle.winery.name","bottle.grape.name","bottle.bottle_type.name")
+      column_set = Array.new(column_names)
+      export_set = Array.new(column_set).push("winery_name","grapd_name","bottle_type")
       csv << export_set
       all.each do |bottle|
         fk = Array.new
         fk.push(bottle.winery.name,bottle.grape.name,bottle.bottle_type.name)
-        csv << bottle.attributes.values_at(*export_set) + fk
+        csv << bottle.attributes.values_at(*column_set) + fk
       end
     end
   end
@@ -86,6 +94,25 @@ class Bottle < ActiveRecord::Base
 
   def winery_name= name
     self.winery = Winery.find_by_name(name)
+  end
+
+  # getter for virtual attribute date_added_to_cellar
+  def date_added_to_cellar_text
+    # instance variable for persistence (see attr_writer)
+    @date_added_to_cellar_text || date_added_to_cellar.try(:strftime, "%m/%d/%Y")
+  end
+
+  # setter for virtual attribute date_added_to_cellar
+  def save_date_added_to_cellar_text	
+    self.date_added_to_cellar = Chronic::parse(@date_added_to_cellar_text) if @date_added_to_cellar_text.present?
+  end
+
+  def check_date_added_to_cellar_text
+    if @date_added_to_cellar_text.present? && Chronic::parse(@date_added_to_cellar_text).nil?
+      errors.add :date_added_to_cellar_text, "cannot be parsed"
+    end
+  rescue ArgumentError
+    errors.add :date_added_to_cellar_text, "is out of range"
   end
 
 end
