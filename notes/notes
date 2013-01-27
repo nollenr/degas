@@ -144,7 +144,6 @@ Done:  :Un-consuming a bottle (via edit)
 
 
 To Do: :Flash a consume... so the user sees the status change.
-To Do:1:Un-consuming a bottle
 Hold:  :Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
         Ajax consume function and go to a page to update the date/message when consuming... then go back
         to the index page.  What would that user experience be like?  Would that make adding a pop-up 
@@ -174,12 +173,16 @@ To Do: :Should folks be able to load new wineries/grapes on demand?  That would 
         to force a selection from the autoselect.
         Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
         A great example is the wine I just purchased from Ljubljana.
-To Do: :Index page - if no results are returned set a message to the user to 
+To Do:1:Index page - if no results are returned set a message to the user to 
         make the functionality clearer.
 To Do: :Should the bottle ID be a text field?
 To Do: :Tasting notes on "consume"
 To Do: :Export to excel (maybe use axlsx and acts_as_axlsx)
 To Do: :Hints about using the date added field (today, last Thursday, etc)
+To Do:1:Home page should have a "you're already signed in"... if this isn't
+        you, sign out/login
+To Do:1:Fix Wineries and Grapes... need to be able to edit and export
+        via CSV.
 
 ================ Next Version Ideas ====================================
 submit bug reports

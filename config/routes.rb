@@ -30,6 +30,8 @@ Degas::Application.routes.draw do
     get :rate_edit, on: :member
   end
 
+  resources :wineries, except: [:destroy]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
