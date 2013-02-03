@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119222332) do
+ActiveRecord::Schema.define(:version => 20130203171225) do
 
   create_table "bottle_types", :force => true do |t|
     t.string   "name",          :limit => 30, :null => false
@@ -80,5 +80,7 @@ ActiveRecord::Schema.define(:version => 20130119222332) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  add_index "wineries", ["name"], :name => "index_wineries_on_name", :unique => true
 
 end
