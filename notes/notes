@@ -140,7 +140,7 @@ Done:  :The cvs download is a little incorrect b/c the headers for the fk are ad
         the "value_to" executes to find all the values for the keys.  Maybe pull out the
         headers, find the attributes, then add the header values to the string.
 Done:  :Un-consuming a bottle (via edit)
-
+Done:  :Add Foreign key constraint to users!!
 
 
 To Do: :Flash a consume... so the user sees the status change.
@@ -183,6 +183,7 @@ To Do:1:Home page should have a "you're already signed in"... if this isn't
         you, sign out/login
 To Do:1:Fix Wineries and Grapes... need to be able to edit and export
         via CSV.
+To Do:1:Add Foreign key constraint to users!!
 
 ================ Next Version Ideas ====================================
 submit bug reports
