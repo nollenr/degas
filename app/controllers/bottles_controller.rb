@@ -18,14 +18,15 @@ class BottlesController < ApplicationController
   end
 
   def index
-    @param_string = params.to_s
+    logger.debug "*****************   Bottle Controller Index: #{params.inspect}"
     @search = current_user.bottles.includes(:bottle_type, :winery, :grape).search(params[:q])
-      # This was a huge mistake and a mis-comprehension regarding active record.
-      # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
-      # To see what the query looks like add the following 2 lines
-      # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
-      # logger.debug "************************** Index #{@query}"
-      @bottles = @search.result.order(sort_column + " " + sort_direction)
+    # This was a huge mistake and a mis-comprehension regarding active record.
+    # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
+    # To see what the query looks like add the following 2 lines
+    # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
+    # logger.debug "************************** Index #{@query}"
+    @bottles = @search.result.order(sort_column + " " + sort_direction)
+    @bottles = @bottles.where(available: 't') unless params[:q]
 
     respond_to do |format|
       format.html #index.html.erb
