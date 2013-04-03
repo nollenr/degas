@@ -7,6 +7,15 @@
   <h2>
     Organize your cellar. Rate your tasting experiences.  <p>Port, champagne, liquors and wine.</p>
   </h2>
-
-  <%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>
 </div>
+
+  <div class="container">
+    <div class="center">
+        <% if signed_in? %>
+          <%= link_to "View Your Cellar List", bottles_path, class: "btn btn-large btn-primary" %>
+        <% else %>
+          <%= link_to "Sign up now!", signup_path, class: "center btn btn-large btn-primary" %>
+        <% end %>
+    </div>
+  </div>
+
