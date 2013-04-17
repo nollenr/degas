@@ -64,6 +64,15 @@ h2 {
   color: $grayLight;
 }
 
+h2-nobottom-margin {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+  text-align: left;
+  font-weight: normal;
+  color: $grayLight;
+}
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -192,4 +201,10 @@ footer ul li {
 /* -------------------------- */
 .bottle-type-select {
   margin-bottom: 14px;
+}
+/* -------------------------- */
+/* confirm (multi-bottle add  */
+/* -------------------------- */
+.confirm-buttons {
+  margin-top: 14px;
 }

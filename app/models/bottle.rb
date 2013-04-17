@@ -29,8 +29,8 @@ class Bottle < ActiveRecord::Base
   # attr_accessible :bottle_id, :available, :availability, :grape_id
 
   validates :price, allow_nil: true, numericality: { greater_than: 0.01 }
-  validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }, 
-    uniqueness: { scope: :user_id, message: "bottle_id should be unique and this identifier was found in your history."}
+  # validates :bottle_id, presence: { message: "identifier cannot be null. Bottle not created." }, 
+  #  uniqueness: { scope: :user_id, message: "bottle_id should be unique and this identifier was found in your history."}
   validates :user_id, presence: true
   validates :grape_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created."}
   validates :winery_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created." }
@@ -39,11 +39,14 @@ class Bottle < ActiveRecord::Base
 
   before_save :save_date_added_to_cellar_text  
 
-  attr_accessible :available, :bottle_id, :cellar_location, :vintage, :drink_by_year, :name, :vineyard, 
-    :grape_name, :winery_name, :price, :rating, :bottle_type_id, :date_added_to_cellar_text, :notes
+  attr_accessible :available, :bottle_id, :bottle_id_text,
+    :cellar_location, :vintage, :drink_by_year, :name, :vineyard, 
+    :grape_name, :winery_name, :price, :rating, :bottle_type_id, :date_added_to_cellar_text, :notes, :confirmed
 
   #This creates the setter (writer)... correct?
   attr_writer :date_added_to_cellar_text 
+
+  attr_accessor :bottle_id_text, :confirmed
 
   def availability
     return @availability
@@ -63,7 +66,7 @@ class Bottle < ActiveRecord::Base
   def self.to_csv
     CSV.generate do |csv|
       column_set = Array.new(column_names)
-      export_set = Array.new(column_set).push("winery_name","grapd_name","bottle_type")
+      export_set = Array.new(column_set).push("winery_name","grape_name","bottle_type")
       csv << export_set
       all.each do |bottle|
         fk = Array.new
