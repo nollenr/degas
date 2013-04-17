@@ -32,7 +32,7 @@ class BottlesController < ApplicationController
         if (Integer(@bottle_id_text[0]) rescue false) and (Integer(@bottle_id_text[1]) rescue false)
           @bottle_id_text[0] = Integer(@bottle_id_text[0])
           @bottle_id_text[1] = Integer(@bottle_id_text[1])
-          logger.debug "********************************** Got two good numbers"
+          # logger.debug "********************************** Got two good numbers"
           # Do the two integers make sense (i.e. is one less than the other)
           if (Integer(@bottle_id_text[0])) <= (Integer(@bottle_id_text[1]))
           # Is the range of numbers unique (i.e. do any of them already exist in the database?
@@ -50,7 +50,7 @@ class BottlesController < ApplicationController
             render 'new' and return
           end
         else #Did not get two good numbers
-          logger.debug "********************************** Did not get two good numbers"
+          # logger.debug "********************************** Did not get two good numbers"
           flash[:error] = "'Bottle Identifier' is not correct.  " +
             "Either supply a single integer or a range (no alpha or special characters) " +
             "separated by a '-'.  Ex: 1124 or 1124-1128"
