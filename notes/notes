@@ -142,6 +142,10 @@ Done:  :The cvs download is a little incorrect b/c the headers for the fk are ad
 Done:  :Un-consuming a bottle (via edit)
 Done:  :Add Foreign key constraint to users!!
 Done:  :Show available only as the default.
+Done:  :Add multi-bottles at once by using a "-" in the bottle id
+Done:  :Should the bottle ID be a text field?  NO.  This will need to be an integer... like a primary key
+Done:  :Home page should have a "you're already signed in"... if this isn't
+        you, sign out/login
 
 To Do: :Flash a consume... so the user sees the status change.
 Hold:  :Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
@@ -175,14 +179,9 @@ To Do: :Should folks be able to load new wineries/grapes on demand?  That would 
         A great example is the wine I just purchased from Ljubljana.
 To Do:1:Index page - if no results are returned set a message to the user to 
         make the functionality clearer.
-To Do: :Should the bottle ID be a text field?
 To Do: :Tasting notes on "consume"
-To Do: :Export to excel (maybe use axlsx and acts_as_axlsx)
 To Do: :Hints about using the date added field (today, last Thursday, etc)
-To Do:1:Home page should have a "you're already signed in"... if this isn't
-        you, sign out/login
-To Do:1:Fix Wineries and Grapes... need to be able to edit and export
-        via CSV.
+
 ================ Next Version Ideas ====================================
 submit bug reports
 submit upgrade requests
