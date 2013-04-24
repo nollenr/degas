@@ -57,9 +57,14 @@ class Bottle < ActiveRecord::Base
   end
 
   after_find :set_availability
+  after_find :set_bottle_id_text
 
   def set_availability
     self.availability= self.available
+  end
+
+  def set_bottle_id_text
+    self.bottle_id_text = self.bottle_id
   end
 
 # For exporting to a CSV file
