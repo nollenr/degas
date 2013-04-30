@@ -19,6 +19,9 @@
     </div>
   </div>
 
-  <%= render @bottles %>
-
+  <% if @bottles.empty? %>
+    Search returned no results.  Change you search criteria, or add some bottles to your cellar.
+  <% else %>
+    <%= render @bottles %>
+  <% end %>
 </div>
