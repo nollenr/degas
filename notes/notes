@@ -1,3 +1,8 @@
+GIT:
+git checkout v2.0-64-g835c907
+git checkout `git describe`
+
+
 Tuesday, 10/02
 rails generate model grapes name:string, color:string
 

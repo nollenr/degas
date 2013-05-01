@@ -1,0 +1,6 @@
+GIT:
+git checkout v2.0-64-g835c907
+git checkout `git describe`
+
+git tag -a <tag> -m <message>
+git log --pretty=format:'%ad %h %d' --abbrev-commit --date=short -1
