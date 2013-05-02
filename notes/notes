@@ -184,8 +184,6 @@ To Do: :Location of winery/bottle... I may have a winery in Walla Walla (US/Wash
         No... the vineyard would be "Red Horse Hills", but I might want to find all
         Oregon Pinots... what level do I want to track the location?  Maybe make a locations
         model?
-To Do:1:Index page - if no results are returned set a message to the user to 
-        make the functionality clearer.
 To Do: :Tasting notes on "consume"
 To Do: :Hints about using the date added field (today, last Thursday, etc)
 To Do: :Clear search button.  Resets all of the search fields and does a search.
