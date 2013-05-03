@@ -152,6 +152,7 @@ footer ul li {
 /* bottle index               */
 /* -------------------------- */
 .hero-unit-bottle-index {
+  margin-top: 36px;
   background-color: #75B4FF;
 }
 
@@ -202,9 +203,19 @@ footer ul li {
 .bottle-type-select {
   margin-bottom: 14px;
 }
+.float-image{
+  float:left;
+}
 /* -------------------------- */
 /* confirm (multi-bottle add  */
 /* -------------------------- */
 .confirm-buttons {
   margin-top: 14px;
 }
+/* -------------------------- */
+/* home                       */
+/* -------------------------- */
+.home h2 {
+text-align: left;
+}
+
