@@ -187,8 +187,15 @@ To Do: :Location of winery/bottle... I may have a winery in Walla Walla (US/Wash
 To Do: :Tasting notes on "consume"
 To Do: :Hints about using the date added field (today, last Thursday, etc)
 To Do: :Clear search button.  Resets all of the search fields and does a search.
-To Do: :Version number on "about".  Is there a way to increment that automatically? And to add that
+To Do:1:Version number on "about".  Is there a way to increment that automatically? And to add that
         here with the "done" message so those can be kept in sync with the GIT commit/push?
+        Need to do this so that the released version is recognizable.  How can I track these
+        changes related to the version?  Go back and update after the commit?  Then I've
+        got uncommitted changes.  Or does all of this have to go in the change request?
+To Do:1:Update the help page.  Make sure it all makes sense!  Can I include pictures?  Where
+        do those get stored?  Assets?
+To Do:1:Fix the wineries... make it clear what each part really is... then allow searching.
+To Do:1:Allow searches on wine names.
 
 ================ Next Version Ideas ====================================
 submit bug reports
