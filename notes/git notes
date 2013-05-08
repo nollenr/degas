@@ -1,0 +1,16 @@
+
+Viewing the Log
+git log --oneline --graph --all --decorate
+git log --oneline --since yesterday
+git log --oneline --since "3 days ago"
+
+Comparing Commits -- Comparing two directories and what has changed.
+  can also use --stat --summary -b (--ignore-space-change)
+  --working directory and staging
+  git diff
+  --working directory and a sha
+  git diff 9133ba1 notes/notes
+  --2 different tree-ishes
+  git diff 9133ba1..b654310 notes/notes
+
+
