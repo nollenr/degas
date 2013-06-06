@@ -5,3 +5,6 @@ $("#sort").attr("value", "<%= sort_column %>");
 $("#bottle").html('<%= j render partial: "bottle_header" %>');
 
 
+$("#clearSearch").click(function(){
+  $("#bottle_search").trigger("reset");
+});

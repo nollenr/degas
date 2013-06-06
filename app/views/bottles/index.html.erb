@@ -9,14 +9,14 @@
   Download:
   <%= link_to "CSV", bottles_path(format: "csv") %>
 
-<div class="row">                    <!-- enclosing row start -->
+<div class="row-fluid">                    <!-- enclosing row start -->
   <div class="span12">                <!-- enclosing row size start -->
     <div class="well well-small" >    <!-- well opening -->
 
       <h2 class="search-title">Search</h2>
 
       <%= search_form_for @search, html: {class: "form-inline search-form"}, remote: true do |f| %>
-        <div class="row">                <!-- search row1 start-->
+        <div class="row-fluid">                <!-- search row1 start-->
           <div class="span10">            <!-- search options column1 size start --> 
             <div class="search-inputs" >
               <label>Bottle Id</label>
@@ -33,26 +33,31 @@
               </span>
             </div>
           </div>                <!-- search options column1 size end -->
-          <div class="span1">   <!-- serach button column2 size start -->
+          <div class="span2">   <!-- serach button column2 size start -->
             <%= f.submit "Update List"%> 
+            <%= f.submit  "Clear Search", id: "clearSearch" %>
           </div>                <!-- serach button column2 size end -->
         </div>                  <!-- search row1 end-->
 
-        <div class="row"> <!-- 2nd row in the well for the checkbox list of bottle types -->
-          <div class="span12 checkbox inline search-bottle-type-span">
-            <span class="search-bottle-type-label">
-            Bottle Types
-            </span>
+        <div class="row-fluid">
+          <!-- 2nd row in the well for the checkbox list of bottle types -->
+          <div class="span2 checkbox inline search-bottle-type-span">
+            <span class="search-bottle-type-label"> Bottle Types </span>
+          </div>
+          <div class="span8 checkbox inline search-bottle-type-span">
             <% BottleType.order(:display_order).pluck(:name).each do |xtype| %>
-              <label class="search-checkbox-type" > <%= check_box_tag 'q[bottle_type_name_in][]', xtype %><%= xtype %></label>
+            <label class="search-checkbox-type" > <%= check_box_tag 'q[bottle_type_name_in][]', xtype %><%= xtype %></label>
             <% end %>
-            <div class="search-checkbox-dropdown">
-              <label class="checkbox inline">
-                <%= f.check_box :available_true, class: "input-small search-query", checked: true %> Show Only Available Bottles
-              </label>
-            </div>
-          </div> <!-- end span12 -->
-        </div> <!-- end the 2nd row in the well -->
+          </div>
+          <!-- end span12 -->
+        </div>
+        <!-- end the 2nd row in the well -->
+        
+        <div class="row-fluid"><div class="span12">
+              Show Only Available Bottles 
+              <%= f.check_box :available_true, class: "checkbox inline input-small search-query", checked: true %> 
+          </div>
+        </div>
 
         <%= hidden_field_tag :direction, params[:direction] %>
         <%= hidden_field_tag :sort, sort_column  %>
