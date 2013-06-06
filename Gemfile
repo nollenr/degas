@@ -36,3 +36,7 @@ gem 'ransack', '0.7.0'
 
 # gem used for creating forms
 gem 'simple_form', '2.0.4'
+
+# For Heroku
+gem 'heroku'
+
