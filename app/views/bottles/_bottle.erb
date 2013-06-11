@@ -50,7 +50,6 @@
           <div><%= link_to "Rate", rate_edit_bottle_path(bottle.id) %></div>
         <% end %>
         <div><%= link_to "Edit", edit_bottle_path(bottle.id) %></div>
-        <div><br /><%= link_to("Back to Top", {}, href: "#searchForm") %></div>
       </div>                         <!-- column 2 data row end -->
     </div>                           <!-- data row1 end -->
     <div class="row-fluid">          <!-- data row2 start -->
@@ -58,6 +57,11 @@
         <div><span class="muted">Notes:</span> <%= bottle.notes %></div>
       </div>                         <!-- data row2 column1 end -->
     </div>                           <!-- data row2 end -->
+    <div class="row-fluid">
+      <div class="span12 center">
+        <%= link_to("Back to Top", {}, href: "#searchForm") %>
+      </div>
+    </div>
   </div>                             <!-- enclosing row size end-->
 </div>                               <!-- enclosing row end-->
 <hr />
