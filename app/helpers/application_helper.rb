@@ -26,4 +26,8 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end
   end
+  
+  def consumed_message(consume_date)
+    "Consumed " + consume_date.try(:strftime, "%m/%d/%Y %I:%M%P")
+  end
 end

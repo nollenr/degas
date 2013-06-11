@@ -1,4 +1,4 @@
-<% avail_message = 'Consumed ' + @bottle.availability_change_date.try(:strftime, "%m/%d/%Y %I:%M%P") %>
+<% avail_message = consumed_message(@bottle.availability_change_date) %>
 <% consume_message = '' %>
 <% avail_id   = '#' + @bottle.id.to_s + 'avail' %>
 <% consume_id = '#' + @bottle.id.to_s + 'consume' %>

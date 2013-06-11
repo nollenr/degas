@@ -29,16 +29,16 @@
       </div>                         <!-- column 1 data row end -->
 
       <div class="span5 offset1">            <!-- column 2 data row start -->
-        <span id='<%= bottle.id.to_s + 'avail' %>' >
-          <%= bottle.availability %>
-        </span>
+
         <% if bottle.available %>
+          <span id='<%= bottle.id.to_s + 'avail' %>' ><%= bottle.availability %></span>
           <span id='<%= bottle.id.to_s + 'consume' %>' >
-            <%= link_to " Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " +
+          <%= link_to " Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " +
               bottle.bottle_id.to_s + "?", remote: true %>
           </span>
         <% else %>
-          <%= bottle.availability_change_date.try(:strftime, "%m/%d/%Y %I:%M%P") %>
+          <%= consumed_message(bottle.availability_change_date) %>
+          <!-- %= bottle.availability_change_date.try(:strftime, "%m/%d/%Y %I:%M%P") % -->
         <% end %>
         <div><%= link_to "Copy", copy_bottle_path(bottle.id) %></div>
         <% if bottle.rating %>
