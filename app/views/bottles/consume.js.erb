@@ -1,7 +1,7 @@
-<% avail_message = 'Consumed' %>
+<% avail_message = 'Consumed ' + @bottle.availability_change_date.try(:strftime, "%m/%d/%Y %I:%M%P") %>
 <% consume_message = '' %>
-<% avail_id   = '#' + @bottleid+'avail' %>
-<% consume_id = '#' + @bottleid+'consume' %>
+<% avail_id   = '#' + @bottle.id.to_s + 'avail' %>
+<% consume_id = '#' + @bottle.id.to_s + 'consume' %>
 
 
 $("<%= avail_id %>").html("<%= avail_message %>");

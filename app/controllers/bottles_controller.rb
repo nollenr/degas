@@ -125,9 +125,10 @@ class BottlesController < ApplicationController
   end
 
   def consume
-    @bottleid = params[:id].to_s
+    # @bottleid = params[:id].to_s
     bottle = current_user.bottles.update(params[:id], available: :false)
     bottle.save
+    @bottle = current_user.bottles.find_by_id(params[:id])
     flash.now[:success] = "You have successfully consumed bottle " + bottle.bottle_id.to_s + "!"
     respond_to do |format|
       format.html { redirect_to bottle_index_path } #index.html.erb
