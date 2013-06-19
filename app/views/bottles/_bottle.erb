@@ -41,14 +41,7 @@
           <!-- %= bottle.availability_change_date.try(:strftime, "%m/%d/%Y %I:%M%P") % -->
         <% end %>
         <div><%= link_to "Copy", copy_bottle_path(bottle.id) %></div>
-        <% if bottle.rating %>
-          <div>
-            <span class="muted">Rating: </span><%= bottle.rating.to_s + "  " %>
-            <%= link_to "Change", rate_edit_bottle_path(bottle.id) %>
-          </div>
-        <% else %>
-          <div><%= link_to "Rate", rate_edit_bottle_path(bottle.id) %></div>
-        <% end %>
+        <%= render partial: "bottle_rating", locals: {bottle: bottle} %>
         <div><%= link_to "Edit", edit_bottle_path(bottle.id) %></div>
       </div>                         <!-- column 2 data row end -->
     </div>                           <!-- data row1 end -->

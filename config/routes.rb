@@ -21,13 +21,13 @@ Degas::Application.routes.draw do
   match "grapes" => "grape#index"
   match "grapes_list" => "grape#list"
   match "wineries_list" => "wineries#list"
+  match "rate_edit" => "bottles#rate_edit", :via=> :put
 
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   resources :bottles  do
     put :consume, on: :member
     get :copy, on: :member
-    get :rate_edit, on: :member
   end
 
   resources :wineries, except: [:destroy]

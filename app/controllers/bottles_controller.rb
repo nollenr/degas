@@ -152,7 +152,8 @@ class BottlesController < ApplicationController
   end
 
   def rate_edit
-    @bottle = current_user.bottles.find_by_id(params[:id])
+    logger.debug "rate edit: ********************* #{params.inspect}"
+    # @bottle = current_user.bottles.find_by_id(params[:id])
   end
 
 
