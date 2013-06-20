@@ -197,21 +197,11 @@ footer ul li {
   color: DarkSlateGray;
 }
 
-.starRate {position:relative; margin:20px; overflow:hidden; zoom:1;}
-.starRate ul {width:160px; margin:0; padding:0;}
-.starRate li {display:inline; list-style:none;}
-.starRate a, .starRate b {background:image_url("star_rate.gif") left top repeat-x;}
-.starRate a {float:left; margin:0 80px 0 -1000px; width:80px; height:16px; background-position:left 16px; color:#000; text-decoration:none;}
-.starRate a:active,.starRate a:focus,.starRate a:hover {background-position:left -32px;}
-.starRate b {position:absolute; z-index:-1; width:80px; height:16px; background-position:left -16px;}
-.starRate div b {left:0px; bottom:0px; background-position:left top;}
-.starRate a span {position:absolute; left:-300px;}
-.starRate a:active span,.starRate a:focus span,.starRate a:hover span {left:90px; width:100%;}
-
-.tempdiv {
-  background: image_url("star_rate.gif") left top repeat-x;
-  
-}
+.starRate {overflow: hidden;}
+.starRate ul {margin-left: 0;}
+.starRate li {list-style: none; display: inline;}
+.starRate li a {display: block; width: 16px; height: 16px; background: image_url("star_rate.gif") left top; float: left; text-indent: -9999px;}
+.starRate a {background-position: 0px;}
 
 /* -------------------------- */
 /* bottle new                 */
