@@ -59,4 +59,56 @@ This is from the working (v1) app
 .starRate a {background-position:0px 0px;}
 .starRate li a.activestar {background-position: 0px -32px;}
 .starRate li a.ratedstar {background-position: 0px -16px;}
+ 
+=========================================================================================
+v1 Rating Javascript/jQuery
+
+$(function() { 
+  gon.bottleids.forEach(function(bottleid){
+      $("#"+bottleid+"starRate li a").hover(changeRating, setRating);
+      displayRating(bottleid);
+      setCancelUpdateClick(bottleid);
+  });
+});
+
+  function changeRating(){
+    $(this).parent().siblings().children("a.starRateanchor").removeClass("ratedstar");
+    $(this).removeClass("ratedstar").addClass("activestar");
+    var index = $(this).parent().index();
+    $(this).parent().siblings(":lt("+index+")").children("a.starRateanchor").addClass("activestar");
+  };
+
+  function setRating(){
+    var current_id = $(this).parent().parent().attr("data-id");
+    $(this).parent().siblings().children(".activestar").removeClass("activestar").addClass("ratedstar");
+    $(this).removeClass("activestar").addClass("ratedstar");
+    $("#" + current_id + "updateRatingBtn").css("visibility", "visible");
+    $("#" + current_id + "cancelRatingBtn").css("visibility", "visible");
+    $("#" + current_id + "hiddenRatingField").val($(this).parent().index());
+  };
+
+  function displayRating(inVar){
+    var index = $("#"+inVar+"hiddenRatingField").val();
+    if (index) {
+      //console.log("Displaying the Rating for id: " + inVar + " Rating: " + index);
+      $("#"+inVar+"starRate li:lt("+index+")").children("a.starRateanchor").addClass("ratedstar");
+    }
+  };
+  
+  function clearStars(inVar){
+    // remove class "activestar" from this div which is "id"+starRate
+    $("#"+inVar+"starRate .ratedstar").removeClass("ratedstar");
+  };
+
+  function setCancelUpdateClick(inVar){
+    $("#"+inVar+"cancelRatingBtn").click(function(){
+      $("#"+inVar+"cancelRatingBtn").css("visibility", "hidden");
+      $("#"+inVar+"updateRatingBtn").css("visibility", "hidden");
+      console.log("Resetting the database value field to: " + $("#"+inVar+"hiddenORatingField").val());
+      $("#"+inVar+"hiddenRatingField").val($("#"+inVar+"hiddenORatingField").val());
+      clearStars(inVar);
+      displayRating(inVar);
+      return false;
+    });
+  };
 
