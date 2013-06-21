@@ -62,3 +62,18 @@ Git, or Heroku seems to update this file automatically.
   [remote "heroku"]
           url = git@heroku.com:shrouded-caverns-4119.git
           fetch = +refs/heads/*:refs/remotes/heroku/*
+
+          
+Delete Apps:
+[nollenr@saphp degas]$ heroku apps
+=== My Apps
+sheltered-headland-8456
+
+[nollenr@saphp degas]$ heroku destroy sheltered-headland-8456
+
+ !    WARNING: Potentially Destructive Action
+ !    This command will destroy sheltered-headland-8456 (including all add-ons).
+ !    To proceed, type "sheltered-headland-8456" or re-run this command with --confirm sheltered-headland-8456
+
+> sheltered-headland-8456
+Destroying sheltered-headland-8456 (including all add-ons)... done
