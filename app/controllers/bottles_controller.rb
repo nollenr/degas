@@ -154,6 +154,11 @@ class BottlesController < ApplicationController
   def rate_edit
     @bottle = current_user.bottles.find_by_id(params[:id])
   end
+  
+  def toc
+    #@bottles=Bottle.where(available: :true).count('*', group: :grape_id)
+    @toc_by_grape = current_user.bottles.where(available: :true).joins(:grape).count('*', group: 'grapes.name')
+  end
 
 
 private
