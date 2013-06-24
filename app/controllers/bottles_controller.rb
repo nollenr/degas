@@ -1,5 +1,5 @@
 class BottlesController < ApplicationController
-  helper_method :sort_column, :sort_direction, :show_avail
+  helper_method :sort_column, :sort_direction, :show_avail, :format_collapsable_list
 
   before_filter :signed_in_user
 
@@ -88,6 +88,7 @@ class BottlesController < ApplicationController
     # logger.debug "************************** Index #{@query}"
     @bottles = @search.result.order(sort_column + " " + sort_direction)
     @bottles = @bottles.where(available: 't') unless params[:q]
+    # logger.debug("********************** #{@bottles.inspect}")
 
     respond_to do |format|
       format.html #index.html.erb
@@ -157,7 +158,10 @@ class BottlesController < ApplicationController
   
   def toc
     #@bottles=Bottle.where(available: :true).count('*', group: :grape_id)
-    @toc_by_grape = current_user.bottles.where(available: :true).joins(:grape).count('*', group: 'grapes.name')
+    @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.name').count('*', group: 'grapes.name').to_a
+    @toc_by_wineries = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.name').count('*', group: 'wineries.name').to_a
+    @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2').count(:all, group: ['wineries.country', 'wineries.location1', 'wineries.location2']).to_a
+    logger.debug("location array ******************************************** #{@toc_by_locations.inspect}")
   end
 
 
@@ -169,6 +173,63 @@ private
   def sort_direction
     # sanitize the direction... only 2 directions should be allowed
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+  
+  def process_array(p_array, p_hash)
+    logger.debug(" #{p_array.inspect} #{p_hash}")
+    if (p_array.length == 2)
+      if (p_hash.has_key?(v_key = p_array.shift))
+        return nil
+      else
+        logger.debug("during recurse returning #{p_hash}")
+        return {v_key => p_array.shift} 
+      end
+    end
+    v_key = p_array.shift
+    p_hash = {v_key => process_array(p_array, p_hash) }
+  end
+  
+  def process_array2(p_array, p_hash)
+    #logger.debug(" #{p_array.inspect} #{p_hash}")
+    if (p_array.length == 2)
+      v_key = p_array.shift
+      p_hash[v_key] = p_array.shift
+      return p_hash
+      #if p_hash.has_key?(v_key = p_array.shift)
+      #  p_hash[v_key] = p_array.shift
+      #  return p_hash
+      #else
+      #  return {v_key => p_array.shift}
+      #end
+    else
+      v_key = p_array.shift
+      if p_hash.has_key?(v_key)
+        p_hash[v_key] = process_array2(p_array, p_hash[v_key])
+        return p_hash
+      else
+        p_hash[v_key] = process_array2(p_array, {})
+        return p_hash
+      end
+    end
+  end
+  
+  def format_collapsable_list(p_list)
+    a_hash = {}
+    p_list.each do |v_row|
+      a_hash = process_array2(v_row[0], a_hash)
+      # logger.debug("after recurse: #{a_hash}")
+    #  html_string = html_string + "<ul>\n"
+    #  html_string = html_string + "  <li>\n"
+    #  html_string = html_string + "    " + v_row[0][0] + "\n"
+    #  html_string = html_string + "  <ul>"
+    #  html_string = html_string + "    <li>"
+    #  html_string = html_string + "      " + v_row[0][1] + "\n"
+    #  html_string = html_string + "    </li>\n"
+    #  html_string = html_string + "  </ul>\n"
+    #  html_string = html_string + "  </li>\n"
+    #  html_string = html_string + "</ul>\n"
+    end
+    logger.debug("Hash after completion: #{a_hash}")
   end
 
 end

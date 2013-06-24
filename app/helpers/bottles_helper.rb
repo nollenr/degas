@@ -16,4 +16,5 @@ module BottlesHelper
     @temp = current_user.bottles.find_by_bottle_id(p_bottle_id)
     @temp ? true : false
   end
+
 end
