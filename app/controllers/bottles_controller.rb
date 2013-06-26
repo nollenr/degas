@@ -160,7 +160,7 @@ class BottlesController < ApplicationController
     #@bottles=Bottle.where(available: :true).count('*', group: :grape_id)
     @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.name').count('*', group: 'grapes.name').to_a
     @toc_by_wineries = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.name').count('*', group: 'wineries.name').to_a
-    @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2').count(:all, group: ['wineries.country', 'wineries.location1', 'wineries.location2']).to_a
+    @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2, wineries.location3').count(:all, group: ['wineries.country', 'wineries.location1', 'wineries.location2', 'wineries.location3']).to_a
     logger.debug("location array ******************************************** #{@toc_by_locations.inspect}")
   end
 
@@ -175,40 +175,18 @@ private
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
-  def process_array(p_array, p_hash)
-    logger.debug(" #{p_array.inspect} #{p_hash}")
-    if (p_array.length == 2)
-      if (p_hash.has_key?(v_key = p_array.shift))
-        return nil
-      else
-        logger.debug("during recurse returning #{p_hash}")
-        return {v_key => p_array.shift} 
-      end
-    end
-    v_key = p_array.shift
-    p_hash = {v_key => process_array(p_array, p_hash) }
-  end
-  
-  def process_array2(p_array, p_hash)
-    #logger.debug(" #{p_array.inspect} #{p_hash}")
-    if (p_array.length == 2)
-      v_key = p_array.shift
-      p_hash[v_key] = p_array.shift
-      return p_hash
-      #if p_hash.has_key?(v_key = p_array.shift)
-      #  p_hash[v_key] = p_array.shift
-      #  return p_hash
-      #else
-      #  return {v_key => p_array.shift}
-      #end
+  def process_array(p_array, p_hash, p_count)
+    if (p_array.length == 0)
+      return {}
     else
       v_key = p_array.shift
+      v_key = v_key == "" ? nil : v_key
       if p_hash.has_key?(v_key)
-        p_hash[v_key] = process_array2(p_array, p_hash[v_key])
+        p_hash[v_key] = [process_array(p_array, p_hash[v_key][0], p_count), p_hash[v_key][1] + p_count]
         return p_hash
       else
-        p_hash[v_key] = process_array2(p_array, {})
-        return p_hash
+        p_hash[v_key] = [process_array(p_array, {}, p_count),p_count] 
+        return p_hash         
       end
     end
   end
@@ -216,18 +194,7 @@ private
   def format_collapsable_list(p_list)
     a_hash = {}
     p_list.each do |v_row|
-      a_hash = process_array2(v_row[0], a_hash)
-      # logger.debug("after recurse: #{a_hash}")
-    #  html_string = html_string + "<ul>\n"
-    #  html_string = html_string + "  <li>\n"
-    #  html_string = html_string + "    " + v_row[0][0] + "\n"
-    #  html_string = html_string + "  <ul>"
-    #  html_string = html_string + "    <li>"
-    #  html_string = html_string + "      " + v_row[0][1] + "\n"
-    #  html_string = html_string + "    </li>\n"
-    #  html_string = html_string + "  </ul>\n"
-    #  html_string = html_string + "  </li>\n"
-    #  html_string = html_string + "</ul>\n"
+      a_hash = process_array(v_row[0], a_hash, v_row[1])
     end
     logger.debug("Hash after completion: #{a_hash}")
   end
