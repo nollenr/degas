@@ -158,9 +158,13 @@ class BottlesController < ApplicationController
   
   def toc
     #@bottles=Bottle.where(available: :true).count('*', group: :grape_id)
-    @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.color, grapes.name').count(:all, group: ['grapes.color', 'grapes.name']).to_a
+    @toc_by_grapes_group_by = ['grapes.color', 'grapes.name'] 
+    @toc_grape_search_data_key = ['grape_color_eq', 'grape_name_cont']
+    @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.color, grapes.name').count(:all, group: @toc_by_grapes_group_by).to_a
     @toc_by_wineries = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.name').count('*', group: 'wineries.name').to_a
-    @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2, wineries.location3, wineries.name').count(:all, group: ['wineries.country', 'wineries.location1', 'wineries.location2', 'wineries.location3', 'wineries.name']).to_a
+    @toc_by_locations_group_by = ['wineries.country', 'wineries.location1', 'wineries.location2', 'wineries.location3', 'wineries.name']
+    @toc_location_search_data_key = [nil, nil, nil, nil, 'winery_name_cont']
+    @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2, wineries.location3, wineries.name').count(:all, group: @toc_by_locations_group_by).to_a
     #logger.debug("location array ******************************************** #{@toc_by_locations.inspect}")
   end
 
@@ -175,19 +179,23 @@ private
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
-  def create_list_html(p_hash, p_html, p_create_link)
+  def create_list_html(p_hash, p_html, p_create_link, p_data_key, p_level)
+    v_data_key = p_data_key[p_level]
     p_html = p_html + '<div class="row-fluid">'
     p_html = p_html + '<ul>'
     p_hash.each{|key, value|
       p_html = p_html + '<li class = "collapse-li">'
-      if (p_create_link && !key.nil?)
-        v_key = key
+      if (p_create_link && !key.nil? && !v_data_key.nil?)
+        v_key = view_context.link_to key, bottles_path("q"=>{v_data_key=> key,"available_true"=>"1"})
       else
         v_key = key.nil? ? "Not Listed" : key
       end
-      p_html = p_html + '<div>' + v_key + '</div> <div class="text-right">' + value[1].to_s + '</div>'
+      # logger.debug("for v_key #{v_key} p_data_key[#{p_level.inspect}]= #{v_data_key.inspect}")
+      p_html = p_html + '<div class="span6">' + v_key + '</div> <div class="span5 text-right">' + value[1].to_s + '</div>'
       if !value[0].empty?
-        p_html = create_list_html(value[0], p_html, p_create_link)
+        p_level = p_level + 1
+        p_html = create_list_html(value[0], p_html, p_create_link, p_data_key, p_level)
+        p_level = p_level -1
       end
       p_html = p_html + '</li>'
     }
@@ -212,13 +220,13 @@ private
     end
   end
   
-  def format_collapsable_list(p_list, p_create_link)
+  def format_collapsable_list(p_list, p_create_link, p_data_key)
     a_hash = {}
     p_list.each do |v_row|
       a_hash = process_array(v_row[0], a_hash, v_row[1])
     end
     # logger.debug("Hash after completion: #{a_hash}")
-    a_html = create_list_html(a_hash, "", p_create_link)
+    a_html = create_list_html(a_hash, "", p_create_link, p_data_key, 0)
     # logger.debug("HTML after completion #{a_html}")
     return a_html
   end
