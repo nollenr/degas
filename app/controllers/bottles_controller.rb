@@ -79,7 +79,7 @@ class BottlesController < ApplicationController
   end
 
   def index
-    # logger.debug "*****************   Bottle Controller Index: #{params.inspect}"
+    logger.debug "*****************   Bottle Controller Index: #{params.inspect}"
     @search = current_user.bottles.includes(:bottle_type, :winery, :grape).search(params[:q])
     # This was a huge mistake and a mis-comprehension regarding active record.
     # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
@@ -158,10 +158,10 @@ class BottlesController < ApplicationController
   
   def toc
     #@bottles=Bottle.where(available: :true).count('*', group: :grape_id)
-    @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.name').count('*', group: 'grapes.name').to_a
+    @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.color, grapes.name').count(:all, group: ['grapes.color', 'grapes.name']).to_a
     @toc_by_wineries = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.name').count('*', group: 'wineries.name').to_a
-    @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2, wineries.location3').count(:all, group: ['wineries.country', 'wineries.location1', 'wineries.location2', 'wineries.location3']).to_a
-    logger.debug("location array ******************************************** #{@toc_by_locations.inspect}")
+    @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2, wineries.location3, wineries.name').count(:all, group: ['wineries.country', 'wineries.location1', 'wineries.location2', 'wineries.location3', 'wineries.name']).to_a
+    #logger.debug("location array ******************************************** #{@toc_by_locations.inspect}")
   end
 
 
@@ -173,6 +173,27 @@ private
   def sort_direction
     # sanitize the direction... only 2 directions should be allowed
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+  
+  def create_list_html(p_hash, p_html, p_create_link)
+    p_html = p_html + '<div class="row-fluid">'
+    p_html = p_html + '<ul>'
+    p_hash.each{|key, value|
+      p_html = p_html + '<li class = "collapse-li">'
+      if (p_create_link && !key.nil?)
+        v_key = key
+      else
+        v_key = key.nil? ? "Not Listed" : key
+      end
+      p_html = p_html + '<div>' + v_key + '</div> <div class="text-right">' + value[1].to_s + '</div>'
+      if !value[0].empty?
+        p_html = create_list_html(value[0], p_html, p_create_link)
+      end
+      p_html = p_html + '</li>'
+    }
+    p_html = p_html + '</ul>'
+    p_html = p_html + '</div>'
+    return p_html
   end
   
   def process_array(p_array, p_hash, p_count)
@@ -191,12 +212,15 @@ private
     end
   end
   
-  def format_collapsable_list(p_list)
+  def format_collapsable_list(p_list, p_create_link)
     a_hash = {}
     p_list.each do |v_row|
       a_hash = process_array(v_row[0], a_hash, v_row[1])
     end
-    logger.debug("Hash after completion: #{a_hash}")
+    # logger.debug("Hash after completion: #{a_hash}")
+    a_html = create_list_html(a_hash, "", p_create_link)
+    # logger.debug("HTML after completion #{a_html}")
+    return a_html
   end
 
 end

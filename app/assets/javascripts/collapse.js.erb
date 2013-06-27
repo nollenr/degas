@@ -1,0 +1,21 @@
+$(function() {
+  $(".collapse-li").find(".collapse-li").hide();
+  // $(".collapse-li").prepend('<i class="icon-plus"></i>');
+  $(".collapse-li").each(function(){
+    if ($(this).find("ul").length > 0 ) {
+      $(this).find("div").first().prepend('<i class="icon-plus"></i>');
+    }
+  });
+  $(".collapse-li").click(function() {
+    if ($(this).find("ul").first().children("li").is(":hidden")) {
+      $(this).find("i").first().removeClass("icon-plus").addClass("icon-minus");
+      $(this).find("ul").first().children("li").show("slow");
+      return false;
+    }
+    else {
+      $(this).find(".collapse-li").slideUp("slow");
+      $(this).find("i").removeClass("icon-minus").addClass("icon-plus");
+      return false;
+    }
+  });
+});
