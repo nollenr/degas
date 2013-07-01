@@ -26,9 +26,9 @@ Degas::Application.routes.draw do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   resources :bottles  do
+    put :rate, on: :member
     put :consume, on: :member
     get :copy, on: :member
-    get :rate_edit, on: :member
   end
 
   resources :wineries, except: [:destroy]

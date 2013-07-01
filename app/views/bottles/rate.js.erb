@@ -1,0 +1,4 @@
+$("#<%= @bottle.id %>stored_rating").val(<%= @bottle.rating %>);
+$("#<%= @bottle.id %>ratingDiv").find(".goldStar").removeClass("goldStar");
+$("#<%= @bottle.id %>ratingDiv").find("li:lt(<%= @bottle.rating%>)").children("a").addClass("goldStar");
+$("#<%= @bottle.id %>ratingDiv").find(".ratingText").html("");

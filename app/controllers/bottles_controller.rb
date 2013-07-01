@@ -152,8 +152,15 @@ class BottlesController < ApplicationController
     render 'new'
   end
 
-  def rate_edit
+  def rate
+    logger.debug "rate edit: ********************* #{params.inspect}"
+    bottle = current_user.bottles.update(params[:id], rating: params[:rating])
+    bottle.save
     @bottle = current_user.bottles.find_by_id(params[:id])
+    respond_to do |format|
+      format.html #rate.html.erb
+      format.js   #rate.js.erb
+    end #end repond_to
   end
   
   def toc

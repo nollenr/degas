@@ -197,6 +197,14 @@ footer ul li {
   color: DarkSlateGray;
 }
 
+.starRate {overflow: hidden;}
+.starRate ul {margin-left: 0; display: inline;}
+.starRate li {list-style: none; display: inline;}
+.starRate li a {display: block; width: 16px; height: 16px; background: image_url("star_rate.gif") left top; float: left; text-indent: -9999px;}
+.starRate a {background-position: 0px;}
+.starRate li a.copperStar {background-position: 0px -32px;}
+.starRate li a.goldStar {background-position: 0px -16px;}
+
 /* -------------------------- */
 /* bottle new                 */
 /* -------------------------- */

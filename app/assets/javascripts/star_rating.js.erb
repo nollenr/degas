@@ -1,0 +1,33 @@
+$(function() { 
+  $(".starRate li a").hover(changeRating, setRating);
+  $(".starRate").each(displayRating);
+});
+
+function changeRating(){
+  var starRateDiv = $(this).closest(".starRate");
+  var current_rating = starRateDiv.children(".storedRating").val();
+  var selected_rating = $(this).parent().index() + 1;
+  starRateDiv.find("a").removeClass("goldStar");
+  starRateDiv.find("li").slice(0,selected_rating).children("a").addClass("copperStar");
+  if (current_rating > selected_rating) {
+    starRateDiv.find("li").slice(selected_rating, current_rating).children("a").addClass("goldStar");
+  };
+    starRateDiv.find(".ratingText").html(starRateDiv.find("li").eq(selected_rating-1).children("a").html());
+};
+
+function setRating(){
+  var starRateDiv = $(this).closest(".starRate");
+  var current_rating = starRateDiv.children(".storedRating").val();
+  starRateDiv.find("li").children("a").removeClass("copperStar");
+  if (current_rating) {
+    starRateDiv.find("li:lt("+current_rating+")").children("a").addClass("goldStar");
+  };
+  starRateDiv.find(".ratingText").html("");
+};
+
+function displayRating(){
+  var current_rating = $(this).children(".storedRating").val();
+  if (current_rating) {
+    $(this).find("li:lt("+current_rating+")").children("a").addClass("goldStar");
+  };
+};
