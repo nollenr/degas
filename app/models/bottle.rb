@@ -36,6 +36,7 @@ class Bottle < ActiveRecord::Base
   validates :winery_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created." }
   validates :bottle_type_id, presence: true
   validate  :check_date_added_to_cellar_text
+  validates :rating, inclusion: 1..10, allow_nil: true
 
   before_save :save_date_added_to_cellar_text  
 

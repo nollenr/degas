@@ -34,8 +34,9 @@
             </div>
           </div>                <!-- search options column1 size end -->
           <div class="span2">   <!-- serach button column2 size start -->
-            <%= f.submit "Update List"%> 
-            <%= f.submit  "Clear Search", id: "clearSearch" %>
+            <%= f.submit "Update List", class: "btn"%> 
+            <%= link_to  "Clear Search", bottles_path, class: "btn"%>
+            <!-- %= f.submit  "Clear Search", id: "clearSearch" % -->
           </div>                <!-- serach button column2 size end -->
         </div>                  <!-- search row1 end-->
 
@@ -46,7 +47,12 @@
           </div>
           <div class="span8 checkbox inline search-bottle-type-span">
             <% BottleType.order(:display_order).pluck(:name).each do |xtype| %>
-            <label class="search-checkbox-type" > <%= check_box_tag 'q[bottle_type_name_in][]', xtype %><%= xtype %></label>
+              <% if defined? params[:q][:bottle_type_name_in] %>
+                <% checked = params[:q][:bottle_type_name_in].include?(xtype) %>
+              <% else %>
+                <% checked = false %>
+              <% end %>
+              <label class="search-checkbox-type" > <%= check_box_tag 'q[bottle_type_name_in][]', xtype, checked %><%= xtype %></label>
             <% end %>
           </div>
           <!-- end span12 -->

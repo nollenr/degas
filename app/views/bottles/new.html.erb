@@ -56,6 +56,7 @@
 
       <% if !@bottle.id.blank? %>
         <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
+        <%= f.input :rating, label: "Rating (1-10)"%>
       <% end %>
 
       <%= f.button :submit, label: "Create Bottle", class: "btn btn-large btn-primary" %>

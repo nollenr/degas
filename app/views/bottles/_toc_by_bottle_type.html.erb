@@ -1,0 +1,11 @@
+  <div class="row-fluid">
+   <div class="span5 offset1">
+     <%= link_to toc_by_bottle_type[0], bottles_path("q"=>{@toc_bottle_type_search_data_key[0]=>[toc_by_bottle_type[0]], "available_true"=>"1"}) %>
+   </div>
+   <div class="span6">
+     <%= toc_by_bottle_type[1].to_s %>
+   </div>
+ </div>
+ 
+ 
+ 

@@ -23,3 +23,8 @@
   <% @v_html = format_collapsable_list(@toc_by_locations, true, @toc_location_search_data_key)%>
   <%= @v_html.html_safe %>
 </div>
+
+<div class="tableoc" id="toc_by_winery">
+  <p class="lead">Cellar Contents By Bottle Type<p>
+  <%= render partial: 'toc_by_bottle_type', collection: @toc_by_bottle_types %>
+</div>

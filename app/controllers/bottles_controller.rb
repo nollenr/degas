@@ -98,31 +98,14 @@ class BottlesController < ApplicationController
   end   #end index method
 
   def update
-    if params.has_key?(:rating) # Rating Update Begin
-      if !params.has_key?(:bottle) 
-        flash.now[:error] = "Please choose a rating 0-9."
-        @bottle = current_user.bottles.find_by_id(params[:id])
-        render 'rate_edit'
-      else
-        bottle = current_user.bottles.update(params[:id], rating: params[:bottle][:rating])
-        if bottle.save
-          flash[:success] = "Bottle rating updated."
-          redirect_to :bottles
-        else
-          render 'rate_edit'
-        end
-      end 
-    # Rating Update End
-    else #Bottle Update Begin
-      @bottle = current_user.bottles.find_by_id(params[:id])
-      if @bottle.update_attributes(params[:bottle])
-        flash[:success] = "Bottle updated"
-        redirect_to :bottles
-      else
-        flash[:error] = "Update unsuccessful."
-        render 'edit'
-      end
-    end #Bottle Update End
+    @bottle = current_user.bottles.find_by_id(params[:id])
+    if @bottle.update_attributes(params[:bottle])
+      flash[:success] = "Bottle updated"
+      redirect_to :bottles
+    else
+      flash[:error] = "Update unsuccessful."
+      render 'new'
+    end
   end
 
   def consume
@@ -138,12 +121,15 @@ class BottlesController < ApplicationController
   end
 
   def copy
-    # available default value is "true"
     @source_bottle = current_user.bottles.find_by_id(params[:id])
     @bottle = @source_bottle.dup
+    logger.debug "**************************** during copy before setting nil #{@bottle.inspect}"
     @bottle[:bottle_id] = nil
-    @bottle[:available] = :true
+    @bottle[:bottle_id_text] = nil
+    @bottle[:available] = true
+    @bottle[:availability_change_date] = nil
     @bottle[:rating] = nil
+    logger.debug "**************************** during copy after setting nil #{@bottle.inspect}"    
     render 'new'
   end
 
@@ -172,6 +158,9 @@ class BottlesController < ApplicationController
     @toc_by_locations_group_by = ['wineries.country', 'wineries.location1', 'wineries.location2', 'wineries.location3', 'wineries.name']
     @toc_location_search_data_key = [nil, nil, nil, nil, 'winery_name_cont']
     @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2, wineries.location3, wineries.name').count(:all, group: @toc_by_locations_group_by).to_a
+    @toc_by_bottle_types_group_by = ['bottle_types.name']
+    @toc_bottle_type_search_data_key = ['bottle_type_name_in']
+    @toc_by_bottle_types = current_user.bottles.where(available: :TRUE).joins(:bottle_type).order('bottle_types.name').count(:all, group: @toc_by_bottle_types_group_by).to_a 
     #logger.debug("location array ******************************************** #{@toc_by_locations.inspect}")
   end
 
