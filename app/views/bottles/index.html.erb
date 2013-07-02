@@ -47,7 +47,8 @@
           </div>
           <div class="span8 checkbox inline search-bottle-type-span">
             <% BottleType.order(:display_order).pluck(:name).each do |xtype| %>
-              <% if defined? params[:q][:bottle_type_name_in] %>
+              <% xyz = params[:q][:bottle_type_name_in] %>
+              <% if !xyz.nil? %>
                 <% checked = params[:q][:bottle_type_name_in].include?(xtype) %>
               <% else %>
                 <% checked = false %>
