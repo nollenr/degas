@@ -46,6 +46,14 @@
             <span class="search-bottle-type-label"> Bottle Types </span>
           </div>
           <div class="span8 checkbox inline search-bottle-type-span">
+            <% logger.debug "**** before setting params it is: #{params.inspect}"%>
+            <% if params.has_key?(:q) %>
+              <% logger.debug "Looks like params HAS the hash key :q" %>
+            <% else %>
+              <% logger.debug "Looks like params DOES NOT HAVE the hash key :q" %>
+              <% params[:q] = {:bottle_type_name_in => []}%>
+            <% end %>
+            <% logger.debug "**** after setting params it is: #{params.inspect}"%>
             <% BottleType.order(:display_order).pluck(:name).each do |xtype| %>
               <% xyz = params[:q][:bottle_type_name_in] %>
               <% if !xyz.nil? %>
