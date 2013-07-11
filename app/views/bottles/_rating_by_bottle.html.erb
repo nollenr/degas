@@ -1,0 +1,29 @@
+<hr>
+<div class="row-fluid">              <!-- enclosing row start -->
+
+  <div class="row-fluid">            <!-- detail line 1 start -->
+    <div class="span9" > 
+      <span class="rbottle-title"><%= rating_by_bottle[0][2] + " " + rating_by_bottle[0][0] %></span>
+      <span class="bottle-title-postfix"><%= rating_by_bottle[0][1] %></span> 
+    </div>
+    <div class="span1 offset2 rbottle-rating" > <%= rating_by_bottle[1] %> </div>
+  </div>                             <!-- detail line 1 end -->
+  
+  <div class="row-fluid">            <!-- detail line 2 start -->
+    <div class="span11 offset1 rbottle-detail">
+        <span class="muted">Name: </span>
+        <% if rating_by_bottle[0][4].empty? %>
+          <span class="muted"><%= "None" %></span>
+        <% else %>
+          <%= rating_by_bottle[0][4]%>
+        <% end %>
+        <span class="muted">Vineyard: </span>
+        <% if rating_by_bottle[0][3].empty? %>
+          <span class="muted"><%= "None" %></span>
+        <% else %>
+          <%= rating_by_bottle[0][3] %>
+        <% end %>
+    </div>
+  </div>                             <!-- detail line 2 end -->
+  
+</div>                               <!-- enclosing row end -->

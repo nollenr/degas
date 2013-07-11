@@ -163,6 +163,14 @@ class BottlesController < ApplicationController
     @toc_by_bottle_types = current_user.bottles.where(available: :TRUE).joins(:bottle_type).order('bottle_types.name').count(:all, group: @toc_by_bottle_types_group_by).to_a 
     #logger.debug("location array ******************************************** #{@toc_by_locations.inspect}")
   end
+  
+  def ratings
+    @rating_list_group_by = ['wineries.name', 'grapes.name', 'vintage', 'vineyard', 'bottles.name']
+    @rating_by_bottle = current_user.bottles.where("rating is not null").joins(:grape, :winery).order("average_rating desc").average("rating", group: @rating_list_group_by).to_a
+    #@rating_list_by_winery = current_user.bottles.select("wineries.name, vintage||'-'||grapes.name||'-'||bottles.name||'-'||vineyard").where("rating is not null").joins(:grape, :winery).group(@rating_list_group_by).to_a
+    logger.debug("Rating array ********************************************** #{@rating_by_bottle.inspect}")
+    #@my_html = format_collapsable_list(@rating_list_by_winery, false, [])
+  end
 
 
 private
@@ -221,9 +229,9 @@ private
     p_list.each do |v_row|
       a_hash = process_array(v_row[0], a_hash, v_row[1])
     end
-    # logger.debug("Hash after completion: #{a_hash}")
+    logger.debug("Hash after completion: #{a_hash}")
     a_html = create_list_html(a_hash, "", p_create_link, p_data_key, 0)
-    # logger.debug("HTML after completion #{a_html}")
+    logger.debug("HTML after completion #{a_html}")
     return a_html
   end
 

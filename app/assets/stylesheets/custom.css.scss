@@ -195,6 +195,8 @@ footer ul li {
 
 .bottle-title-postfix {
   color: DarkSlateGray;
+  font-size: 1em;
+  font-weight: normal;
 }
 
 .starRate {overflow: hidden;}
@@ -234,5 +236,18 @@ text-align: left;
   //border: 1px solid gray;
   //border-radius: 4px;
 }
-
-
+/* -------------------------- */
+/* Ratings                    */
+/* -------------------------- */
+.rbottle-title {
+    color: DarkSlateGray;
+    font-size: 1.4em;
+    letter-spacing: -1px;
+    text-align: left;
+}
+.rbottle-detail {
+  color: DarkSlateGray;
+}
+.rbottle-rating{
+  color: DarkSlateGray;
+}

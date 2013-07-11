@@ -1,0 +1,15 @@
+<% provide(:title, 'Ratings') %>
+
+<div class="ratings" id="rating_by_bottle">
+  <p class="lead">Ratings By Bottle</p>
+    
+  <div class="row-fluid">            <!-- heading row start -->
+    <h2>
+    <div class="span9" >Bottle</div>
+    <div class="span1 offset2" >Average Rating</div>
+    </h2>
+  </div>                             <!-- heading row end --> 
+    
+    
+  <%= render partial: 'rating_by_bottle', collection: @rating_by_bottle %>
+</div>
