@@ -1,4 +1,4 @@
-      <div class="row-fluid starRate" id="<%= bottle.id %>ratingDiv">
+      <div class="row-fluid starRate rstarRate" id="<%= bottle.id %>ratingDiv">
         <div class="span2">Rating:</div> 
         <%= hidden_field_tag "stored_rating", bottle.rating, {id: bottle.id.to_s + "stored_rating", class: "storedRating"} %>
         <div class="span6">

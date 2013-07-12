@@ -199,13 +199,13 @@ footer ul li {
   font-weight: normal;
 }
 
-.starRate {overflow: hidden;}
-.starRate ul {margin-left: 0; display: inline;}
-.starRate li {list-style: none; display: inline;}
-.starRate li a {display: block; width: 16px; height: 16px; background: image_url("star_rate.gif") left top; float: left; text-indent: -9999px;}
-.starRate a {background-position: 0px;}
-.starRate li a.copperStar {background-position: 0px -32px;}
-.starRate li a.goldStar {background-position: 0px -16px;}
+.rstarRate {overflow: hidden;}
+.rstarRate ul {margin-left: 0; display: inline;}
+.rstarRate li {list-style: none; display: inline;}
+.rstarRate li a {display: block; width: 16px; height: 16px; background: image_url("star_rate.gif") left top; float: left; text-indent: -9999px;}
+.rstarRate a {background-position: 0px;}
+.rstarRate li a.copperStar {background-position: 0px -32px;}
+.rstarRate li a.goldStar {background-position: 0px -16px;}
 
 /* -------------------------- */
 /* bottle new                 */
@@ -240,14 +240,18 @@ text-align: left;
 /* Ratings                    */
 /* -------------------------- */
 .rbottle-title {
-    color: DarkSlateGray;
-    font-size: 1.4em;
-    letter-spacing: -1px;
-    text-align: left;
+  color: DarkSlateGray;
+  font-size: 1.4em;
+  letter-spacing: -1px;
+  text-align: left;
 }
 .rbottle-detail {
   color: DarkSlateGray;
 }
-.rbottle-rating{
+.rbottle-rating {
   color: DarkSlateGray;
+}
+
+.num_ratings_list {
+  padding-left: 5px;
 }

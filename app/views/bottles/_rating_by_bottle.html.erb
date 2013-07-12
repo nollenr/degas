@@ -2,26 +2,56 @@
 <div class="row-fluid">              <!-- enclosing row start -->
 
   <div class="row-fluid">            <!-- detail line 1 start -->
-    <div class="span9" > 
-      <span class="rbottle-title"><%= rating_by_bottle[0][2] + " " + rating_by_bottle[0][0] %></span>
-      <span class="bottle-title-postfix"><%= rating_by_bottle[0][1] %></span> 
+    <div class="span8" > 
+      <span class="rbottle-title"><%= rating_by_bottle[:vintage] + " " + rating_by_bottle[:winery] %></span>
+      <span class="bottle-title-postfix"><%= rating_by_bottle[:grape] %></span> 
     </div>
-    <div class="span1 offset2 rbottle-rating" > <%= rating_by_bottle[1] %> </div>
+    <!-- div class="span1 offset2 rbottle-rating" > <%= rating_by_bottle[1] %></div --> 
+      
+      
+     <div class="dstarRate rstarRate pull-right">
+      <!-- div class="span2">Rating:</div --> 
+      <%= hidden_field_tag "stored_rating", rating_by_bottle[:avg_rating].round, {class: "storedRating"} %>
+      <span>
+        <ul>
+          <li class="starRateli"><%= link_to "1 Star",  "#" %></li>
+          <li class="starRateli"><%= link_to "2 Stars", "#" %></li>
+          <li class="starRateli"><%= link_to "3 Stars", "#" %></li>
+          <li class="starRateli"><%= link_to "4 Stars", "#" %></li>
+          <li class="starRateli"><%= link_to "5 Stars", "#" %></li>
+          <li class="starRateli"><%= link_to "6 Stars", "#" %></li>
+          <li class="starRateli"><%= link_to "7 Stars", "#" %></li>
+          <li class="starRateli"><%= link_to "8 Stars", "#" %></li>
+          <li class="starRateli"><%= link_to "9 Stars", "#" %></li>
+          <li class="starRateli"><%= link_to "10 Stars", "#" %></li>
+        </ul>
+      </span>
+      <span class="muted num_ratings_list">
+        <%=rating_by_bottle[:num_ratings].to_s + " " + "rating".pluralize(rating_by_bottle[:num_ratings])%>
+      </span>
+      <!-- div class="span4 ratingText"></div -->
+    </div>
+   
   </div>                             <!-- detail line 1 end -->
   
   <div class="row-fluid">            <!-- detail line 2 start -->
     <div class="span11 offset1 rbottle-detail">
         <span class="muted">Name: </span>
-        <% if rating_by_bottle[0][4].empty? %>
+        <% if rating_by_bottle[:name].empty? %>
           <span class="muted"><%= "None" %></span>
         <% else %>
-          <%= rating_by_bottle[0][4]%>
+          <%= rating_by_bottle[:name]%>
         <% end %>
         <span class="muted">Vineyard: </span>
-        <% if rating_by_bottle[0][3].empty? %>
+        <% if rating_by_bottle[:vineyard].empty? %>
           <span class="muted"><%= "None" %></span>
         <% else %>
-          <%= rating_by_bottle[0][3] %>
+          <%= rating_by_bottle[:vineyard] %>
+        <% end %>
+        <% if rating_by_bottle[:avail_bottles] == 0 %>
+          <span class="muted">Available Bottles: <%= rating_by_bottle[:avail_bottles]%></span>
+        <% else %>
+          <%= link_to "Available Bottles: " + rating_by_bottle[:avail_bottles].to_s, bottles_path("q"=>{"available_true"=>"1", "grape_name_eq"=>rating_by_bottle[:grape], "winery_name_eq"=>rating_by_bottle[:winery], "vintage_eq"=>rating_by_bottle[:vintage], "name_eq"=>rating_by_bottle[:name], "vineyard_eq"=>rating_by_bottle[:vineyard]})%>
         <% end %>
     </div>
   </div>                             <!-- detail line 2 end -->

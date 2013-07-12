@@ -1,6 +1,10 @@
 $(function() { 
   $(".starRate li a").hover(changeRating, setRating);
-  $(".starRate").each(displayRating);
+//  $(".starRate").each(displayRating);
+  $(".rstarRate").each(displayRating);
+  $(".dstarRate li a").click(function(){
+    return false;
+  });
 });
 
 function changeRating(){

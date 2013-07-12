@@ -166,7 +166,13 @@ class BottlesController < ApplicationController
   
   def ratings
     @rating_list_group_by = ['wineries.name', 'grapes.name', 'vintage', 'vineyard', 'bottles.name']
-    @rating_by_bottle = current_user.bottles.where("rating is not null").joins(:grape, :winery).order("average_rating desc").average("rating", group: @rating_list_group_by).to_a
+    @rating_by_bottle_unformatted = current_user.bottles.where("rating is not null").joins(:grape, :winery).order("average_rating desc").average("rating", group: @rating_list_group_by).to_a
+    @rating_by_bottle = @rating_by_bottle_unformatted.map{|x| {:winery=>x[0][0], :grape=>x[0][1], :vintage=>x[0][2], :vineyard=>x[0][3], :name=>x[0][4], :avg_rating=>x[1]}}
+    @rating_by_bottle.map! {|x|
+      x[:num_ratings] = current_user.bottles.where('rating is not null and wineries.name = ? and grapes.name = ? and vintage = ? and vineyard = ? and bottles.name = ?', x[:winery], x[:grape], x[:vintage], x[:vineyard], x[:name]).joins(:grape, :winery).count(:all)
+      x[:avail_bottles] = current_user.bottles.where('available = ? and wineries.name = ? and grapes.name = ? and vintage = ? and vineyard = ? and bottles.name = ?', true, x[:winery], x[:grape], x[:vintage], x[:vineyard], x[:name]).joins(:grape, :winery).count(:all)
+      x
+      }
     #@rating_list_by_winery = current_user.bottles.select("wineries.name, vintage||'-'||grapes.name||'-'||bottles.name||'-'||vineyard").where("rating is not null").joins(:grape, :winery).group(@rating_list_group_by).to_a
     logger.debug("Rating array ********************************************** #{@rating_by_bottle.inspect}")
     #@my_html = format_collapsable_list(@rating_list_by_winery, false, [])
