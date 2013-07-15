@@ -6,6 +6,9 @@ $(function() {
       // $(this).find("div").first().prepend('<i class="icon-plus collapse-i"></i>');
       $(this).prepend('<div class="span1"><i class="icon-plus collapse-i"></i></div>');
     }
+    else {
+      $(this).prepend('<div class="span1"></div>')
+    }
   });
   $(".collapse-i").click(function() {
     if ($(this).parent().parent(".collapse-li").find("ul").first().children("li").is(":hidden")) {

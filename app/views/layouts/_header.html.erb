@@ -28,7 +28,15 @@
                 <ul class="dropdown-menu">
                   <li><%= link_to "Cellar Table of Contents", toc_path %></li>
                   <li class="divider"></li>
-                  <li><%= link_to "View Ratings", ratings_path %></li>
+                  
+                  <li class="dropdown-submenu">
+                    <a tabindex="-1" href="#">Ratings</a>
+                    <ul class="dropdown-menu" >
+                      <li><%= link_to "Bottle Ratings", ratings_path %></li>
+                      <li><%= link_to "Winery Ratings", winery_ratings_path %></li>
+                    </ul>  
+                  </li>
+                  
                   <li class="divider"></li>
                   <li><%= link_to "Cellar List", bottles_path %></li>
                   <li><%= link_to "Add a Bottle", new_bottle_path %></li>
