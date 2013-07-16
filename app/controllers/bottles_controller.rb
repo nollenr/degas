@@ -180,10 +180,10 @@ class BottlesController < ApplicationController
   def winery_ratings
     @rating_list_group_by = ['wineries.name', 'grapes.name', 'vintage', 'vineyard', 'bottles.name']
     @rating_by_winery_unformatted = current_user.bottles.where("rating is not null").joins(:grape, :winery).order("average_rating desc").average("rating", group: @rating_list_group_by).to_a
-    logger.debug("unformatted winery ratings.................................. #{@rating_by_winery_unformatted.inspect}")
+    # logger.debug("unformatted winery ratings.................................. #{@rating_by_winery_unformatted.inspect}")
     @rating_by_winery = @rating_by_winery_unformatted.map{|x| [[x[0][0], x[0][1] + " " + x[0][3] + " " + x[0][4], x[0][2]], x[1]]}
-    logger.debug("formatted winery ratings .................................... #{@rating_by_winery.inspect}")
-    @rating_collapsable_list = format_collapsable_list(@rating_by_winery, true, ["winery_name_cont",nil,nil])
+    # logger.debug("formatted winery ratings .................................... #{@rating_by_winery.inspect}")
+    @rating_collapsable_list = format_collapsable_list(@rating_by_winery, true, ["winery_name_cont",nil,nil], true)
   end
 
 
@@ -197,7 +197,7 @@ private
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
-  def create_list_html(p_hash, p_html, p_create_link, p_data_key, p_level)
+  def create_list_html(p_hash, p_html, p_create_link, p_data_key, p_level, p_average)
     v_data_key = p_data_key[p_level]
     p_html = p_html + '<div class="row-fluid">'
     p_html = p_html + '<ul>'
@@ -208,11 +208,17 @@ private
       else
         v_key = key.nil? ? "Not Listed" : key
       end
+      # If the data value is supposed to be an average, then do a divide
+      if (p_average)
+        v_value = (value[1]/value[2]).round(1)
+      else
+        v_value = value[1]
+      end
       # logger.debug("for v_key #{v_key} p_data_key[#{p_level.inspect}]= #{v_data_key.inspect}")
-      p_html = p_html + '<div class="span6">' + v_key + '</div> <div class="span5 text-right">' + value[1].to_s + '</div>'
+      p_html = p_html + '<div class="span6">' + v_key + '</div> <div class="span5 text-right">' + v_value.to_s + '</div>'
       if !value[0].empty?
         p_level = p_level + 1
-        p_html = create_list_html(value[0], p_html, p_create_link, p_data_key, p_level)
+        p_html = create_list_html(value[0], p_html, p_create_link, p_data_key, p_level, p_average)
         p_level = p_level -1
       end
       p_html = p_html + '</li>'
@@ -222,30 +228,67 @@ private
     return p_html
   end
   
-  def process_array(p_array, p_hash, p_count)
+  def process_array(p_array, p_hash, p_count, p_accum)
+    # Build a nested list structure
+    # pass in:
+    #  1.  An array with 3 elements (usually created from the database)
+    #      The first element of the array is an array with any number of elements
+    #      The second element of the array is a computation from the database(count, average, etc.)
+    #      Example:
+    #      [[a, b, c, d, e], 12]
+    #      [[a, b, x, y, z], 10]
+    #      [[m, n, o, p, q], 15]
+    #      [[m, s, t, u, v], 18]
+    #      [[m, s, t, u, w], 20]
+    #  2.  A hash (the first iteration, this will be an empty hash)
+    #  3-4.  A couple of accumulators for summing and averaging.  The first sums the
+    #        database computation, the second keep track of the number of records
+    # The function will process through the array checking to see if the hash contains
+    # the key.  If not it creates it and recursively calls this function to continue processing.
+    # each hash key points to an array with two elements.  The first element is a hash, the 
+    # second element has the accumulator value.  
+    #
+    # What you get back is a hash where each element points to an array.  The first element of the 
+    # array is a hash, the second element is the accumulated value (the sum of its children) and the 
+    # third which is a count of the records in it's tree.  It's a recursive data
+    # structure.  The first element of the array (the hash) is either an empty hash (meaning) that 
+    # you've arrived at the bottom of the structure, or it has keys that point to arrays with 
+    # 2 elements.
+    # Example (building)
+    # {"a"=>[{"b"=>[{"c"=>[{"d"=>[{"e"=>[{}, 12, 1]}, 12, 1]}, 12, 1]}, 12, 1]}, 12, 1]}
+    # {"a"=>[{"b"=>[{"c"=>[{"d"=>[{"e"=>[{}, 12, 1]}, 12, 1]}, 12, 1], "x"=>[{"y"=>[{"z"=>[{}, 10, 1]}, 10, 1]}, 10, 1]}, 22, 2]}, 22, 2]}
+    # The "topmost" hash would have 2 elements
+    # {a=>[], m=>[]}  Each of those arrays would have 2 elements... a hash and an accumulator
+    # b=>[] Which would have 2 elements... a hash and an accumulator
+    # {c=>[], x=>[]}
     if (p_array.length == 0)
       return {}
     else
       v_key = p_array.shift
       v_key = v_key == "" ? nil : v_key
       if p_hash.has_key?(v_key)
-        p_hash[v_key] = [process_array(p_array, p_hash[v_key][0], p_count), p_hash[v_key][1] + p_count]
+        p_hash[v_key] = [process_array(p_array, p_hash[v_key][0], p_count, p_accum), p_hash[v_key][1] + p_count, p_hash[v_key][2] + 1]
         return p_hash
       else
-        p_hash[v_key] = [process_array(p_array, {}, p_count),p_count] 
+        # New hash (key doesn't exist)
+        p_hash[v_key] = [process_array(p_array, {}, p_count, 0), p_count, 1] 
         return p_hash         
       end
     end
   end
   
-  def format_collapsable_list(p_list, p_create_link, p_data_key)
+  def format_collapsable_list(p_list, p_create_link, p_data_key, p_average=false)
     a_hash = {}
     p_list.each do |v_row|
-      a_hash = process_array(v_row[0], a_hash, v_row[1])
+      a_hash = process_array(v_row[0], a_hash, v_row[1], 0)
     end
     logger.debug("Hash after completion: #{a_hash}")
-    a_html = create_list_html(a_hash, "", p_create_link, p_data_key, 0)
-    logger.debug("HTML after completion #{a_html}")
+    if (p_average)
+      a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
+    end
+    logger.debug("Hash after sorting: #{a_hash}")
+    a_html = create_list_html(a_hash, "", p_create_link, p_data_key, 0, p_average)
+    # logger.debug("HTML after completion #{a_html}")
     return a_html
   end
 
