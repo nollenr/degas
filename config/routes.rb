@@ -21,7 +21,10 @@ Degas::Application.routes.draw do
   match "grapes" => "grape#index"
   match "grapes_list" => "grape#list"
   match "wineries_list" => "wineries#list"
-  match "toc" => "bottles#toc"
+  match "toc_by_grape" => "bottles#toc_by_grape"
+  match "toc_by_winery" => "bottles#toc_by_winery"
+  match "toc_by_location" => "bottles#toc_by_location"
+  match "toc_by_bottle_type" => "bottles#toc_by_bottle_type"
   match "ratings" => "bottles#ratings"
   match "winery_ratings" => "bottles#winery_ratings"
 

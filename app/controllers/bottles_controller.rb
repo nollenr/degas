@@ -164,6 +164,33 @@ class BottlesController < ApplicationController
     #logger.debug("location array ******************************************** #{@toc_by_locations.inspect}")
   end
   
+  def toc_by_grape
+    @toc_by_grapes_group_by = ['grapes.color', 'grapes.name'] 
+    @toc_grape_search_data_key = ['grape_color_eq', 'grape_name_cont']
+    @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.color, grapes.name').count(:all, group: @toc_by_grapes_group_by).to_a
+    @toc_by_grapes_collapsable_list = format_collapsable_list(@toc_by_grapes, true, @toc_grape_search_data_key)
+  end
+  
+  def toc_by_winery
+    @toc_by_wineries_group_by = ['wineries.name', 'grapes.name']
+    @toc_winery_search_data_key = ['winery_name_cont', 'grape_name_cont']
+    @toc_by_wineries = current_user.bottles.where(available: :TRUE).joins(:winery, :grape).order('wineries.name, grapes.name').count('*', group: @toc_by_wineries_group_by).to_a
+    @toc_by_wineries_collapsable_list = format_collapsable_list(@toc_by_wineries, true, @toc_winery_search_data_key)
+  end
+  
+  def toc_by_location
+    @toc_by_locations_group_by = ['wineries.country', 'wineries.location1', 'wineries.location2', 'wineries.location3', 'wineries.name']
+    @toc_location_search_data_key = [nil, nil, nil, nil, 'winery_name_cont']
+    @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2, wineries.location3, wineries.name').count(:all, group: @toc_by_locations_group_by).to_a    
+    @toc_by_locations_collapsable_list = format_collapsable_list(@toc_by_locations, true, @toc_location_search_data_key)
+  end
+  
+  def toc_by_bottle_type
+    @toc_by_bottle_types_group_by = ['bottle_types.name']
+    @toc_bottle_type_search_data_key = ['bottle_type_name_in']
+    @toc_by_bottle_types = current_user.bottles.where(available: :TRUE).joins(:bottle_type).order('bottle_types.name').count(:all, group: @toc_by_bottle_types_group_by).to_a 
+  end
+  
   def ratings
     @rating_list_group_by = ['wineries.name', 'grapes.name', 'vintage', 'vineyard', 'bottles.name']
     @rating_by_bottle_unformatted = current_user.bottles.where("rating is not null").joins(:grape, :winery).order("average_rating desc").average("rating", group: @rating_list_group_by).to_a

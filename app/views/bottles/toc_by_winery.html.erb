@@ -1,0 +1,13 @@
+<% provide(:title, 'Cellar Table of Contents By Winery') %>
+
+<div class="hero-unit hero-unit-bottle-index">
+  <h1>Cellar Table of Contents</h1>
+  <h1>By Winery</h1>
+</div>
+<hr />
+
+<div class="tableoc" id="toc_by_winery">
+  <p class="lead">Cellar Contents By Winery<p>
+  <!-- %= render partial: 'toc_by_winery', collection: @toc_by_wineries % -->
+  <%= @toc_by_wineries_collapsable_list.html_safe %>
+</div>
