@@ -1,6 +1,10 @@
 $(function() {
+  // Start off with everything hidden except for the outermost level.j
+  // .hide() is a jQuery method
   $(".collapse-li").find(".collapse-li").hide();
-  // $(".collapse-li").prepend('<i class="icon-plus"></i>');
+
+
+  // Add a graphic for expanding and contracting a list
   $(".collapse-li").each(function(){
     if ($(this).find("ul").length > 0 ) {
       // $(this).find("div").first().prepend('<i class="icon-plus collapse-i"></i>');
@@ -10,6 +14,8 @@ $(function() {
       $(this).prepend('<div class="span1"></div>')
     }
   });
+  
+  // Add an event handler to each graphic to control the opening and closing of the list
   $(".collapse-i").click(function() {
     if ($(this).parent().parent(".collapse-li").find("ul").first().children("li").is(":hidden")) {
       $(this).parent().parent(".collapse-li").find("i").first().removeClass("icon-plus").addClass("icon-minus");
@@ -17,9 +23,23 @@ $(function() {
       // return false;
     }
     else {
+      // change this and all sub lists graphic to a "-" and hide them all
       $(this).parent().parent().find(".collapse-li").slideUp("slow");
       $(this).parent().parent().find("i").removeClass("icon-minus").addClass("icon-plus");
       // return false;
     }
   });
+  
+  //Add an event handler to each row to create highlighting when hovered
+  $(".dataval").hover(
+    function() {
+      $(this).siblings(".dataval").css('background-color', 'lightgray');
+      $(this).css('background-color', 'lightgray');
+    },
+    function() {
+      $(this).siblings(".dataval").css('background-color', 'transparent');
+      $(this).css('background-color', 'transparent');
+    }
+  );
+
 });

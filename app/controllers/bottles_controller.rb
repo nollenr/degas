@@ -129,7 +129,7 @@ class BottlesController < ApplicationController
     @bottle[:available] = true
     @bottle[:availability_change_date] = nil
     @bottle[:rating] = nil
-    logger.debug "**************************** during copy after setting nil #{@bottle.inspect}"    
+    #logger.debug "**************************** during copy after setting nil #{@bottle.inspect}"    
     render 'new'
   end
 
@@ -139,7 +139,7 @@ class BottlesController < ApplicationController
   end
 
   def rate
-    logger.debug "rate edit: ********************* #{params.inspect}"
+    #logger.debug "rate edit: ********************* #{params.inspect}"
     bottle = current_user.bottles.update(params[:id], rating: params[:rating])
     bottle.save
     @bottle = current_user.bottles.find_by_id(params[:id])
@@ -242,7 +242,7 @@ private
         v_value = value[1]
       end
       # logger.debug("for v_key #{v_key} p_data_key[#{p_level.inspect}]= #{v_data_key.inspect}")
-      p_html = p_html + '<div class="span6">' + v_key + '</div> <div class="span5 text-right">' + v_value.to_s + '</div>'
+      p_html = p_html + '<div class="span6 dataval">' + v_key + '</div> <div class="span5 text-right dataval">' + v_value.to_s + '</div>'
       if !value[0].empty?
         p_level = p_level + 1
         p_html = create_list_html(value[0], p_html, p_create_link, p_data_key, p_level, p_average)
