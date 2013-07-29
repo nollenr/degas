@@ -16,3 +16,6 @@ doc/
 .DS_Store
 .idea
 
+Gemfile.lock
+config/database.yml
+
