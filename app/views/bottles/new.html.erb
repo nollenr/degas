@@ -1,13 +1,17 @@
 <div class="hero-unit hero-unit-bottle-index">
   <h1>
-    <% if @bottle.id.blank? %>
+  	<% if @bottle.is_for_rating_only %>
+  		Add a Rating Only
+    <% elsif @bottle.id.blank? %>
       Add Bottle To Cellar
     <% else %>
       Edit Bottle In Cellar
     <% end %>
   </h1>
 </div>
-
+<% if @bottle.is_for_rating_only %>
+  <h1>Not for adding a bottle to your cellar</h1>
+<% end %>
 
 <%= simple_form_for @bottle, html: {class: 'form-horizontal'} do |f| %>
 
@@ -31,15 +35,21 @@
 
 <div class="row">
   <div class="span6">
+  	  <%= f.hidden_field :is_for_rating_only %>
+  	  
+  	  <% unless @bottle.is_for_rating_only %>
       <%= f.input :bottle_id_text, label: 'Bottle Identifier' %>
 
       <%= f.input :date_added_to_cellar_text, label: 'Date Added to Cellar' %>
 
       <%= f.input :cellar_location %>
+      <% end %>
 
       <%= f.input :vintage, label: "Vintage (Year)" %>
 
+      <% unless @bottle.is_for_rating_only %>
       <%= f.input :drink_by_year, label: "Drink By (Year)" %>
+      <% end %>
 
       <%= f.input :name %>
 
@@ -57,6 +67,11 @@
       <% if !@bottle.id.blank? %>
         <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
         <%= f.input :rating, label: "Rating (1-10)"%>
+      <% end %>
+      
+      <% if @bottle.is_for_rating_only %>
+        <% f.hidden_field :available, value: false %>
+        <%= f.input :rating, label: "Rating (1-10)" %>
       <% end %>
 
       <%= f.button :submit, label: "Create Bottle", class: "btn btn-large btn-primary" %>

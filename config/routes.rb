@@ -27,6 +27,7 @@ Degas::Application.routes.draw do
   match "toc_by_bottle_type" => "bottles#toc_by_bottle_type"
   match "ratings" => "bottles#ratings"
   match "winery_ratings" => "bottles#winery_ratings"
+  match "bottle_for_rating_only" => "bottles#bottle_for_rating_only"
 
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do

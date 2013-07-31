@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203183910) do
+ActiveRecord::Schema.define(:version => 20130731170607) do
 
   create_table "bottle_types", :force => true do |t|
     t.string   "name",          :limit => 30, :null => false
@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(:version => 20130203183910) do
   add_index "bottle_types", ["name"], :name => "index_bottle_types_on_name", :unique => true
 
   create_table "bottles", :force => true do |t|
-    t.integer  "bottle_id",                                                                                 :null => false
-    t.integer  "grape_id",                                                                                  :null => false
-    t.datetime "created_at",                                                                                :null => false
-    t.datetime "updated_at",                                                                                :null => false
-    t.boolean  "available",                                                               :default => true, :null => false
+    t.integer  "bottle_id",                                                                                  :null => false
+    t.integer  "grape_id",                                                                                   :null => false
+    t.datetime "created_at",                                                                                 :null => false
+    t.datetime "updated_at",                                                                                 :null => false
+    t.boolean  "available",                                                               :default => true,  :null => false
     t.datetime "availability_change_date"
     t.string   "availability_change_message"
     t.integer  "winery_id"
@@ -37,11 +37,12 @@ ActiveRecord::Schema.define(:version => 20130203183910) do
     t.string   "name"
     t.string   "cellar_location",             :limit => 30
     t.decimal  "price",                                     :precision => 8, :scale => 2
-    t.integer  "user_id",                                                                                   :null => false
+    t.integer  "user_id",                                                                                    :null => false
     t.integer  "rating"
-    t.integer  "bottle_type_id",                                                                            :null => false
+    t.integer  "bottle_type_id",                                                                             :null => false
     t.datetime "date_added_to_cellar"
     t.text     "notes"
+    t.boolean  "is_for_rating_only",                                                      :default => false, :null => false
   end
 
   add_index "bottles", ["grape_id"], :name => "index_bottles_on_grape_id"

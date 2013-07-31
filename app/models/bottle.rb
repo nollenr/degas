@@ -37,6 +37,7 @@ class Bottle < ActiveRecord::Base
   validates :bottle_type_id, presence: true
   validate  :check_date_added_to_cellar_text
   validate  :validate_vintage
+  validate  :rating_on_rating_only_bottles
   validates :rating, inclusion: 1..10, allow_nil: true
   validates :vintage, presence: {message: "cannot be empty.  Enter a 4 digit year or 'NV'.  Bottle not created."}
 
@@ -44,7 +45,8 @@ class Bottle < ActiveRecord::Base
 
   attr_accessible :available, :bottle_id, :bottle_id_text,
     :cellar_location, :vintage, :drink_by_year, :name, :vineyard, 
-    :grape_name, :winery_name, :price, :rating, :bottle_type_id, :date_added_to_cellar_text, :notes, :confirmed
+    :grape_name, :winery_name, :price, :rating, :bottle_type_id, 
+    :date_added_to_cellar_text, :notes, :confirmed, :is_for_rating_only
 
   #This creates the setter (writer)... correct?
   attr_writer :date_added_to_cellar_text 
@@ -131,6 +133,12 @@ class Bottle < ActiveRecord::Base
     if (self.vintage !~ /^\d{4}$/) && (self.vintage != 'NV')
       errors.add :vintage, "must be a 4 digit year, or 'NV'"
     end
+  end
+  
+  def rating_on_rating_only_bottles
+    if self.is_for_rating_only && self.rating.nil?
+      errors.add :rating, "must be specified for a 'rating only' bottle."
+    end 
   end
 
 end

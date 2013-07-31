@@ -9,8 +9,28 @@ class BottlesController < ApplicationController
 
   def create
     @bottle = current_user.bottles.new(params[:bottle])
+    #---------------------------------------------------------------------#
+    #                                                                     #
+    #  Is this a rating only bottle?                                      #
+    #                                                                     #
+    #---------------------------------------------------------------------#
+    if @bottle.is_for_rating_only
+      @nextid = ActiveRecord::Base.connection.execute("SELECT nextval('bottles_id_seq')")
+      @bottle.bottle_id = Integer(@nextid[0]["nextval"]) * (-1)
+      @bottle.available = false
+      if @bottle.save
+        flash[:success] = "Rating created."
+        redirect_to :bottles
+      else
+        render 'new'
+      end      
+    #---------------------------------------------------------------------#
+    #                                                                     #
+    #  Does the bottle id contain a "-"?                                  #
+    #                                                                     #
+    #---------------------------------------------------------------------#
     # Test to see if there is a dash in the bottle_id_text, which means we want a range of bottle id's created.
-    if is_dashed?(params[:bottle][:bottle_id_text])
+    elsif is_dashed?(params[:bottle][:bottle_id_text])
       @bottle_id_text = parse_text_bottle_ids(params[:bottle][:bottle_id_text])
       # If there was a dash AND it is confirmed, then I should try and commit it.
       if (params[:bottle][:confirmed])
@@ -87,7 +107,9 @@ class BottlesController < ApplicationController
     # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
     # logger.debug "************************** Index #{@query}"
     @bottles = @search.result.order(sort_column + " " + sort_direction)
-    @bottles = @bottles.where(available: 't') unless params[:q]
+    @bottles = @bottles.where(is_for_rating_only: false)
+    # Checking if the hash key exists, not the value
+    @bottles = @bottles.where(available: true) unless params[:q] && params[:q][:available_true]
     # logger.debug("********************** #{@bottles.inspect}")
 
     respond_to do |format|
@@ -213,6 +235,11 @@ class BottlesController < ApplicationController
     @rating_collapsable_list = format_collapsable_list(@rating_by_winery, true, ["winery_name_cont",nil,nil], true)
   end
 
+  def bottle_for_rating_only
+    @bottle = Bottle.new
+    @bottle[:is_for_rating_only] = true
+    render 'new'
+  end
 
 private
   def sort_column
