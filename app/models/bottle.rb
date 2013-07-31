@@ -36,7 +36,9 @@ class Bottle < ActiveRecord::Base
   validates :winery_name, presence: {message: "cannot be empty and must be a value from the list.  Bottle not created." }
   validates :bottle_type_id, presence: true
   validate  :check_date_added_to_cellar_text
+  validate  :validate_vintage
   validates :rating, inclusion: 1..10, allow_nil: true
+  validates :vintage, presence: {message: "cannot be empty.  Enter a 4 digit year or 'NV'.  Bottle not created."}
 
   before_save :save_date_added_to_cellar_text  
 
@@ -122,6 +124,13 @@ class Bottle < ActiveRecord::Base
     end
   rescue ArgumentError
     errors.add :date_added_to_cellar_text, "is out of range"
+  end
+
+  def validate_vintage
+    # logger.debug("................. executing the validate_vintage before save... vintage is #{self.vintage}")
+    if (self.vintage !~ /^\d{4}$/) && (self.vintage != 'NV')
+      errors.add :vintage, "must be a 4 digit year, or 'NV'"
+    end
   end
 
 end
