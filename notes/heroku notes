@@ -4,6 +4,9 @@ using heroku_pg_pull and heroku_pg_push to export/import data
 Create the heroku app
   "heroku create"
 
+If you've changed development hosts, you may need to do the following
+-bash-4.1$ heroku keys:add ~/.ssh/id_rsa.pub
+
 Push git master
   The git config file must have the config for the new heroku app:
   /home/nollenr/rails/degas/.git
