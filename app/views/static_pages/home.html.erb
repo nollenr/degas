@@ -8,7 +8,7 @@
   </div>
   <div class="home">
     <h2>
-      Discover the contents of your cellar. <br> Rate your tasting experiences.<br>Wine, champagne, port & liquors.
+      Discover the contents of your cellar. <br> Rate your tasting experiences.
     </h2>
   </div>
 </div>
@@ -17,6 +17,7 @@
     <div class="center">
         <% if signed_in? %>
           <%= link_to "View Your Cellar List", bottles_path, class: "btn btn-large btn-primary" %>
+          <div class="home-info">There <%= @current_cellar_size==1 ? "is": "are" %> currently <%= @current_cellar_size %> <%= @current_cellar_size==1 ? "bottle" : "bottles" %> cataloged in your cellar.</div>
         <% else %>
           <%= link_to "Sign up now!", signup_path, class: "center btn btn-large btn-primary" %>
         <% end %>
