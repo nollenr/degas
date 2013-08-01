@@ -43,6 +43,8 @@
         <div><%= link_to "Copy", copy_bottle_path(bottle.id) %></div>
         <%= render partial: "bottle_rating", locals: {bottle: bottle} %>
         <div><%= link_to "Edit", edit_bottle_path(bottle.id) %></div>
+        <% google_query = bottle.vintage + " " + bottle.winery.name + " " + bottle.name + " " + bottle.grape.name %>
+        <div><%= link_to "Search the Web", "http://www.google.com/search?q=#{google_query}", target: '_blank' %></div>
       </div>                         <!-- column 2 data row end -->
     </div>                           <!-- data row1 end -->
     <div class="row-fluid">          <!-- data row2 start -->
