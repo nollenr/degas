@@ -17,7 +17,17 @@
     <div class="center">
         <% if signed_in? %>
           <%= link_to "View Your Cellar List", bottles_path, class: "btn btn-large btn-primary" %>
-          <div class="home-info">There <%= @current_cellar_size==1 ? "is": "are" %> currently <%= @current_cellar_size %> <%= @current_cellar_size==1 ? "bottle" : "bottles" %> cataloged in your cellar.</div>
+          <div class="home-info">
+            There 
+              <%= @current_cellar_size==1 ? "is": "are" %> 
+            currently 
+              <%= @current_cellar_size %> 
+              <%= @current_cellar_size==1 ? "bottle" : "bottles" %> 
+            available in your cellar and you've rated 
+              <%= @current_ratings %>
+              <%= @current_ratings==1 ? "bottle" : "bottles" %>
+              .
+          </div>
         <% else %>
           <%= link_to "Sign up now!", signup_path, class: "center btn btn-large btn-primary" %>
         <% end %>

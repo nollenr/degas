@@ -1,7 +1,10 @@
 class StaticPagesController < ApplicationController
 
   def home
-    @current_cellar_size = current_user.bottles.where(available: true).count
+    if signed_in?
+      @current_cellar_size = current_user.bottles.where(available: true).count
+      @current_ratings = current_user.bottles.where("rating is not null").count
+    end
   end
 
   def help
