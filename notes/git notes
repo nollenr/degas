@@ -13,4 +13,10 @@ Comparing Commits -- Comparing two directories and what has changed.
   --2 different tree-ishes
   git diff 9133ba1..b654310 notes/notes
 
-
+Tag 
+  -- Checking out a tagged commit
+  git checkout -b tagv13 tags/v1.3
+  -- Tagging a commit
+  git tag -a v1.3 -m "my version 1.3"
+  --pushing tags
+  git push origin --tags:
