@@ -20,3 +20,12 @@ Check to see which branches are merged
 
 Last commit date for a branch
   git log -1 --pretty=format:"%Cgreen%ci %Cred%cr%Creset" 20130731_develop
+
+Tag 
+  -- Checking out a tagged commit
+  git checkout -b tagv13 tags/v1.3
+  -- Tagging a commit
+  git tag -a v1.3 -m "my version 1.3"
+  --pushing tags
+  git push origin --tags:
+
