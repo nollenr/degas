@@ -13,8 +13,10 @@ apr-1-config  checkgid      envvars-std  htdbm         httpd     rotatelogs
 
 
 When doing a commit and push... it's actually
+git add .
 git commit -m "<some commit message>"
 rake generate_globals
+git add .
 git commit -m "generated globals"
 git push
 git push --tags
