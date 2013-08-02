@@ -5,7 +5,20 @@
         <nav>
           <ul class="nav pull-right"> <!-- outermost ul -->
             <li><%= link_to "Home",    home_path %></li>  <!-- single level -->
-            <li><%= link_to "Help",    help_path %></li>  <!-- single level -->
+            
+            <li id="fat-menu" class="dropdown">         <!-- dropdown help  -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Help <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Help", help_path %></li>
+                  <li><%= link_to "About", about_path %></li>
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to "Application Version: #{APPVERSION}", about_path %>
+                  </li>
+                </ul>
+            </li>                                       <!-- dropdown help end -->
             <% if signed_in? %>
               <li><%= link_to "Users", users_path %></li> <!-- single level -->
               <li id="fat-menu" class="dropdown">         <!-- dropdown account  -->
@@ -56,6 +69,8 @@
                   <li class="divider"></li>
                   <li><%= link_to "List Wineries", wineries_path %></li>
                   <li><%= link_to "Add a Winery", new_winery_path %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Application Version: #{APPVERSION}", about_path %></li>
                 </ul>
               </li>                                       <!-- dropdown cellar end -->
             <% else %>

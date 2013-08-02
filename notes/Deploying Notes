@@ -9,3 +9,12 @@ apachectl     apxs          envvars      htcacheclean  htpasswd  logresolve
 apr-1-config  checkgid      envvars-std  htdbm         httpd     rotatelogs
 [root@seurat bin]# ./apachectl stop
 [root@seurat bin]# ./apachectl start
+
+
+
+When doing a commit and push... it's actually
+git commit -m "<some commit message>"
+rake generate_globals
+git commit -m "generated globals"
+git push
+git push --tags
