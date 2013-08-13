@@ -5,3 +5,7 @@ Recreate the public schema (schema = public, owner=degas)
 Restore the public schema
 	Format: Custom or TAR
 	File name: degas_db.custom
+	Rolename: degas
+	Don't Save: 	owner
+					privilege
+					tablespace
