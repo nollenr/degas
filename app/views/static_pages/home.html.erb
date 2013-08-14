@@ -1,17 +1,19 @@
 <% provide(:title, 'Home') %>
 
 
-<div class="center hero-unit">
+<div class="center hero-unit extrabottommargin">
   <h1>Welcome to Degas</h1>
-  <div class="pull-right">
-    <%= image_tag "bottle.jpg", height: '150', width: '150' %>
+  <div id="mediaarea" class="pull-right">
+    <%= video_tag(["/assets/winepour.oggtheora.ogv", "/assets/winepour.iphone.mp4", "/assets/winepour.webmsd.webm"], height: '360', width: '640', autoplay: true, id: "winepourvideo") %>
   </div>
   <div class="home">
     <h2>
-      Discover the contents of your cellar. <br> Rate your tasting experiences.
+      Discover the contents of your cellar. <br> <br> Rate your tasting experiences.
     </h2>
   </div>
 </div>
+
+<div class="clear"><br></div>
 
   <div class="container">
     <div class="center">
