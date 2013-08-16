@@ -4,4 +4,8 @@ $(function() {
 	   // alert("The video has ended");
 	   $("#winepourvideo").replaceWith('<%= image_tag "winepourmid.png", height: '360', width: '640', id: 'winepourpic' %>');
 	});
+		$("#winepourvideo").bind("error", function() {
+	   // alert("The video has ended");
+	   $("#winepourvideo").replaceWith('<%= image_tag "winepourmid.png", height: '360', width: '640', id: 'winepourpic' %>');
+	});
 });
