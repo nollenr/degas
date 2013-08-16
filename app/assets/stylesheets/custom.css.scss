@@ -64,7 +64,7 @@ h2 {
   color: $grayLight;
 }
 
-h2-nobottom-margin {
+.h2-nobottom-margin {
   font-size: 1.7em;
   letter-spacing: -1px;
   margin-bottom: 10px;
@@ -226,11 +226,22 @@ footer ul li {
 /* home                       */
 /* -------------------------- */
 .home h2 {
-text-align: left;
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 1px;
+  margin-top: 20px;
+  text-align: left;
+  font-weight: normal;
+  color: $grayLight;
 }
 .home-info {
   margin-top: 14px;
   color: DarkSlateGray;
+}
+.home .subtext {
+  color: $grayLight;
+  text-align: left;
+  line-height: 100%;
 }
 /* -------------------------- */
 /* TOC                        */
