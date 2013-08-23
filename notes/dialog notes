@@ -1,0 +1,22 @@
+This was put in the "app/views/static_pages/about.html.erb" page
+<button id="opener">More Info</button>
+<div id="myDialog" title="This is the title"><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at sapien nec dolor iaculis feugiat. Nam tincidunt ultricies pretium. Maecenas pellentesque sagittis turpis nec venenatis. In hac habitasse platea dictumst. Integer elementum, est vel euismod consequat, mi elit laoreet nisi, in ultricies neque risus vitae lacus. Ut imperdiet et erat id dictum. Fusce sed pulvinar eros. Aliquam id accumsan orci, sed ultrices ipsum. Praesent est lectus, pretium nec enim eget, bibendum dictum lectus. Nunc non viverra massa, vitae faucibus quam. Aenean vitae posuere magna. Donec hendrerit vestibulum justo et laoreet. Morbi in pellentesque ligula. Maecenas enim nisi, venenatis ut tellus et, venenatis aliquet nulla. Vivamus ullamcorper massa in lectus egestas, non imperdiet lectus ornare. Sed tempor imperdiet tortor in vestibulum. </div>
+
+This was added to the "app/assets/javascripts/dialog.js.erb" page
+$(function(){
+	$("#myDialog").dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			"Delete all items": function(){
+				$(this).dialog("close");
+			},
+			"Cancel": function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+	$("#opener").click(function(){
+		$("#myDialog").dialog("open");
+	});
+});

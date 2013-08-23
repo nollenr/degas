@@ -1,0 +1,21 @@
+
+Gemfile
+==============================
+mv Gemfile.3214 Gemfile
+rm Gemfile.lock
+bundle install --local
+
+
+app/assets/javascripts/application.js (this should already be taken care of with git changes)
+==============================
+change //= require jquery-ui
+to //= require jquery.ui.all
+
+Also adding jquery-ui theme
+==============================
+Adding the following gem
+gem install jquery-ui-themes
+gem 'jquery-ui-themes' to the Gemfile
+*= require jquery-ui/overcast to the stylesheet manifest (application.css)
+
+
