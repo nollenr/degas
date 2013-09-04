@@ -33,8 +33,9 @@
         <% if bottle.available %>
           <span id='<%= bottle.id.to_s + 'avail' %>' ><%= bottle.availability %></span>
           <span id='<%= bottle.id.to_s + 'consume' %>' >
-          <%= link_to " Consume", consume_bottle_path(bottle.id), method: :put, confirm: "Drink bottle " +
-              bottle.bottle_id.to_s + "?", remote: true %>
+          <%= link_to " Consume", consume_bottle_path(bottle.id), id: bottle.id.to_s + "consumelink", class: "hideLink", method: :put, remote: true %>
+            <button id='<%= bottle.id.to_s + 'consumebutton'%>' data-bottleid='<%= bottle.id.to_s %>'>Consume</button>
+            <div class= 'hideLink', id='<%= bottle.id.to_s + 'consumedialog'%>' data-bottleid='<%= bottle.id.to_s %>' title='Consume this bottle of wine?'>Do you want to consume bottle id <%= bottle.bottle_id.to_s%>?  (<%= bottle.vintage + " " + bottle.winery.try(:name) + " " + bottle.grape.try(:name) %>) This bottle will no longer be available.</div>
           </span>
         <% else %>
           <%= consumed_message(bottle.availability_change_date) %>

@@ -1,17 +1,29 @@
 $(function(){
-	$("#myDialog").dialog({
+	initialise_dialog();
+});
+
+function initialise_dialog(){
+	$("[id$=consumedialog]").dialog({
 		autoOpen: false,
 		modal: true,
 		buttons: {
-			"Delete all items": function(){
+			"Confirm": function(){
+				var ele;
 				$(this).dialog("close");
+				console.log('The bottleid value is: ' + $(this).data("bottleid"));
+				ele = "#" + $(this).data("bottleid") + "consumelink";
+				console.log('The id for the link is: ' + ele);
+				$(ele)[0].click();
+				// in here I want to do something like :$(ele)[0].click();
 			},
 			"Cancel": function(){
 				$(this).dialog("close");
 			}
 		}
 	});
-	$("#opener").click(function(){
-		$("#myDialog").dialog("open");
+	$("[id$=consumebutton]").click(function(){
+		var value;
+		value = $(this).data("bottleid");
+		$("#"+value+"consumedialog").dialog("open");
 	});
-});
+};
