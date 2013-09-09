@@ -35,7 +35,8 @@ Push git master
   "git push heroku 20130604_work:master"
 
 Push the local database to Heroku
-    heroku_pg_push shrouded-caverns-4119 postgres
+    heroku_pg_push shrouded-caverns-4119 degasdb
+    (password degas)
     
   # Postgres equivalent to heroku db:push. 
   # Pushes local database up to heroku application database.
