@@ -9,9 +9,12 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
+// 
+// If you are using the jquery-ui-rails gem (rails 3.2.14) jquery.ui.all
+// else jquery-ui
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery.ui.all
 //= require bootstrap
 //= require_tree .

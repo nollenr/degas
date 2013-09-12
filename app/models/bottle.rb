@@ -60,12 +60,29 @@ class Bottle < ActiveRecord::Base
   def availability= avail_bool
     @availability = avail_bool ? 'Available' : 'Consumed'
   end
+  
+  def would_buy_at_this_price
+    return @would_buy_at_this_price
+  end
+  
+  def would_buy_at_this_price= buy_at_this_price_bool
+    if buy_at_this_price_bool.nil?
+      @would_buy_at_this_price = nil
+    else
+      @would_buy_at_this_price = buy_at_this_price_bool ? 'Yes' : 'No'
+    end
+  end
 
   after_find :set_availability
   after_find :set_bottle_id_text
+  after_find :set_would_buy_at_this_price
 
   def set_availability
     self.availability= self.available
+  end
+  
+  def set_would_buy_at_this_price
+    self.would_buy_at_this_price= self.buy_at_this_price
   end
 
   def set_bottle_id_text

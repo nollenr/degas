@@ -25,7 +25,7 @@
         <div><span class="muted">Vineyard: </span> <%= bottle.vineyard %></div>
         <div><span class="muted">Price: </span>    <%= number_to_currency(bottle.price) %></div>
         <div><span class="muted">Drink By: </span> <%= bottle.drink_by_year %></div>
-        <div><span class="muted">Cellar Location: </span> <%=bottle.cellar_location %></div>
+        <div><span class="muted">Cellar Location: </span> <%= bottle.cellar_location %></div>
       </div>                         <!-- column 1 data row end -->
 
       <div class="span5 offset1">            <!-- column 2 data row start -->
@@ -42,6 +42,7 @@
         <% end %>
         <div><%= link_to "Copy", copy_bottle_path(bottle.id) %></div>
         <%= render partial: "bottle_rating", locals: {bottle: bottle} %>
+        <%= render partial: "bottle_buy_at_this_price" %>
         <div><%= link_to "Edit", edit_bottle_path(bottle.id) %></div>
         <% google_query = bottle.vintage + " " + bottle.winery.name + " " + bottle.name + " " + bottle.grape.name %>
         <div><%= link_to "Search the Web", "http://www.google.com/search?q=#{google_query}", target: '_blank' %></div>
