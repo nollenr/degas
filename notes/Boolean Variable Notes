@@ -1,0 +1,10 @@
+
+
+Example:
+Added a boolean "buy_at_this_price" using database migration
+
+In the MODEL
+Create instance methods
+
+
+Adding a new partial (_bottle_buy_at_this_price.html.erb)
