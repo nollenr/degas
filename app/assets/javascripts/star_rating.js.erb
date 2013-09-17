@@ -3,7 +3,7 @@ $(function() {
   $(".rstarRate").each(displayRating);
   $(".dstarRate li a").click(function(){ return false; });
   $(".thumbRate li a").hover(changeThumb, setThumb);
-  $(".rthumbRate").each(displayThumb);
+  $(".rthumbRate").each(function(){displayThumb($(this));});
 });
 
 function changeRating(){
@@ -37,22 +37,27 @@ function displayRating(){
   
 function changeThumb(){
 	// console.log("Hovering...");
+	var current_loc = $(this).closest(".rthumbRate");
+	current_loc.find("li.thumbRateUp a").removeClass("goldThumb");
+    current_loc.find("li.thumbRateDown a").removeClass("goldThumb");
 	$(this).addClass("copperThumb");
 };
 
 function setThumb(){
 	$(this).removeClass("copperThumb");
+	displayThumb($(this).closest(".rthumbRate"));
 };
 
-function displayThumb(){
-	var current_rating=$(this).children(".stored_buy_again").val();
+function displayThumb(current_loc){
+	var current_rating=current_loc.children(".stored_buy_again").val();
+	// console.log("Running displayThumb.   The current value is: " + current_rating);
 	if (current_rating != "" ) {
 		// console.log("Found a non-blank buy_again value.  The current value is: " + current_rating);
 		if (current_rating === 'true') {
-			$(this).find("li.thumbRateUp a").addClass("goldThumb");
+			current_loc.find("li.thumbRateUp a").addClass("goldThumb");
 		}
 		else if (current_rating === 'false') {
-			$(this).find("li.thumbRateDown a").addClass("goldThumb");
+			current_loc.find("li.thumbRateDown a").addClass("goldThumb");
 		};
 	};
 };
