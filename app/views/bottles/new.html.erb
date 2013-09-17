@@ -67,6 +67,7 @@
       <% if !@bottle.id.blank? %>
         <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
         <%= f.input :rating, label: "Rating (1-10)"%>
+        <%= f.input :buy_at_this_price, as: :radio_buttons, item_wrapper_class: :inline, collection: [['true', :true], ['false', :false], ['undecided', ""]] %>
       <% end %>
       
       <% if @bottle.is_for_rating_only %>
