@@ -36,3 +36,9 @@ Controller
 
 CSS
 custom.css.scss
+
+For other AJAX Calls
+index.js.erb
+  call the hover and display methods:
+  $(".thumbRate li a").hover(changeThumb, setThumb);
+  $(".rthumbRate").each(function(){displayThumb($(this));});

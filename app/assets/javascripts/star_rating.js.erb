@@ -41,11 +41,16 @@ function changeThumb(){
 	current_loc.find("li.thumbRateUp a").removeClass("goldThumb");
     current_loc.find("li.thumbRateDown a").removeClass("goldThumb");
 	$(this).addClass("copperThumb");
+	current_loc.find(".thumbRateText").html($(this).html());
 };
 
 function setThumb(){
 	$(this).removeClass("copperThumb");
-	displayThumb($(this).closest(".rthumbRate"));
+	// return the display to what ever is stored in the database
+	var thisMasterDiv = $(this).closest(".rthumbRate");
+	displayThumb(thisMasterDiv);
+	// remove the html
+	thisMasterDiv.find(".thumbRateText").html("");
 };
 
 function displayThumb(current_loc){
