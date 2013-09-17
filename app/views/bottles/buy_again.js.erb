@@ -1,0 +1,6 @@
+$("#<%= @bottle.id %>stored_buy_again").val(<%= @bottle.buy_at_this_price %>);
+<% if (@bottle.buy_at_this_price)  %>
+$("#<%= @bottle.id %>buyAgainDiv").find("li.thumbRateUp a").addClass("goldThumb");
+<% else %>
+$("#<%= @bottle.id %>buyAgainDiv").find("li.thumbRateDown a").addClass("goldThumb");
+<% end %>

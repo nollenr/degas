@@ -240,6 +240,17 @@ class BottlesController < ApplicationController
     @bottle[:is_for_rating_only] = true
     render 'new'
   end
+  
+  def buy_again   
+    logger.debug "buy_again edit: **************************** #{params.inspect}"
+    bottle = current_user.bottles.update(params[:id], buy_at_this_price: params[:buy_at_this_price])
+    bottle.save
+    @bottle = current_user.bottles.find_by_id(params[:id])
+    respond_to do |format|
+      format.html #buy_again.html.erb
+      format.js   #buy_again.js.erb 
+    end
+  end
 
 private
   def sort_column

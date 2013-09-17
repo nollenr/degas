@@ -207,6 +207,18 @@ footer ul li {
 .rstarRate li a.copperStar {background-position: 0px -32px;}
 .rstarRate li a.goldStar {background-position: 0px -16px;}
 
+.rthumbRate {overflow: hidden;}
+.rthumbRate ul {margin-left: 0; display: inline;}
+.rthumbRate li {list-style: none; display: inline;}
+.rthumbRate li.thumbRateUp a {display: block; width: 20px; height: 20px; background: image_url("thumbs.gif") left top; float: left; text-indent: -9999px;}
+.rthumbRate li.thumbRateDown  a {display: block; width: 20px; height: 20px; background: image_url("thumbs.gif") left top; float: left; text-indent: -9999px; background-position: -21px 0px; }
+.rthumbRate a {background-position: 0px;}
+.rthumbRate li.thumbRateUp a.copperThumb   {background-position: 0px -20px;}
+.rthumbRate li.thumbRateUp a.goldThumb     {background-position: 0px -40px;}
+.rthumbRate li.thumbRateDown a.copperThumb {background-position: -20px -20px;}
+.rthumbRate li.thumbRateDown a.goldThumb   {background-position: -20px -40px;}
+
+
 /* -------------------------- */
 /* bottle new                 */
 /* -------------------------- */
