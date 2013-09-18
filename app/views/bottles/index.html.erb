@@ -68,9 +68,14 @@
         </div>
         <!-- end the 2nd row in the well -->
         
-        <div class="row-fluid"><div class="span12">
+        <div class="row-fluid">
+        	<div class="span6">
               Show Only Available Bottles 
-              <%= f.check_box :available_true, class: "checkbox inline input-small search-query", checked: true %> 
+              <%= f.check_box :available_true, class: "checkbox inline input-small search-query", checked: true %>
+            </div> 
+            <div class="span6">
+              Include Bottles Entered For Rating only?
+              <%= f.check_box :is_for_rating_only_true, class: "checkbox incline input-small search-query", checked: false%>
           </div>
         </div>
 

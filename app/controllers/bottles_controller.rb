@@ -107,7 +107,7 @@ class BottlesController < ApplicationController
     # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
     # logger.debug "************************** Index #{@query}"
     @bottles = @search.result.order(sort_column + " " + sort_direction)
-    @bottles = @bottles.where(is_for_rating_only: false)
+    @bottles = @bottles.where(is_for_rating_only: false) unless params[:q] && params[:q][:is_for_rating_only_true]
     # Checking if the hash key exists, not the value
     @bottles = @bottles.where(available: true) unless params[:q] && params[:q][:available_true]
     # logger.debug("********************** #{@bottles.inspect}")
