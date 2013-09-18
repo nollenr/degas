@@ -46,7 +46,8 @@ class Bottle < ActiveRecord::Base
   attr_accessible :available, :bottle_id, :bottle_id_text,
     :cellar_location, :vintage, :drink_by_year, :name, :vineyard, 
     :grape_name, :winery_name, :price, :rating, :bottle_type_id, 
-    :date_added_to_cellar_text, :notes, :confirmed, :is_for_rating_only
+    :date_added_to_cellar_text, :notes, :confirmed, :is_for_rating_only,
+    :buy_at_this_price
 
   #This creates the setter (writer)... correct?
   attr_writer :date_added_to_cellar_text 
@@ -60,12 +61,29 @@ class Bottle < ActiveRecord::Base
   def availability= avail_bool
     @availability = avail_bool ? 'Available' : 'Consumed'
   end
+  
+  def would_buy_at_this_price
+    return @would_buy_at_this_price
+  end
+  
+  def would_buy_at_this_price= buy_at_this_price_bool
+    if buy_at_this_price_bool.nil?
+      @would_buy_at_this_price = nil
+    else
+      @would_buy_at_this_price = buy_at_this_price_bool ? 'Yes' : 'No'
+    end
+  end
 
   after_find :set_availability
   after_find :set_bottle_id_text
+  after_find :set_would_buy_at_this_price
 
   def set_availability
     self.availability= self.available
+  end
+  
+  def set_would_buy_at_this_price
+    self.would_buy_at_this_price= self.buy_at_this_price
   end
 
   def set_bottle_id_text

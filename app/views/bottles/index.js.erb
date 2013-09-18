@@ -10,3 +10,6 @@ $("#bottle").html('<%= j render partial: "bottle_header" %>');
 
 $(".starRate li a").hover(changeRating, setRating);
 $(".starRate").each(displayRating);
+
+$(".thumbRate li a").hover(changeThumb, setThumb);
+$(".rthumbRate").each(function(){displayThumb($(this));});

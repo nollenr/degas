@@ -1,10 +1,9 @@
 $(function() { 
   $(".starRate li a").hover(changeRating, setRating);
-//  $(".starRate").each(displayRating);
   $(".rstarRate").each(displayRating);
-  $(".dstarRate li a").click(function(){
-    return false;
-  });
+  $(".dstarRate li a").click(function(){ return false; });
+  $(".thumbRate li a").hover(changeThumb, setThumb);
+  $(".rthumbRate").each(function(){displayThumb($(this));});
 });
 
 function changeRating(){
@@ -35,3 +34,36 @@ function displayRating(){
     $(this).find("li:lt("+current_rating+")").children("a").addClass("goldStar");
   };
 };
+  
+function changeThumb(){
+	// console.log("Hovering...");
+	var current_loc = $(this).closest(".rthumbRate");
+	current_loc.find("li.thumbRateUp a").removeClass("goldThumb");
+    current_loc.find("li.thumbRateDown a").removeClass("goldThumb");
+	$(this).addClass("copperThumb");
+	current_loc.find(".thumbRateText").html($(this).html());
+};
+
+function setThumb(){
+	$(this).removeClass("copperThumb");
+	// return the display to what ever is stored in the database
+	var thisMasterDiv = $(this).closest(".rthumbRate");
+	displayThumb(thisMasterDiv);
+	// remove the html
+	thisMasterDiv.find(".thumbRateText").html("");
+};
+
+function displayThumb(current_loc){
+	var current_rating=current_loc.children(".stored_buy_again").val();
+	// console.log("Running displayThumb.   The current value is: " + current_rating);
+	if (current_rating != "" ) {
+		// console.log("Found a non-blank buy_again value.  The current value is: " + current_rating);
+		if (current_rating === 'true') {
+			current_loc.find("li.thumbRateUp a").addClass("goldThumb");
+		}
+		else if (current_rating === 'false') {
+			current_loc.find("li.thumbRateDown a").addClass("goldThumb");
+		};
+	};
+};
+

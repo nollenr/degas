@@ -33,6 +33,7 @@ Degas::Application.routes.draw do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   resources :bottles  do
     put :rate, on: :member
+    put :buy_again, on: :member
     put :consume, on: :member
     get :copy, on: :member
   end
