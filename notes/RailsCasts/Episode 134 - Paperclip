@@ -1,0 +1,13 @@
+Paperclip
+Stores images in the file system rather than the database.
+
+
+Either a gem or a plugin.
+
+	To use the plugin: script/plugin install git://github.com/thoughtbot/paperclip.git
+	Then generate (plugin or gem): script/generate paperclip product photo
+	                                                         <model> <attribute>
+	Then run the migrations.
+	Change the model to include: has_attached_file :photo
+	
+
