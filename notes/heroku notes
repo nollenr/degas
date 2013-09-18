@@ -80,3 +80,10 @@ sheltered-headland-8456
 
 > sheltered-headland-8456
 Destroying sheltered-headland-8456 (including all add-ons)... done
+
+
+Compiling Assets (so that there are no errors on the push to heroku)
+--------------------------------------------------------------------
+(First, be sure there is a production database connection in database.yml)
+RAILS_ENV=production bundle exec rake assets:precompile
+

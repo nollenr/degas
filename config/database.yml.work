@@ -23,3 +23,12 @@ development:
   username: degas
   password: degas
 
+production:
+  adapter: postgresql
+  host: 10.248.8.30
+  port: 1521
+  database: degasdb
+  pool: 5
+  username: degas
+  password: degas
+
