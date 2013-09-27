@@ -4,3 +4,4 @@ installed the key into ~/.ec2
 ssh -i ~/.ec2/liszt-keypair.pem -X ec2-user@ec2-54-200-81-97.us-west-2.compute.amazonaws.com
 sudo su -
 
+The production/development switch is in /etc/httpd/conf/httpd.conf
