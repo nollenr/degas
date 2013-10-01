@@ -1,0 +1,2 @@
+module RatingPipelinesHelper
+end

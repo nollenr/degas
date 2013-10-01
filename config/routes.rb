@@ -13,6 +13,8 @@ Degas::Application.routes.draw do
 
   # resources :users, only: [:new, :create, :index, :edit]
   resources :users
+  
+  resources :rating_pipelines
 
   # match "users/new" => "users#new", :via => :get
   # match "users" => "users#create", :via => :post

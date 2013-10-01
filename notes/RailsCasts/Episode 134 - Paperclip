@@ -12,7 +12,7 @@ Either a gem or a plugin.
 	    
 	(4) Change the model to include: has_attached_file :photo
 	
-	(5) Change the view
+	(5) Change the form
 	    Add a button
 	      <p>
 	      	<%= f.file_field :photo %>

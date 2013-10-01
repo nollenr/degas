@@ -29,6 +29,10 @@ In the session that I run rails console, I did the following:
 	-bash-4.1$ export AWS_BUCKET=degas-bucket1
 	-bash-4.1$ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXX
 	-bash-4.1$ export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxx
+    export AWS_BUCKET=degas-devl-bucket01
+    export AWS_ACCESS_KEY_ID=AKIAJSGNRZAGAVGX7OAA
+    export AWS_SECRET_ACCESS_KEY=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
+
 	
 Since this is a new model, I did:
 	rails generate model ratingPipeline rating_date:timestamp rating_place:string
@@ -39,7 +43,7 @@ Added the photo to the rating_pipeline model
 	rails generate paperclip rating_pipeline photo
 	rake db:migrate
 
-Updated the model to include
+Updated the model to include (NOTE:  If you have multiple, put them on separate lines!!
 	has_attached_file :photo
 
 Updated the form on the "new" view to add multipart

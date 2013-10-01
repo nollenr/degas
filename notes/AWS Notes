@@ -27,7 +27,7 @@ httpd Conf settings for accessing S3 from EC2
     ServerName degas.com
     ErrorLog logs/degas.com-error_log
     CustomLog logs/degas.com-access_log common
-    SetEnv AWS_BUCKET degas-bucket1
+    SetEnv AWS_BUCKET degas-prod-bucket01
     SetEnv AWS_ACCESS_KEY_ID AKIAJSGNRZAGAVGX7OAA
     SetEnv AWS_SECRET_ACCESS_KEY 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
 </VirtualHost>

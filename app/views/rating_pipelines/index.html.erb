@@ -1,0 +1,22 @@
+<h1>Listing rating_pipelines</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rating_pipelines.each do |rating_pipeline| %>
+  <tr>
+  	<td><%= rating_pipeline.tasting_date_text %></td>
+    <td><%= link_to 'Show', rating_pipeline %></td>
+    <td><%= link_to 'Edit', edit_rating_pipeline_path(rating_pipeline) %></td>
+    <td><%= link_to 'Destroy', rating_pipeline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Rating pipeline', new_rating_pipeline_path %>

@@ -41,3 +41,6 @@ gem 'simple_form', '2.1.0'
 # For Heroku
 # gem 'heroku'
 
+# For paperclip and s3
+gem 'paperclip', '3.5.1'
+gem 'aws-sdk', '1.19.0'

@@ -1,0 +1,13 @@
+<%= simple_form_for(@rating_pipeline, :html => {:multipart => true}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	      <%= f.input :tasting_date_text, label: 'Tasting Date' %>
+  	      <%= f.file_field :front_label %>
+  	      <%= f.file_field :back_label %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

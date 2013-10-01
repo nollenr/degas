@@ -9,6 +9,7 @@ class BottlesController < ApplicationController
 
   def create
     @bottle = current_user.bottles.new(params[:bottle])
+    logger.debug(".........................................#{@bottle.inspect}")
     #---------------------------------------------------------------------#
     #                                                                     #
     #  Is this a rating only bottle?                                      #
