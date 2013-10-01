@@ -30,6 +30,7 @@ Degas::Application.routes.draw do
   match "ratings" => "bottles#ratings"
   match "winery_ratings" => "bottles#winery_ratings"
   match "bottle_for_rating_only" => "bottles#bottle_for_rating_only"
+  match "convert_rating" => "rating_pipelines#convert_rating"
 
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do

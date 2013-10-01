@@ -69,4 +69,8 @@ class RatingPipelinesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def convert_rating
+  end
+
 end
