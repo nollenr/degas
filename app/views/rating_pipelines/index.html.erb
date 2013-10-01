@@ -1,4 +1,9 @@
-<h1>Listing rating_pipelines</h1>
+<% provide(:title, 'Bottles Waiting To Be Rated') %>
+<div class="hero-unit hero-unit-bottle-index">
+  <h1>
+  	Bottles Waiting To Be Rated
+  </h1>
+</div>
 
 <table>
   <tr>
@@ -10,9 +15,10 @@
 <% @rating_pipelines.each do |rating_pipeline| %>
   <tr>
   	<td><%= rating_pipeline.tasting_date_text %></td>
-    <td><%= link_to 'Show', rating_pipeline %></td>
+  	<td><%= image_tag rating_pipeline.front_label.url(:thumbnail) %></td>
+  	<td><%= image_tag rating_pipeline.back_label.url(:thumbnail) %></td>
     <td><%= link_to 'Edit', edit_rating_pipeline_path(rating_pipeline) %></td>
-    <td><%= link_to 'Destroy', rating_pipeline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete', rating_pipeline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

@@ -1,0 +1,13 @@
+https://github.com/plataformatec/simple_form
+
+Include the gem
+then install simple_form
+rails g simple_form:install
+
+Remove blank option:
+:include_blank => false
+
+collection option
+<%= f.input :rating, :collection => 1..5 %>
+or 
+<%= f.input :rating, :collection => 1..5, :as => :radio %>

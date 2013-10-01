@@ -1,15 +1,20 @@
 class RatingPipeline < ActiveRecord::Base
-  attr_accessible :rating, :tasting_date_text, :tasting_notes, :tasting_date, :front_label, :back_label
+  belongs_to :user
+  
+  attr_accessible :rating, :tasting_date_text, :tasting_notes, :front_label, :back_label
   
   # has_attached_file :front_label, :back_label
-  has_attached_file :front_label
-  has_attached_file :back_label
+  has_attached_file :front_label, :styles => { :thumbnail => "150x150>"}
+  has_attached_file :back_label, :styles => { :thumbnail => "150x150>"}
   
+  # validate runs when the data is returned, before_save before the record is committed to the database
+  # attr_writer makes the attribute available for writing -- maybe becuase there is no real setter?
   validate  :check_tasting_date_text
-
   before_save :save_tasting_date_text  
-
   attr_writer :tasting_date_text
+  
+  # Make rating nullable, but make sure if it is included it is an integer between 1 and 10.
+  validates :rating, inclusion: 1..10, allow_nil: true
   
   # getter for virtual attribute tasting_date_text
   def tasting_date_text

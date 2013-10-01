@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130930164951) do
+ActiveRecord::Schema.define(:version => 20131001221057) do
 
   create_table "bottle_types", :force => true do |t|
     t.string   "name",          :limit => 30, :null => false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20130930164951) do
     t.string   "back_label_content_type"
     t.integer  "back_label_file_size"
     t.datetime "back_label_updated_at"
+    t.integer  "user_id",                  :null => false
   end
 
   create_table "users", :force => true do |t|

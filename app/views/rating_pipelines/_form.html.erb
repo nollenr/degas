@@ -3,8 +3,12 @@
 
   <div class="form-inputs">
   	      <%= f.input :tasting_date_text, label: 'Tasting Date' %>
+  	      <%= f.input :tasting_notes, as: :text, label: 'Notes', input_html: {rows: 5} %>
+  	      <%= f.input :rating, collection: 1..10, include_blank: false %>
+  	      <%= f.label 'Front Label' %>
   	      <%= f.file_field :front_label %>
-  	      <%= f.file_field :back_label %>
+  	      <%= f.label 'Back Label' %>
+  	      <%= f.file_field :back_label %>  	      
   </div>
 
   <div class="form-actions">

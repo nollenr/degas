@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :username, :password, :password_confirmation
   has_secure_password
   has_many :bottles
+  has_many :rating_pipelines
 
   before_save { |user| user.email = email.downcase }
   before_save { |user| user.username = username.downcase}
