@@ -59,5 +59,19 @@ module Degas
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # Paperclip storage on AWS S3
+    config.paperclip_defaults = {
+      :url => ':s3_domain_url',
+      :path => '/:class/:attachment/:id_partition/:style/:filename',
+      :storage => :s3,
+      :s3_storage_class => :reduced_redundancy,
+      :s3_credentials => {
+        :bucket => ENV['AWS_BUCKET'],
+        :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+      }
+    }
+  
   end
 end

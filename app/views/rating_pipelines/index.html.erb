@@ -17,7 +17,7 @@
   	<td><%= rating_pipeline.tasting_date_text %></td>
   	<td><%= image_tag rating_pipeline.front_label.url(:thumbnail) %></td>
   	<td><%= image_tag rating_pipeline.back_label.url(:thumbnail) %></td>
-  	<td><%= link_to 'Add Rating', convert_rating_path(rating_pipeline) %></td>
+  	<td><%= link_to 'Add Rating', convert_rating_pipeline_path(rating_pipeline) %></td>
     <td><%= link_to 'Edit', edit_rating_pipeline_path(rating_pipeline) %></td>
     <td><%= link_to 'Delete', rating_pipeline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

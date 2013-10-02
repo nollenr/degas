@@ -70,7 +70,14 @@ class RatingPipelinesController < ApplicationController
     end
   end
   
-  def convert_rating
+  def convert
+    @rating_pipeline = current_user.rating_pipelines.find(params[:id])
+    @bottle = Bottle.new
+    @bottle[:is_for_rating_only] = true
+    @bottle[:rating] = @rating_pipeline[:rating]
+    @bottle[:date_added_to_cellar] = @rating_pipeline[:tasting_date]
+    @bottle[:notes] = @rating_pipeline[:tasting_notes]
+    render 'bottles/new'
   end
 
 end

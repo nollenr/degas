@@ -14,7 +14,11 @@ Degas::Application.routes.draw do
   # resources :users, only: [:new, :create, :index, :edit]
   resources :users
   
-  resources :rating_pipelines
+  resources :rating_pipelines do
+    member do
+      get 'convert'
+    end
+  end
 
   # match "users/new" => "users#new", :via => :get
   # match "users" => "users#create", :via => :post
@@ -30,7 +34,7 @@ Degas::Application.routes.draw do
   match "ratings" => "bottles#ratings"
   match "winery_ratings" => "bottles#winery_ratings"
   match "bottle_for_rating_only" => "bottles#bottle_for_rating_only"
-  match "convert_rating" => "rating_pipelines#convert_rating"
+  # match "convert_rating" => "rating_pipelines#convert_rating"
 
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
