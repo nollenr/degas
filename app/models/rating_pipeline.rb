@@ -1,7 +1,7 @@
 class RatingPipeline < ActiveRecord::Base
   belongs_to :user
   
-  attr_accessible :rating, :tasting_date_text, :tasting_notes, :front_label, :back_label
+  attr_accessible :rating, :tasting_date_text, :tasting_notes, :front_label, :back_label, :price
   
   # has_attached_file :front_label, :back_label
   has_attached_file :front_label, :styles => { :original => "600x600>", :thumbnail => "150x150>"}
@@ -15,6 +15,9 @@ class RatingPipeline < ActiveRecord::Base
   
   # Make rating nullable, but make sure if it is included it is an integer between 1 and 10.
   validates :rating, inclusion: 1..10, allow_nil: true
+ 
+  # Price should be positive but nullable.
+  validates :price, allow_nil: true, numericality: { greater_than: 0.01 }
   
   # getter for virtual attribute tasting_date_text
   def tasting_date_text

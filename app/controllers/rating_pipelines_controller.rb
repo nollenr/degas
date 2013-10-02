@@ -77,6 +77,7 @@ class RatingPipelinesController < ApplicationController
     @bottle[:rating] = @rating_pipeline[:rating]
     @bottle[:date_added_to_cellar] = @rating_pipeline[:tasting_date]
     @bottle[:notes] = @rating_pipeline[:tasting_notes]
+    @bottle[:price] = @rating_pipeline[:price]
     render 'bottles/new'
   end
 

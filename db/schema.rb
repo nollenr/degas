@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001221057) do
+ActiveRecord::Schema.define(:version => 20131002195535) do
 
   create_table "bottle_types", :force => true do |t|
     t.string   "name",          :limit => 30, :null => false
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(:version => 20131001221057) do
     t.datetime "tasting_date"
     t.string   "tasting_notes"
     t.integer  "rating"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.string   "front_label_file_name"
     t.string   "front_label_content_type"
     t.integer  "front_label_file_size"
@@ -71,7 +71,8 @@ ActiveRecord::Schema.define(:version => 20131001221057) do
     t.string   "back_label_content_type"
     t.integer  "back_label_file_size"
     t.datetime "back_label_updated_at"
-    t.integer  "user_id",                  :null => false
+    t.integer  "user_id",                                                :null => false
+    t.decimal  "price",                    :precision => 8, :scale => 2
   end
 
   create_table "users", :force => true do |t|
