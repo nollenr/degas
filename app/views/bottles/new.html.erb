@@ -13,6 +13,11 @@
   <h1>Not for adding a bottle to your cellar</h1>
 <% end %>
 
+<% if defined? @rating_pipeline %>
+  <%= image_tag @rating_pipeline.front_label.url %>
+  <%= image_tag @rating_pipeline.back_label.url %>
+<% end %>
+
 <%= simple_form_for @bottle, html: {class: 'form-horizontal'} do |f| %>
 
 <div class="row">
@@ -37,26 +42,27 @@
   <div class="span6">
   	  <%= f.hidden_field :is_for_rating_only %>
   	  
+  	  <% if defined? @rating_pipeline %>
+  	    <%= f.hidden_field :rating_pipeline_id, value:@rating_pipeline[:id]%>
+  	  <% end %>
+  	  
   	  <% unless @bottle.is_for_rating_only %>
-      <%= f.input :bottle_id_text, label: 'Bottle Identifier' %>
-
-      <%= f.input :date_added_to_cellar_text, label: 'Date Added to Cellar' %>
-
-      <%= f.input :cellar_location %>
+        <%= f.input :bottle_id_text, label: 'Bottle Identifier' %>
+        <%= f.input :date_added_to_cellar_text, label: 'Date Added to Cellar' %>
+        <%= f.input :cellar_location %>
       <% end %>
 
+      <% # Always display the follwowing field (rating_only or not) %>
       <%= f.input :vintage, label: "Vintage (Year)" %>
 
       <% unless @bottle.is_for_rating_only %>
-      <%= f.input :drink_by_year, label: "Drink By (Year)" %>
+        <%= f.input :drink_by_year, label: "Drink By (Year)" %>
       <% end %>
 
+      <% # Always dispaly the following fields (rating_only or not) %>
       <%= f.input :name %>
-
       <%= f.input :vineyard %>
-
       <%= f.input :price %>
-
       <%= f.input :grape_name, input_html: { data: { autocomplete_source: grapes_list_path } } %>
       <!-- %= f.input :grape_id, collection: Grape.order("name"), selected: @bottle.grape_id  % -->
 
@@ -75,9 +81,14 @@
         <%= f.input :rating, label: "Rating (1-10)" %>
       <% end %>
 
+      <% # Determine if we need to go back to the rating pipeline or to the cellar list %>
       <%= f.button :submit, label: "Create Bottle", class: "btn btn-large btn-primary" %>
-      <%= link_to "Cancel", bottles_path, class: 'btn btn-large' %>
-
+      <% if defined? @rating_pipeline %>
+        <%= link_to "Cancel", rating_pipelines_path, class: 'btn btn-large' %>
+      <% else %>
+        <%= link_to "Cancel", bottles_path, class: 'btn btn-large' %>
+      <% end %>
+      
     <% end %>
   </div>
   <div class="span5 offset1">

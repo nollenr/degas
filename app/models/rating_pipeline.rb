@@ -4,8 +4,8 @@ class RatingPipeline < ActiveRecord::Base
   attr_accessible :rating, :tasting_date_text, :tasting_notes, :front_label, :back_label
   
   # has_attached_file :front_label, :back_label
-  has_attached_file :front_label, :styles => { :thumbnail => "150x150>"}
-  has_attached_file :back_label, :styles => { :thumbnail => "150x150>"}
+  has_attached_file :front_label, :styles => { :original => "600x600>", :thumbnail => "150x150>"}
+  has_attached_file :back_label, :styles => {  :original => "600x600>", :thumbnail => "150x150>"}
   
   # validate runs when the data is returned, before_save before the record is committed to the database
   # attr_writer makes the attribute available for writing -- maybe becuase there is no real setter?

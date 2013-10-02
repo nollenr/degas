@@ -9,7 +9,7 @@ class BottlesController < ApplicationController
 
   def create
     @bottle = current_user.bottles.new(params[:bottle])
-    logger.debug(".........................................#{@bottle.inspect}")
+    # logger.debug(".........................................#{@bottle.inspect}")
     #---------------------------------------------------------------------#
     #                                                                     #
     #  Is this a rating only bottle?                                      #
@@ -21,6 +21,11 @@ class BottlesController < ApplicationController
       @bottle.available = false
       if @bottle.save
         flash[:success] = "Rating created."
+        unless @bottle.rating_pipeline_id.nil?
+          @rating_pipeline = current_user.rating_pipelines.find_by_id(@bottle.rating_pipeline_id)
+          # logger.debug("...............................Finding the associated rating pipeline #{@rating_pipeline.inspect}")
+          @rating_pipeline.destroy
+        end
         redirect_to :bottles
       else
         render 'new'

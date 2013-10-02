@@ -47,12 +47,12 @@ class Bottle < ActiveRecord::Base
     :cellar_location, :vintage, :drink_by_year, :name, :vineyard, 
     :grape_name, :winery_name, :price, :rating, :bottle_type_id, 
     :date_added_to_cellar_text, :notes, :confirmed, :is_for_rating_only,
-    :buy_at_this_price
+    :buy_at_this_price, :rating_pipeline_id
 
   #This creates the setter (writer)... correct?
   attr_writer :date_added_to_cellar_text 
 
-  attr_accessor :bottle_id_text, :confirmed
+  attr_accessor :bottle_id_text, :confirmed, :rating_pipeline_id
 
   def availability
     return @availability
