@@ -55,6 +55,16 @@
                   <li class="divider"></li>
                   
                   <li class="dropdown-submenu">
+                    <a tabindex="-1" href="#">Rating Pipeline...</a>
+                    <ul class="dropdown-menu" >
+                      <li><%= link_to "...new Pipeline Entry", new_rating_pipeline_path %></li>
+                      <li><%= link_to "...manage Pipeline", rating_pipelines_path %></li>
+                    </ul>  
+                  </li>
+                  
+                  <li class="divider"></li>
+                  
+                  <li class="dropdown-submenu">
                     <a tabindex="-1" href="#">Ratings...</a>
                     <ul class="dropdown-menu" >
                       <li><%= link_to "... by Bottle", ratings_path %></li>
