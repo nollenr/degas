@@ -29,7 +29,7 @@ The application is owned by:
 appman
 
 
-As Root
+As root
 ----------------------------
 Stop http
 service httpd stop
@@ -37,5 +37,25 @@ service httpd stop
 Postgres
 service postgresql status
 
+As appman
+----------------------------
+rvm gemset use rails3214
 
+cp rails/degas/.git/config /home/appman/.
+cd /home/appman/rails
+rm -rf degas
+mkdir degas
+cd degas
+git init
+mv home/appman/config /home/appman/rails/degas/.git/.
+git pull
 
+cd /home/appman/rails/degas/config
+cp database.yml.liszt.aws database.yml
+
+bundle install --local
+RAILS_ENV=production rake db:migrate
+
+As root
+----------------------------
+cp /home/appman/rails/degas/notes/EC2.etc.httpd.conf.httd.conf /etc/httd/conf/httpd.conf

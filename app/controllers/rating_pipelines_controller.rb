@@ -30,6 +30,9 @@ class RatingPipelinesController < ApplicationController
   # POST /rating_pipelines.json
   def create
     @rating_pipeline = current_user.rating_pipelines.new(params[:rating_pipeline])
+    
+    # bytes = Base64.decode64(params[:rating_pipeline][:front_label])
+    logger.debug "......................................#{@rating_pipeline.inspect}"
 
     respond_to do |format| 
       if @rating_pipeline.save
