@@ -56,6 +56,9 @@ cp database.yml.liszt.aws database.yml
 bundle install --local
 RAILS_ENV=production rake db:migrate
 
+rake assets:precompile
+RAILS_ENV=production bundle exec rake assets:precompile
+
 As root
 ----------------------------
 cp /home/appman/rails/degas/notes/EC2.etc.httpd.conf.httd.conf /etc/httd/conf/httpd.conf

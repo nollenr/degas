@@ -1,3 +1,9 @@
+Interesting Links:
+http://thewebfellas.com/blog/2008/11/2/goodbye-attachment_fu-hello-paperclip
+https://devcenter.heroku.com/articles/paperclip-s3
+http://railscasts.com/episodes/134-paperclip?autoplay=true
+
+
 add the gems paperclip and aws-sdk to the gemfile
 
 I don't think I want to do this: yum install rubygem-nokogiri
