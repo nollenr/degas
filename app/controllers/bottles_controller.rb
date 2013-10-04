@@ -235,6 +235,16 @@ class BottlesController < ApplicationController
     @rating_collapsable_list = format_collapsable_list(@rating_by_winery, true, ["winery_name_cont",nil,nil], true)
   end
 
+  def grape_ratings
+    @rating_list_group_by = ['grapes.name', 'wineries.name', 'vineyard', 'vintage', 'bottles.name']
+    @rating_by_grapes_unformatted = current_user.bottles.where("rating is not null").joins(:grape, :winery).order("average_rating desc").average("rating", group: @rating_list_group_by).to_a
+    # logger.debug("unformatted grape ratings.................................. #{@rating_by_grapes_unformatted.inspect}")
+    # Formatted: [[grape, winery-vineyard-name, vintage], average rating]
+    @rating_by_grapes = @rating_by_grapes_unformatted.map{|x| [[x[0][0], x[0][1] + "-" + (x[0][2].blank? ? "No Vineyard" : x[0][2])  + "-" + (x[0][4].blank? ? "No Name" : x[0][4]), x[0][3] ], x[1]]}
+    # logger.debug("formatted grape ratings.................................. #{@rating_by_grapes.inspect}")
+    @rating_collapsable_list = format_collapsable_list(@rating_by_grapes, true, [nil,nil,nil], true)
+  end
+
   def bottle_for_rating_only
     @bottle = Bottle.new
     @bottle[:is_for_rating_only] = true
@@ -347,11 +357,11 @@ private
     p_list.each do |v_row|
       a_hash = process_array(v_row[0], a_hash, v_row[1], 0)
     end
-    logger.debug("Hash after completion: #{a_hash}")
+    # logger.debug("Hash after completion: #{a_hash}")
     if (p_average)
       a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
     end
-    logger.debug("Hash after sorting: #{a_hash}")
+    # logger.debug("Hash after sorting: #{a_hash}")
     a_html = create_list_html(a_hash, "", p_create_link, p_data_key, 0, p_average)
     # logger.debug("HTML after completion #{a_html}")
     return a_html
