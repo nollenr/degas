@@ -10,9 +10,9 @@
 	</head>
 	<body>
 
-	  <%= render 'layouts/header20131008' %>
+    <div class="container-fluid">   
+	    <%= render 'layouts/header20131008' %>
 	  
-	  <div class="container-fluid">	  
 	    <% flash.each do |key, value| %>
 	      <div class="alert alert-<%= key %>"><%= value %></div>
 	    <% end %>
