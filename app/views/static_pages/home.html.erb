@@ -1,48 +1,49 @@
 <% provide(:title, 'Home') %>
 
-
-<div class="center hero-unit extrabottommargin">
-  <h1>Welcome to Degas</h1>
-  <div id="mediaarea" class="pull-right">
-    <!-- %= video_tag(["assets/winepour.mp4", "assets/winepour.oggtheora.ogv", "assets/winepour.webmsd.webm"], height: '360', width: '640', autoplay: true, id: "winepourvideo") % -->
-    <%= image_tag "winepourmid.png", height: '360', width: '640', id: 'winepourpic' %>
-  </div>
-  <div class="home">
-    <h2>
-      Discover
-    </h2>
-    <div class="subtext">
-      the contents of your cellar.
+<div class="container-fluid">
+  <div class="center hero-unit extrabottommargin">
+    <h1>Welcome to Degas</h1>
+    <div id="mediaarea" class="pull-right">
+      <!-- %= video_tag(["assets/winepour.mp4", "assets/winepour.oggtheora.ogv", "assets/winepour.webmsd.webm"], height: '360', width: '640', autoplay: true, id: "winepourvideo") % -->
+      <%= image_tag "winepourmid.png", height: '360', width: '640', id: 'winepourpic' %>
     </div>
-    <h2>
-    	Rate
-    </h2>
-    <div class="subtext">
-      your tasting experiences.
+    <div class="home">
+      <h2>
+        Discover
+      </h2>
+      <div class="subtext">
+        the contents of your cellar.
+      </div>
+      <h2>
+      	Rate
+      </h2>
+      <div class="subtext">
+        your tasting experiences.
+      </div>
     </div>
   </div>
 </div>
 
 <div class="clear"><br></div>
 
-  <div class="container">
-    <div class="center">
-        <% if signed_in? %>
-          <%= link_to "View Your Cellar List", bottles_path, class: "btn btn-large btn-primary" %>
-          <div class="home-info">
-            There 
-              <%= @current_cellar_size==1 ? "is": "are" %> 
-            currently 
-              <%= @current_cellar_size %> 
-              <%= @current_cellar_size==1 ? "bottle" : "bottles" %> 
-            available in your cellar and you've rated 
-              <%= @current_ratings %>
-              <%= @current_ratings==1 ? "bottle" : "bottles" %>
-              .
-          </div>
-        <% else %>
-          <%= link_to "Sign up now!", signup_path, class: "center btn btn-large btn-primary" %>
-        <% end %>
-    </div>
+<div class="container-fluid">
+  <div class="center">
+      <% if signed_in? %>
+        <%= link_to "View Your Cellar List", bottles_path, class: "btn btn-large btn-primary" %>
+        <div class="home-info">
+          There 
+            <%= @current_cellar_size==1 ? "is": "are" %> 
+          currently 
+            <%= @current_cellar_size %> 
+            <%= @current_cellar_size==1 ? "bottle" : "bottles" %> 
+          available in your cellar and you've rated 
+            <%= @current_ratings %>
+            <%= @current_ratings==1 ? "bottle" : "bottles" %>
+            .
+        </div>
+      <% else %>
+        <%= link_to "Sign up now!", signup_path, class: "center btn btn-large btn-primary" %>
+      <% end %>
   </div>
+</div>
 
