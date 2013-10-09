@@ -18,7 +18,7 @@
           <ul class="nav pull-right"> <!-- outermost ul -->
             <li><%= link_to "Home",    home_path %></li>  <!-- single level -->
             
-            <li id="fat-menu" class="dropdown">         <!-- dropdown help  -->
+            <li class="dropdown">         <!-- dropdown help  -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Help", help_path %></li>
@@ -32,7 +32,7 @@
 
             <% if signed_in? %>
               <li><%= link_to "Users", users_path %></li> <!-- single level -->
-              <li id="fat-menu" class="dropdown">         <!-- dropdown account  -->
+              <li class="dropdown">         <!-- dropdown account  -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Account <b class="caret"></b>
                 </a>
@@ -45,7 +45,7 @@
                   </li>
                 </ul>
               </li>                                       <!-- dropdown account end -->
-              <li id="fat-menu" class="dropdown">         <!-- dropdown cellar -->
+              <li class="dropdown">         <!-- dropdown cellar -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Cellar <b class="caret"></b>
                 </a>
