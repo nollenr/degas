@@ -1,11 +1,11 @@
-@import "bootstrap";
-@import "bootstrap-responsive";
-
 /* -------------------------- */
 /* mixins, variables, etc.    */
 /* -------------------------- */
 
 $grayMediumLight: #eaeaea;
+$grayLight: #eaeaea;
+$gray: #eaeaea;
+$grayDarker: #eaeaea;
 $blueHeroBackground: #CEDEF4;
 $yellowHeroBackground: #FFFF99;
 
@@ -287,3 +287,5 @@ footer ul li {
 .num_ratings_list {
   padding-left: 5px;
 }
+@import "bootstrap";
+@import "bootstrap-responsive";
