@@ -37,6 +37,9 @@ Degas::Application.routes.draw do
     put :buy_again, on: :member
     put :consume, on: :member
     get :copy, on: :member
+    # Edit in a pop-up
+    # do I need this or can I use the update function in the controller with a respond-to (the other piece of edit)
+    put :change_location, on: :member
   end
 
   resources :wineries, except: [:destroy]

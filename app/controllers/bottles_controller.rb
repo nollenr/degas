@@ -130,6 +130,11 @@ class BottlesController < ApplicationController
     end
   end
 
+  def change_location
+    @bottle = current_user.bottles.find_by_id(params[:id])
+    logger.debug "Change Location *************************** #{params.inspect}"
+  end
+
   def consume
     # @bottleid = params[:id].to_s
     bottle = current_user.bottles.update(params[:id], available: :false)
@@ -145,7 +150,7 @@ class BottlesController < ApplicationController
   def copy
     @source_bottle = current_user.bottles.find_by_id(params[:id])
     @bottle = @source_bottle.dup
-    logger.debug "**************************** during copy before setting nil #{@bottle.inspect}"
+    # logger.debug "**************************** during copy before setting nil #{@bottle.inspect}"
     @bottle[:bottle_id] = nil
     @bottle[:bottle_id_text] = nil
     @bottle[:available] = true
