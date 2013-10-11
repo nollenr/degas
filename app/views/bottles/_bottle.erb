@@ -47,9 +47,11 @@
         <% end %>
         <%= render partial: "bottle_rating", locals: {bottle: bottle} %>
         <%= render partial: "bottle_buy_at_this_price", locals: {bottle: bottle} %>
-        <div><%= link_to "Edit", edit_bottle_path(bottle.id) %></div>
-        <% google_query = bottle.vintage + " " + bottle.winery.name + " " + bottle.name + " " + bottle.grape.name %>
-        <div><%= link_to "Search the Web", "http://www.google.com/search?q=#{google_query}", target: '_blank' %></div>
+        <div>
+          <%= link_to "Edit", edit_bottle_path(bottle.id), class: 'editLink' %>
+          <% google_query = bottle.vintage + " " + bottle.winery.name + " " + bottle.name + " " + bottle.grape.name %>
+          <%= link_to "Search the Web", "http://www.google.com/search?q=#{google_query}", target: '_blank' %>
+        </div>
       </div>                         <!-- column 2 data row end -->
     </div>                           <!-- data row1 end -->
     <div class="row-fluid">          <!-- data row2 start -->
