@@ -132,7 +132,12 @@ class BottlesController < ApplicationController
 
   def change_location
     @bottle = current_user.bottles.find_by_id(params[:id])
+    @bottle.cellar_location = params[:bottle][:cellar_location]
+    @bottle.save
     logger.debug "Change Location *************************** #{params.inspect}"
+    respond_to do |format|
+      format.js   #change_location.js.erb
+    end
   end
 
   def consume

@@ -28,7 +28,7 @@
         <div><span class="muted">Price: </span>    <%= number_to_currency(bottle.price) %></div>
         <div><span class="muted">Drink By: </span> <%= bottle.drink_by_year %></div>
         <div>
-          <span class="muted">Cellar Location: </span> <%= bottle.cellar_location %>
+          <span class="muted">Cellar Location: </span> <span id="<%= bottle.id.to_s + "cellarloc"%>"><%= bottle.cellar_location %></span>
           <%= link_to "Edit Location", "#chgLoc"+bottle.id.to_s, data: {toggle: "modal"}  %>
         </div>
       </div>                         <!-- column 1 data row end -->
@@ -78,19 +78,20 @@
   <div class="modal-body">
     <p>Bottle ID:  <%= bottle.bottle_id %></p>
     <p>Current Location: <%= bottle.cellar_location %></p>
-    <%= simple_form_for :bottle do |f| %>
+    <%= simple_form_for :bottle, url: change_location_bottle_path(bottle.id), html: {id: "locChange"+bottle.id.to_s, method: "put", remote: true} do |f| %>
       <%= f.input :cellar_location %>
+      <%= f.button :submit, class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn" data-dismiss="modal" aria-hidden="true" id="<%= "closemodal" + bottle.id.to_s %>" >Close</button>
     <!-- NEED TO CHANGE THE LINK_TO to perform a submit!
          Which means the form may need an id
          http://stackoverflow.com/questions/11645153/submit-form-using-link-to-in-rails
          search for "submit form using link_to in rails
       <%= link_to 'submit', "#", :onclick => "$('#form_id').submit()" %>
+      <%= link_to "Save Changes", change_location_bottle_path(bottle.id), method: :put, remote: true, class: "btn btn-primary", onclick: "$('#locChange67').submit()" %>
     -->
-    <%= link_to "Save Changes", change_location_bottle_path(bottle.id), method: :put, remote: true, class: "btn btn-primary"%>
   </div>
 </div>
 <hr />
