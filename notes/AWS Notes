@@ -35,6 +35,13 @@ httpd Conf settings for accessing S3 from EC2
 ====================================================
 Deploying:
 
+In notes/apache_stuff are 3 httpd.conf files and 2 html files
+  Deploy the httpd files to /etc/httd/conf
+  Deploy the html files to /var/www/html
+  --
+  To singal an outage, copy httpd.out.conf to httpd.conf and restart the httpd service
+  To end the outage, copy http.alive.conf to httpd.conf and restart the service
+
 ssh -i ~/.ec2/liszt-keypair.pem -X ec2-user@ec2-54-200-81-97.us-west-2.compute.amazonaws.com
 sudo su -
 
@@ -55,10 +62,11 @@ mv ~/config ~/rails/degas/.git/.
 
 git pull origin <branch name>
 
-cp database.yml.liszt.aws database.yml
+cp config/database.yml.liszt.aws config/database.yml
 
 rvm gemset use rails3214
-bundle install
+rm Gemfile.lock
+bundle install --local
 RAILS_ENV=production bundle exec rake assets:precompile
 
 As root:

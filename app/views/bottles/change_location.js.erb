@@ -1,0 +1,5 @@
+<% span_loc_id = '#' + @bottle.id.to_s + 'cellarloc'%>
+$("<%= span_loc_id %>").html("<%= @bottle.cellar_location %>");
+
+<% botton_id = '#closemodal'+@bottle.id.to_s %>
+$("<%= botton_id %>").click();
