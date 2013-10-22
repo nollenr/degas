@@ -65,7 +65,8 @@ git pull origin <branch name>
 cp config/database.yml.liszt.aws config/database.yml
 
 rvm gemset use rails3214
-bundle install
+rm Gemfile.lock
+bundle install --local
 RAILS_ENV=production bundle exec rake assets:precompile
 
 As root:
