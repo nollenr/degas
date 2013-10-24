@@ -4,7 +4,7 @@
     <h1>Welcome To Degas</h1>
     <div id="mediaarea" class="pull-right">
       <!-- %= video_tag(["assets/winepour.mp4", "assets/winepour.oggtheora.ogv", "assets/winepour.webmsd.webm"], height: '360', width: '640', autoplay: true, id: "winepourvideo") % -->
-      <%= image_tag "winepourmid.png", height: '360', width: '640', id: 'winepourpic' %>
+      <%= image_tag "winepourmid.png", height: '360', width: '640', id: 'winepourpic', class: 'img' %>
     </div>
     <div class="home">
       <h2>
@@ -22,9 +22,9 @@
     </div>
   </div><!-- hero unit -->
 
-<div class="clear"><br></div>
+<br>
 
-<div class="container-fluid">
+<div class="row-fluid">
   <div class="center">
       <% if signed_in? %>
         <%= link_to "View Your Cellar List", bottles_path, class: "btn btn-large btn-primary" %>
