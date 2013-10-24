@@ -1,5 +1,5 @@
 <% provide(:title, 'Home') %>
-
+<div class="row-fluid">
   <div class="hero-unit">
     <h1>Welcome To Degas</h1>
     <div id="mediaarea" class="pull-right">
@@ -21,11 +21,12 @@
       </div>
     </div>
   </div><!-- hero unit -->
+</div>
 
 <br>
 
 <div class="row-fluid">
-  <div class="center">
+  <div class="text-center">
       <% if signed_in? %>
         <%= link_to "View Your Cellar List", bottles_path, class: "btn btn-large btn-primary" %>
         <div class="home-info">
