@@ -26,4 +26,9 @@
 @media (max-width: 480px) {
   .hero-unit h1  { font-size: 40px; }
 }
- 
+
+/* Fix for iPhone dropdown */
+/* see https://github.com/twbs/bootstrap/issues/7968 */
+.dropdown-backdrop {
+  position: static;
+}
