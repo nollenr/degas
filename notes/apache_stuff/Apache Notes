@@ -16,6 +16,6 @@ Code Explaination
     The first line is merely a comment to explain the purpose of the code. It is not processed by the server.
     The second line enables Apache’s rewrite engine, mod_rewrite. Depending on your server setup, this line may be unnecessary.
     The third line checks to see if the request is coming from your computer. If it is, then the redirect does not happen. For this to work, you need to change the numbers in this line to match your own IP address.
-    The fourth line prevents an infinite-loop scenario by testing the request against the name of your maintenance page. Obviously, we don’t want to redirect requests for the page to which we are redirecting.
+    The fourth line prevents an infinite-loop scenario by testing the request against the name of your maintenance page (NC is nocase). Obviously, we don’t want to redirect requests for the page to which we are redirecting.
     The fifth and final line contains the action. It basically redirects all requests that meet both of the previous rewrite conditions to the specified maintenance page. Apache doesn’t allow us to use 500-level response codes, so we are stuck with the next best thing, a 302 – temporary – response.
   
