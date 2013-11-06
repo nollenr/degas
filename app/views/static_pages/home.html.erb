@@ -1,28 +1,29 @@
 <% provide(:title, 'Home') %>
 <div class="row-fluid">
   <div class="span12">
-    <div class="hero-unit">
+    <div class="hero-unit homeHero">
       <h1>Welcome To Degas</h1>
-      <div id="mediaarea" class="pull-right">
-        <%= image_tag "winepourmid.png", height: '360', width: '640', id: 'winepourpic', class: 'img' %>
-      </div>
-      <div class="home">
-        <h2>
-          Discover
-        </h2>
-        <div class="subtext">
-          the contents of your cellar.
-        </div>
-        <h2>
-        	Rate
-        </h2>
-        <div class="subtext">
-          your tasting experiences.
-        </div>
+      <div class="row-fluid">
+        <div class="span3">
+          <dl>
+            <dt>Discover</dt>
+            <dd><div class="muted"><small>the contents of your cellar.</small></div></dd>
+          </dl>
+          <dl>
+            <dt>Rate</dt>
+            <dd><div class="muted"><small>your tasting experiences.</small></div></dd>
+          </dl>
+        </div> <!-- span6 (column1)-->
+        <div class="span9">
+          <div id="mediaarea">
+            <p><%= image_tag "winepourmid.png", id: 'winepourpic' %></p>
+          </div>
+        </div> <!-- span6 (column2) -->
       </div>
     </div>  <!-- hero unit   -->
   </div>    <!-- span12      -->
 </div>      <!-- row-fluid   -->
+
 
 <br>
 
