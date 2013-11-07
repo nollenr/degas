@@ -23,7 +23,8 @@
 .rthumbRate li.thumbRateDown a.goldThumb   {background-position: -20px -40px;}
 
 @media (max-width: 480px) {
-  .hero-unit h1  { font-size: 40px; }
+//  .hero-unit h1  { font-size: 40px; }
+  h1, h2, h3, h4, h5, h6 {font-size: 80%;}
 }
 
 img {
