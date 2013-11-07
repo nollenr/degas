@@ -36,3 +36,17 @@ Options:
    
    The actual css files are in:
    /usr/local/rvm/gems/ruby-2.0.0-p247@rails3214/gems/bootstrap-sass-2.3.2.2/
+   
+ Text:
+   I'm trying to work out the heading sizes on my "hero-unit h1".
+   I've tried:
+   
+   @media (max-width: 480px) {
+  .hero-unit h1, h2, h3, h4, h5, h6  { font-size: 100%; }
+   }
+   
+   but that seems to be taking 100% of the body font size and applying it to the headings.  Not what I want.
+   
+   http://stackoverflow.com/questions/9143345/how-to-use-responsive-features-of-bootstrap-2-0
+   gave me that suggestion... but I don't think it worked.  I expected it to take some percentage of the
+   h1...h6 font size.    
