@@ -4,24 +4,36 @@
     <h1>Wineries</h1>
 </div>
 
-<div class="row">                    <!-- enclosing row start -->
+<div class="row-fluid">               <!-- enclosing row start -->
   <div class="span12">                <!-- enclosing row size start -->
     <div class="well well-small" >    <!-- well opening -->
       <h2 class="search-title">Search</h2>
       <%= search_form_for @search, html: {class: "form-inline search-form"} do |f| %>
-        <div class="row">                <!-- search row1 start-->
-          <div class="span10">            <!-- search options column1 size start --> 
+        <div class="row-fluid">       <!-- search row1 start-->
+          <div class="span10">        <!-- search options column1 size start --> 
             <div class="search-inputs" >
-              <label>Winery Name</label>  
-              <%= f.text_field :name_cont, class: "input-small", placeholder: "Winery Name"%>
-              <label>Country</label>  
-              <%= f.text_field :country_cont, class: "input-small", placeholder: "Country"%>
-              <label>Location 1</label>  
-              <%= f.text_field :location1_cont, class: "input-small", placeholder: "Location 1"%>
-              <label>Location 2</label>  
-              <%= f.text_field :location2_cont, class: "input-small", placeholder: "Location 2"%>
-              <label>Location 3</label>  
-              <%= f.text_field :location3_cont, class: "input-small", placeholder: "Location 3"%>
+              <div class="row-fluid">
+                <div class="span4">
+                  <label>Winery Name</label>  
+                  <%= f.text_field :name_cont, class: "input-small", placeholder: "Winery Name"%>
+                </div>
+                <div class="span4">
+                  <label>Country</label>  
+                  <%= f.text_field :country_cont, class: "input-small", placeholder: "Country"%>
+                </div>
+                <div class="span4">
+                  <label>Location 1</label>  
+                  <%= f.text_field :location1_cont, class: "input-small", placeholder: "Location 1"%>
+                </div>
+                <div class="span4">
+                  <label>Location 2</label>  
+                  <%= f.text_field :location2_cont, class: "input-small", placeholder: "Location 2"%>
+                </div>
+                <div class="span4">
+                  <label>Location 3</label>  
+                  <%= f.text_field :location3_cont, class: "input-small", placeholder: "Location 3"%>
+                </div>
+              </div>
             </div>
           </div>                <!-- search options column1 size end -->
           <div class="span1">   <!-- serach button column2 size start -->
