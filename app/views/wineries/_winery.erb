@@ -16,7 +16,7 @@
       <div class="span6 offset1" >   <!-- column 1 data row start -->
         <div><span class="muted">Location 1: </span><%= winery.location1 %></div>
         <div><span class="muted">Location 2: </span><%= winery.location2 %></div>
-        <div><span class="muted">Location 3: </span>     <%= winery.location3 %></div>
+        <div><span class="muted">Location 3: </span><%= winery.location3 %></div>
         <% if !winery.winery_url.nil? %>
           <div> <%= link_to "Winery Website", winery.winery_url %> <span class="muted">( <%= winery.winery_url %> )</span> </div>
         <% end %>
@@ -27,7 +27,7 @@
           <div> <%= link_to "Winery Facebook URL", winery.facebook_url %> <span class="muted">( <%= winery.facebook_url %> )</span> </div>
         <% end %>
       </div>                         <!-- column 1 data row end -->
-      <div class="span2">            <!-- column 2 data row start -->
+      <div class="span3">            <!-- column 2 data row start -->
         <div> <%= link_to 'Show', winery %> </div>
         <div> <%= link_to 'Edit', edit_winery_path(winery) %> </div>
       </div>                         <!-- column 2 data row end -->
