@@ -2,7 +2,7 @@
 @import "bootstrap-responsive";
 
 /* ********************************************** */
-/* For starrating and thumbratings on all screens */
+/* For starrating and thumbratings on all pages   */
 /* ********************************************** */
 .rstarRate {overflow: hidden;}
 .rstarRate ul {margin-left: 0; display: inline;}
@@ -22,18 +22,6 @@
 .rthumbRate li.thumbRateDown a.copperThumb {background-position: -20px -20px;}
 .rthumbRate li.thumbRateDown a.goldThumb   {background-position: -20px -40px;}
 
-@media (max-width: 480px) {
-  .hero-unit h1 { font-size: 40px; }
-} 
-
-.form-responsive {
-  @extends .form-inline;
-}
-
-img {
-  max-width: 100%;
-}
-
 /* ********************************************** */
 /* Fix for iPhone dropdown navbar                 */
 /* see https://github.com/twbs/bootstrap/issues/7968 */
@@ -45,6 +33,14 @@ img {
 /* ********************************************** */
 /* Site-Wide                                      */
 /* ********************************************** */
+@media (max-width: 480px) {
+  .hero-unit h1 { font-size: 40px; }
+} 
+
+img {
+  max-width: 100%;
+}
+
 .footer {
   margin-top: 20px;
 }
