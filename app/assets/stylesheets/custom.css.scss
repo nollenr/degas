@@ -26,6 +26,10 @@
   .hero-unit h1 { font-size: 40px; }
 } 
 
+.form-responsive {
+  @extends .form-inline;
+}
+
 img {
   max-width: 100%;
 }
