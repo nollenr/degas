@@ -8,29 +8,29 @@
   <div class="span12">                <!-- enclosing row size start -->
     <div class="well well-small" >    <!-- well opening -->
       <h2 class="search-title">Search</h2>
-      <%= search_form_for @search, html: {class: "form-inline search-form"} do |f| %>
+      <%= search_form_for @search, html: {class: "search-form"} do |f| %>
         <div class="row-fluid">       <!-- search row1 start-->
           <div class="span10">        <!-- search options column1 size start --> 
             <div class="search-inputs" >
               <div class="row-fluid">
-                <div class="span3">
+                <div class="span2">
                   <label>Winery Name</label>  
                   <%= f.text_field :name_cont, class: "input-small", placeholder: "Winery Name"%>
                 </div>
-                <div class="span3">
+                <div class="span2">
                   <label>Country</label>  
                   <%= f.text_field :country_cont, class: "input-small", placeholder: "Country"%>
                 </div>
-                <div class="span2">
-                  <label>Location 1 (State or Territory, Ex: California)</label>  
+                <div class="span3">
+                  <label>State or Territory, Ex: California</label>  
                   <%= f.text_field :location1_cont, class: "input-small", placeholder: "Location 1"%>
                 </div>
                 <div class="span2">
-                  <label>Location 2 (Area, Ex: Sonoma)</label>  
+                  <label>Area, Ex: Sonoma</label>  
                   <%= f.text_field :location2_cont, class: "input-small", placeholder: "Location 2"%>
                 </div>
-                <div class="span2">
-                  <label>Location 3 (Sub Area, Ex: Alexander Valley)</label>  
+                <div class="span3">
+                  <label>Sub Area, Ex: Alexander Valley</label>  
                   <%= f.text_field :location3_cont, class: "input-small", placeholder: "Location 3"%>
                 </div>
               </div>
