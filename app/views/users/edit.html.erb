@@ -13,11 +13,11 @@
 
       <%= f.input :email %>
 
-      <%= f.input :password %>
+      <%= f.input :password, label: "New password" %>
 
       <%= f.input :password_confirmation %>
 
-      <%= f.button :submit, label: "Save", class: "btn btn-large btn-primary" %>
+      <%= f.button :submit, "Save", class: "btn btn-large btn-primary" %>
       <%= link_to "Cancel", users_path, class: 'btn btn-large' %>
     <% end %>
 
