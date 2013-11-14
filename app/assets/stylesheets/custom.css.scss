@@ -1,5 +1,7 @@
 @import "bootstrap";
-@import "bootstrap-responsive";
+/* No longer needed in 3.0.2.1
+ * @import "bootstrap-responsive"; 
+*/
 
 /* ********************************************** */
 /* For starrating and thumbratings on all pages   */
@@ -45,9 +47,20 @@ img {
   margin-top: 20px;
 }
 
+.full-widthLayout {
+  padding: 0 15px;
+}
+
 /* ********************************************** */
 /* Home Page                                      */
 /* ********************************************** */
 .homeHero h1 {
   margin-bottom: 20px;
+}
+
+/* ********************************************** */
+/* Cellar List                                    */
+/* ********************************************** */
+#cellarListSearch {
+  margin-bottom: 10px;
 }

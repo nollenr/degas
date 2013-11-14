@@ -9,66 +9,76 @@
   Download:
   <%= link_to "CSV", bottles_path(format: "csv") %>
 </div>
-<div class="row-fluid">               <!-- enclosing row start -->
-  <div class="span12">                <!-- enclosing row size start -->
+<div class="full-widthLayout">
+<div class="row">                         <!-- enclosing row start -->
+  <div class="col-md-12">                 <!-- enclosing row size start -->
     <div id="searchForm" class="well well-small" >    <!-- well opening -->
 
       <h2 class="search-title">Search</h2>
 
-      <%= search_form_for @search, html: {class: "form-inline search-form"}, remote: true do |f| %>
-        <div class="row-fluid">                <!-- search row1 start-->
-          <div class="span10">            <!-- search options column1 size start --> 
+      <%= search_form_for @search, html: {class: "search-form"}, remote: true do |f| %>
+        <div class="row">                 <!-- search row1 start-->
+          <div class="col-md-10">         <!-- search options column1 size start --> 
             <div class="search-inputs" >
-              <label>Bottle Id</label>
-              <%= f.text_field :bottle_id_eq, class: "input-small", placeholder: "Bottle Id"%>
-
-              <label>Winery Name</label>  
-              <%= f.text_field :winery_name_cont, class: "input-small", placeholder: "Wine Name"%>
-
-              <label>Grape</label>
-              <%= f.text_field :grape_name_cont, class: "input-small", placeholder: "Grape"%>
-
-              <span class="search-dropdown">
-                <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'}, {class: "input-medium"} %>
-              </span>
+              <div class="row">
+                <div class="col-md-2">
+                  <label>Bottle Id</label>
+                  <%= f.text_field :bottle_id_eq, class: "input-small", placeholder: "Bottle Id"%>
+                </div>
+  
+                <div class="col-md-2">
+                  <label>Winery Name</label>  
+                  <%= f.text_field :winery_name_cont, class: "input-small", placeholder: "Wine Name"%>
+                </div>
+  
+                <div class="col-md-2">
+                <label>Grape</label>
+                <%= f.text_field :grape_name_cont, class: "input-small", placeholder: "Grape"%>
+                </div>
+  
+                <div class="search-dropdown col-md-6">
+                  <label>Grape Color (Red/White)</label>
+                  <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'}, {class: "input-medium"} %>
+                </div>
+              </div>
             </div>
           </div>                <!-- search options column1 size end -->
-          <div class="span2">   <!-- serach button column2 size start -->
-            <%= f.submit "Update List", class: "btn"%> 
+          <div class="col-md-2">   <!-- serach button column2 size start -->
+            <%= f.submit "Update List", class: "btn", id: "cellarListSearch"%> 
             <%= link_to  "Clear Search", bottles_path, class: "btn"%>
-            <!-- %= f.submit  "Clear Search", id: "clearSearch" % -->
           </div>                <!-- serach button column2 size end -->
         </div>                  <!-- search row1 end-->
 
-        <div class="row-fluid">
+        <div class="row">
           <!-- 2nd row in the well for the checkbox list of bottle types -->
-          <div class="span2 checkbox inline search-bottle-type-span">
+          <div>
             <span class="search-bottle-type-label"> Bottle Types </span>
           </div>
-          <div class="span8 checkbox inline search-bottle-type-span">
-            <% logger.debug "**** before setting params it is: #{params.inspect}"%>
+          <div class="span8 checkbox form-inline search-bottle-type">
             <% if params.has_key?(:q) %>
-              <% logger.debug "Looks like params HAS the hash key :q" %>
+              <% # When would this ever be set? This was probably before I was using AJAX %>
             <% else %>
-              <% logger.debug "Looks like params DOES NOT HAVE the hash key :q" %>
               <% params[:q] = {:bottle_type_name_in => []}%>
             <% end %>
-            <% logger.debug "**** after setting params it is: #{params.inspect}"%>
             <% BottleType.order(:display_order).pluck(:name).each do |xtype| %>
               <% xyz = params[:q][:bottle_type_name_in] %>
+              <% #Check to see if the bottle_type was included in the last search. %>
+              <% # if it was, set the checked variable to true, if not, set it to false %>
               <% if !xyz.nil? %>
                 <% checked = params[:q][:bottle_type_name_in].include?(xtype) %>
               <% else %>
                 <% checked = false %>
               <% end %>
-              <label class="search-checkbox-type" > <%= check_box_tag 'q[bottle_type_name_in][]', xtype, checked %><%= xtype %></label>
+              <div class="col-sm-1">
+                <label class="search-checkbox-type" > <%= check_box_tag 'q[bottle_type_name_in][]', xtype, checked %><%= xtype %></label>
+              </div>
             <% end %>
           </div>
           <!-- end span12 -->
         </div>
         <!-- end the 2nd row in the well -->
         
-        <div class="row-fluid">
+        <div class="row">
         	<div class="span6">
               Show Only Available Bottles 
               <%= f.check_box :available_true, class: "checkbox inline input-small search-query", checked: true %>
