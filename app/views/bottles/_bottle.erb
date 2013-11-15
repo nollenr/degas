@@ -1,8 +1,8 @@
 <!-- Display the detail for a single bottle -->
-<div class="row-fluid">              <!-- enclosing row start -->
-  <div class="span12">               <!-- enclosing row size start -->
-    <div class="row-fluid">          <!-- title row start-->
-      <div class="span5 offset1">            <!-- title column1 size start -->
+<div class="row">                    <!-- enclosing row start -->
+  <div class="col-md-12">            <!-- enclosing row size start -->
+    <div class="row">                <!-- title row start-->
+      <div class="col-md-5 col-md-offset-1">    <!-- title column1 size start -->
         <span class="bottle-title">  <!-- title column1 data start -->
           <%= bottle.vintage + " " + bottle.winery.try(:name) + " " %> 
         </span>
@@ -10,7 +10,7 @@
           <%= bottle.grape.try(:name) %>
         </span>                      <!-- title column1 data end -->
       </div>                         <!-- title column1 size end -->
-      <div class="span5 offset1">    <!-- title column2 size start -->
+      <div class="col-md-5 col-md-offset-1">    <!-- title column2 size start -->
       	<% if !bottle.is_for_rating_only %>
         <span class="bottle-title">  <!-- title column2 data start -->
         Bottle Id: <%= bottle.bottle_id %>
@@ -19,21 +19,21 @@
       </div>                         <!-- title column2 size end -->
     </div>                           <!-- title row end -->
     
-    <div class="row-fluid">          <!-- data row1 start -->
-      <div class="span5 offset1" >   <!-- column 1 data row start -->
-        <div><span class="muted">Bottle Type: </span><%= bottle.bottle_type.name %></div>
-        <div><span class="muted">Date Added: </span><%= bottle.date_added_to_cellar.try(:strftime, "%m/%d/%Y") %></div>
-        <div><span class="muted">Name: </span>     <%= bottle.name %></div>
-        <div><span class="muted">Vineyard: </span> <%= bottle.vineyard %></div>
-        <div><span class="muted">Price: </span>    <%= number_to_currency(bottle.price) %></div>
-        <div><span class="muted">Drink By: </span> <%= bottle.drink_by_year %></div>
+    <div class="row">          <!-- data row1 start -->
+      <div class="col-md-5 col-md-offset-1" >   <!-- column 1 data row start -->
+        <div><span class="text-muted">Bottle Type: </span><%= bottle.bottle_type.name %></div>
+        <div><span class="text-muted">Date Added: </span><%= bottle.date_added_to_cellar.try(:strftime, "%m/%d/%Y") %></div>
+        <div><span class="text-muted">Name: </span>     <%= bottle.name %></div>
+        <div><span class="text-muted">Vineyard: </span> <%= bottle.vineyard %></div>
+        <div><span class="text-muted">Price: </span>    <%= number_to_currency(bottle.price) %></div>
+        <div><span class="text-muted">Drink By: </span> <%= bottle.drink_by_year %></div>
         <div>
-          <span class="muted">Cellar Location: </span> <span id="<%= bottle.id.to_s + "cellarloc"%>"><%= bottle.cellar_location %></span>
+          <span class="text-muted">Cellar Location: </span> <span id="<%= bottle.id.to_s + "cellarloc"%>"><%= bottle.cellar_location %></span>
           <%= link_to "Edit Location", "#chgLoc"+bottle.id.to_s, data: {toggle: "modal"}  %>
         </div>
       </div>                         <!-- column 1 data row end -->
 
-      <div class="span5 offset1">            <!-- column 2 data row start -->
+      <div class="col-md-5 col-md-offset-1">            <!-- column 2 data row start -->
 
         <% if !bottle.is_for_rating_only %>
         <% if bottle.available %>
@@ -57,13 +57,13 @@
         </div>
       </div>                         <!-- column 2 data row end -->
     </div>                           <!-- data row1 end -->
-    <div class="row-fluid">          <!-- data row2 start -->
-      <div class="span8 offset1">    <!-- data row2 column1 start -->
-        <div><span class="muted">Notes:</span> <%= bottle.notes %></div>
+    <div class="row">          <!-- data row2 start -->
+      <div class="col-md-8 col-md-offset-1">    <!-- data row2 column1 start -->
+        <div><span class="text-muted">Notes:</span> <%= bottle.notes %></div>
       </div>                         <!-- data row2 column1 end -->
     </div>                           <!-- data row2 end -->
-    <div class="row-fluid">
-      <div class="span12 center">
+    <div class="row">
+      <div class="col-md-12 text-center">
         <%= link_to("Back to Top", {}, href: "#searchForm") %>
       </div>
     </div>
