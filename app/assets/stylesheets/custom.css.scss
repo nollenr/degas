@@ -1,7 +1,9 @@
 @import "bootstrap";
-/* No longer needed in 3.0.2.1
- * @import "bootstrap-responsive"; 
-*/
+
+/* ********************************************** */
+/* No longer needed in 3.0.2.1                    */
+/* @import "bootstrap-responsive";                */
+/* ********************************************** */
 
 /* ********************************************** */
 /* For starrating and thumbratings on all pages   */
@@ -49,6 +51,10 @@ img {
 
 .full-widthLayout {
   padding: 0 15px;
+}
+
+.jumbotron {
+  @include gradient-vertical(#241970, #432de1, 0%, 90%);
 }
 
 /* ********************************************** */
