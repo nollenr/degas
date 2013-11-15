@@ -1,0 +1,7 @@
+Color Gradients (v3)
+	http://stackoverflow.com/questions/13040765/how-to-call-bootstraps-less-gradient-mixins
+	http://stackoverflow.com/questions/13436379/rails-with-bootstrap-sass-how-do-you-use-mixins
+	Parameters to the gradient mixin are: start-color, end-color, start-percent, end-percent
+	body {
+	  @include gradient-vertical($white, #08c);
+	}

@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def sort_icon_chevron (column)
     if column == sort_column
-      sort_direction == "asc" ? "<i class=\"icon-chevron-up\"></i> " : "<i class=\"icon-chevron-down\"></i> "
+      sort_direction == "asc" ? "<span class=\"glyphicon glyphicon-chevron-up\"></span>" : "<span class=\"glyphicon glyphicon-chevron-down\"></span> "
     end
   end
 

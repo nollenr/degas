@@ -1,28 +1,38 @@
 <!-- Display the sort box and then display the details for each bottle -->
 <div id="bottle">
-  <div class="well well-small" >
-    <h2 class="search-title">Sort</h2>
-  
-    <div class="btn-toolbar">
-      <div class="btn-group">
-        <%= sortable_button "bottle_id",     "Bottle Id " %>
-        <%= sortable_button "cellar_location" %>
-        <%= sortable_button "wineries.name", "Winery " %>
-        <%= sortable_button "grapes.name",   "Grape " %>
-        <%= sortable_button "vintage" %>
-        <%= sortable_button "name" %>
-        <%= sortable_button "vineyard" %>
-        <%= sortable_button "drink_by_year", "Drink By Year" %>
-        <%= sortable_button "price" %>
-        <%= sortable_button "rating" %>
+  <div class="row">                         <!-- enclosing row 0 start -->
+    <div class="col-md-12">                 <!-- enclosing row size start -->
+      <div class="well well-sm" >
+        <h2 class="search-title">Sort</h2>
+      
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <%= sortable_button "bottle_id",     "Bottle Id " %>
+            <%= sortable_button "cellar_location" %>
+            <%= sortable_button "wineries.name", "Winery " %>
+            <%= sortable_button "grapes.name",   "Grape " %>
+            <%= sortable_button "vintage" %>
+            <%= sortable_button "name" %>
+            <%= sortable_button "vineyard" %>
+            <%= sortable_button "drink_by_year", "Drink By Year" %>
+            <%= sortable_button "price" %>
+            <%= sortable_button "rating" %>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </div>  
 
-  <% if @bottles.empty? %>
-    Search returned no results.  Change you search criteria, or add some bottles to your cellar.
-  <% else %>
-    <%= render @bottles %>
-  <% end %>
+    <% if @bottles.empty? %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-danger">
+            Search returned no results.  Change your search criteria, or add some bottles to your cellar.
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <%= render @bottles %>
+    <% end %>
 
 </div>
