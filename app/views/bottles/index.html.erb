@@ -19,12 +19,12 @@
       <%= search_form_for @search, html: {class: "search-form"}, remote: true do |f| %>
         <div class="row">
           <div class="col-md-10">
-            <%= render partial: "index_search_row1" %>
-            <!--%= render partial: "_index_search_row2" %-->
-            <!--%= render partial: "_index_search_row3" %-->
+            <%= render partial: "index_search_row1", locals: {f: f} %>
+            <%= render partial: "index_search_row2", locals: {f: f} %>
+            <%= render partial: "index_search_row3", locals: {f: f} %>
           </div>
           <div class="col-md-2">
-            
+            <%= render partial: "index_button_column", locals: {f: f} %>          
           </div>
         </div>
 

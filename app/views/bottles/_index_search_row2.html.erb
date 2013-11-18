@@ -1,0 +1,25 @@
+        <div class="row" id="cellarSearchBottleType">                 <!-- 2nd row in the well for the checkbox list of bottle types -->
+          <div class="col-md-12">
+            <div class="form-group">
+              <label> Bottle Types </label>
+              <div class="form-inline">
+                <% if params.has_key?(:q) %>
+                  <% # When would this ever be set? This was probably before I was using AJAX %>
+                <% else %>
+                  <% params[:q] = {:bottle_type_name_in => []}%>
+                <% end %>
+                <% BottleType.order(:display_order).pluck(:name).each do |xtype| %>
+                  <% xyz = params[:q][:bottle_type_name_in] %>
+                  <% #Check to see if the bottle_type was included in the last search. %>
+                  <% # if it was, set the checked variable to true, if not, set it to false %>
+                  <% if !xyz.nil? %>
+                    <% checked = params[:q][:bottle_type_name_in].include?(xtype) %>
+                  <% else %>
+                    <% checked = false %>
+                  <% end %>
+                  <label class="checkbox-inline" > <%= check_box_tag 'q[bottle_type_name_in][]', xtype, checked %><%= xtype %></label>
+                <% end %>
+              </div>                      <!-- end span12 -->
+            </div>                        <!-- end form group -->
+          </div>                          <!-- end the enclosing column -->
+        </div>                            <!-- end the 2nd row in the well -->

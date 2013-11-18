@@ -1,0 +1,21 @@
+            <div class="row">             <!-- bottle id row start -->
+              <div class="col-md-2">
+                <label>Bottle Id</label>
+                <%= f.text_field :bottle_id_eq, class: "form-control", placeholder: "Bottle Id"%>
+              </div>
+
+              <div class="col-md-2">
+                <label>Winery Name</label>
+                <%= f.text_field :winery_name_cont, class: "form-control", placeholder: "Wine Name"%>
+              </div>
+
+              <div class="col-md-2">
+                <label>Grape</label>
+                <%= f.text_field :grape_name_cont, class: "form-control", placeholder: "Grape"%>
+              </div>
+
+              <div class="search-dropdown col-md-3">
+                <label>Grape Color (Red/White)</label>
+                <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'}, {class: "form-control"} %>
+              </div>
+            </div>                        <!-- bottle id row end-->

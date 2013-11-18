@@ -1,0 +1,19 @@
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group">
+              <label>Other Search Options</label>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="checkbox-inline">
+                    <%= f.check_box :available_true, checked: true %>Show Only Available Bottles
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label class="checkbox-inline">
+                    <%= f.check_box :is_for_rating_only_true, checked: false%>Include Rating Only Bottles
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
