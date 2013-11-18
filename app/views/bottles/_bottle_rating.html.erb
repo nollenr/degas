@@ -1,7 +1,7 @@
-      <div class="row-fluid starRate rstarRate" id="<%= bottle.id %>ratingDiv">
-        <div class="span2">Rating:</div> 
+      <div class="row starRate rstarRate" id="<%= bottle.id %>ratingDiv">
+        <div class="col-md-2">Rating:</div> 
         <%= hidden_field_tag "stored_rating", bottle.rating, {id: bottle.id.to_s + "stored_rating", class: "storedRating"} %>
-        <div class="span6">
+        <div class="col-md-6">
           <ul>
             <li class="starRateli"><%= link_to "Give 1 Star", rate_bottle_path(bottle.id, rating: 1), method: :put, remote: :true %></li>
             <li class="starRateli"><%= link_to "Give 2 Stars", rate_bottle_path(bottle.id, rating: 2), method: :put, remote: :true %></li>
@@ -15,5 +15,5 @@
             <li class="starRateli"><%= link_to "Give 10 Stars", rate_bottle_path(bottle.id, rating: 10), method: :put, remote: :true %></li>
           </ul>
         </div>
-        <div class="span4 ratingText"></div>
+        <div class="col-md-4 ratingText"></div>
       </div>

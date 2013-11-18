@@ -1,11 +1,11 @@
-      <div class="row-fluid thumbRate rthumbRate" id="<%= bottle.id %>buyAgainDiv">
-        <div class="span5">Buy again at this price?</div> 
+      <div class="row thumbRate rthumbRate" id="<%= bottle.id %>buyAgainDiv">
+        <div class="col-md-5">Buy again at this price?</div> 
         <%= hidden_field_tag "stored_buy_again", bottle.buy_at_this_price, {id: bottle.id.to_s + "stored_buy_again", class: "stored_buy_again"} %>
-        <div class="span3">
+        <div class="col-md-3">
           <ul>
             <li class="thumbRateUp"><%= link_to "Yes", buy_again_bottle_path(bottle.id, buy_at_this_price: true), method: :put, remote: :true %></li>
             <li class="thumbRateDown"><%= link_to "No",  buy_again_bottle_path(bottle.id, buy_at_this_price: false), method: :put, remote: :true %></li>
           </ul>
         </div>
-        <div class="span3 thumbRateText"></div>
+        <div class="col-md-3 thumbRateText"></div>
       </div>

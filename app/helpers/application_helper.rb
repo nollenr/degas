@@ -3,12 +3,12 @@ module ApplicationHelper
   def sortable_button(column, title = nil)
     title ||= column.titleize
     # Add the chevron icon to the title if the column is being sorted.
-    title = title + (sort_icon_chevron(column) ? "  " + sort_icon_chevron(column): "")
+    title = title + (sort_icon_chevron(column) ? "  " + sort_icon_chevron(column): "") #add a space plus a chevron if this is a sort column, else add nothing.
     # check to see if the column passed in is the current sorted column
     # and if it is currently ascending, then make it descending
     # sort_column and sort_direction are methods in bottles_controller
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    link_to title.html_safe, params.merge(sort: column, direction: direction), remote: true, class: "btn btn-primary"
+    link_to title.html_safe, params.merge(sort: column, direction: direction), remote: true, class: "btn btn-primary" #this is the return value to the function call.
   end
 
   def sort_icon_chevron (column)

@@ -1,0 +1,33 @@
+<div id="<%= 'chgLoc'+bottle.id.to_s %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="<%= "chgLocModal"+bottle.id.to_s%>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden-"true">x</button>
+        <h3 id="<%= "chgLocModal"+bottle.id.to_s %>" >Change Location</h3>
+      </div>
+
+      <div class="modal-body">
+        <p>Bottle ID:  <%= bottle.bottle_id %></p>
+        <p>Current Location: <%= bottle.cellar_location %></p>
+        <%= simple_form_for :bottle, url: change_location_bottle_path(bottle.id), html: {id: "locChange"+bottle.id.to_s, method: "put", remote: true} do |f| %>
+          <%= f.input :cellar_location %>
+         <%= f.button :submit, class: "btn btn-large btn-primary" %>
+        <% end %>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true" id="<%= "closemodal" + bottle.id.to_s %>" >Close</button>
+    <!-- NEED TO CHANGE THE LINK_TO to perform a submit!
+         Which means the form may need an id
+         http://stackoverflow.com/questions/11645153/submit-form-using-link-to-in-rails
+         search for "submit form using link_to in rails
+      <%= link_to 'submit', "#", :onclick => "$('#form_id').submit()" %>
+      <%= link_to "Save Changes", change_location_bottle_path(bottle.id), method: :put, remote: true, class: "btn btn-primary", onclick: "$('#locChange67').submit()" %>
+    -->
+  </div>
+
+
+    </div> <!-- modal-content-->
+  </div>   <!-- modal-dialog -->
+</div>
