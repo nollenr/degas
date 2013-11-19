@@ -200,7 +200,7 @@ class BottlesController < ApplicationController
     @toc_by_grapes_group_by = ['grapes.color', 'grapes.name'] 
     @toc_grape_search_data_key = ['grape_color_eq', 'grape_name_cont']
     @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.color, grapes.name').count(:all, group: @toc_by_grapes_group_by).to_a
-    @toc_by_grapes_array = format_collapsable_list(@toc_by_grapes, true, @toc_grape_search_data_key)
+    @toc_by_grapes_hash = format_collapsable_list(@toc_by_grapes, true, @toc_grape_search_data_key)
   end
   
   def toc_by_winery
@@ -282,7 +282,7 @@ private
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
-  def create_array_from_hash (p_hash, p_array, p_level, p_average, p_createLink, p_searchParams)
+  def create_array_from_hash (p_hash, p_array, p_level, p_average, p_createLink, p_searchParams, p_parentTarget=nil)
     # p_hash is the recursive hash developed below
     # p_array is the new array.  each row will be a display.  children will be hidden
     # p_average is a flag indicating whether to average... if not, then it defaults to sum
@@ -306,10 +306,12 @@ private
         v_value = value[1]
       end
       v_key = key.nil? ? "Not Listed" : key
-      p_array.push({"display_value"=>v_key, "sum_or_avg_of_children" => v_value, "number_of_children"=> value[2], "level"=> p_level, "create_link"=>v_create_link, "search_param"=>v_searchParam })
+      v_dataTarget = "#" + v_key.gsub(" ","")
+      v_myID = p_parentTarget
+      p_array.push({"display_value"=>v_key, "sum_or_avg_of_children" => v_value, "number_of_children"=> value[2], "level"=> p_level, "create_link"=>v_create_link, "search_param"=>v_searchParam, "data_target"=>v_dataTarget, "myID"=>v_myID})
       if !value[0].empty?
         p_level = p_level + 1
-        p_array = create_array_from_hash(value[0], p_array, p_level, p_average, p_createLink, p_searchParams)
+        p_array = create_array_from_hash(value[0], p_array, p_level, p_average, p_createLink, p_searchParams, v_dataTarget)
         p_level = p_level -1
       end
     }
@@ -410,6 +412,7 @@ private
     if (p_average)
       a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
     end
+    return a_hash
     logger.debug("Hash after sorting: #{a_hash}")
     a_html = create_list_html(a_hash, "", p_create_link, p_data_key, 0, p_average)
     # logger.debug("HTML after completion #{a_html}")

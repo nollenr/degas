@@ -7,13 +7,7 @@
 <hr />
 
 <div class="toc" id="toc_by_grape">
-  <% @toc_by_grapes_array.each{ |a| %>
-    <div class="row">
-      <div class="col-md-<%= 11-a["level"]%> <% if a["level"]!=0 %> col-md-offset-<%= a["level"]%> <% end%>">
-        <%= a["display_value"] %>
-      </div>
-    </div>
-  <% } %>
+  <% create_recursive_html(@toc_by_grapes_hash) %>
 </div>
 
 
