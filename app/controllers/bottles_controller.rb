@@ -200,7 +200,7 @@ class BottlesController < ApplicationController
     @toc_by_grapes_group_by = ['grapes.color', 'grapes.name'] 
     @toc_grape_search_data_key = ['grape_color_eq', 'grape_name_cont']
     @toc_by_grapes = current_user.bottles.where(available: :TRUE).joins(:grape).order('grapes.color, grapes.name').count(:all, group: @toc_by_grapes_group_by).to_a
-    @toc_by_grapes_collapsable_list = format_collapsable_list(@toc_by_grapes, true, @toc_grape_search_data_key)
+    @toc_by_grapes_array = format_collapsable_list(@toc_by_grapes, true, @toc_grape_search_data_key)
   end
   
   def toc_by_winery
@@ -282,9 +282,43 @@ private
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
+  def create_array_from_hash (p_hash, p_array, p_level, p_average, p_createLink, p_searchParams)
+    # p_hash is the recursive hash developed below
+    # p_array is the new array.  each row will be a display.  children will be hidden
+    # p_average is a flag indicating whether to average... if not, then it defaults to sum
+    # p_createLink is a flag indicating whether or not to generate the info needed for an html link
+    # p_searchParams is an array used for generating the html link.  it provides the search key and the "display_value" is the search value
+    if p_createLink
+      v_searchParam = p_searchParams[p_level]
+    else
+      v_searchParam = nil
+    end
+    p_hash.each{|key, value|
+      # Determine if we can create a search link from this data
+      if (p_createLink && !key.nil? && !v_searchParam.nil?)
+        v_create_link=true
+      else
+        v_create_link=false
+      end      
+      if (p_average)
+        v_value = (value[1]/value[2]).round(1)
+      else
+        v_value = value[1]
+      end
+      v_key = key.nil? ? "Not Listed" : key
+      p_array.push({"display_value"=>v_key, "sum_or_avg_of_children" => v_value, "number_of_children"=> value[2], "level"=> p_level, "create_link"=>v_create_link, "search_param"=>v_searchParam })
+      if !value[0].empty?
+        p_level = p_level + 1
+        p_array = create_array_from_hash(value[0], p_array, p_level, p_average, p_createLink, p_searchParams)
+        p_level = p_level -1
+      end
+    }
+    return p_array
+  end
+
   def create_list_html(p_hash, p_html, p_create_link, p_data_key, p_level, p_average)
     v_data_key = p_data_key[p_level]
-    p_html = p_html + '<div class="row-fluid">'
+    p_html = p_html + '<div class="row">'
     p_html = p_html + '<ul>'
     p_hash.each{|key, value|
       p_html = p_html + '<li class = "collapse-li">'
@@ -300,7 +334,7 @@ private
         v_value = value[1]
       end
       # logger.debug("for v_key #{v_key} p_data_key[#{p_level.inspect}]= #{v_data_key.inspect}")
-      p_html = p_html + '<div class="span6 dataval">' + v_key + '</div> <div class="span5 text-right dataval">' + v_value.to_s + '</div>'
+      p_html = p_html + '<div class="col-md-6 dataval">' + v_key + '</div> <div class="col-md-5 text-right dataval">' + v_value.to_s + '</div>'
       if !value[0].empty?
         p_level = p_level + 1
         p_html = create_list_html(value[0], p_html, p_create_link, p_data_key, p_level, p_average)
@@ -356,7 +390,12 @@ private
         return p_hash
       else
         # New hash (key doesn't exist)
-        p_hash[v_key] = [process_array(p_array, {}, p_count, 0), p_count, 1] 
+        if (p_array.length == 0)
+          v_children = 0
+        else
+          v_children = 1
+        end
+        p_hash[v_key] = [process_array(p_array, {}, p_count, 0), p_count, v_children] 
         return p_hash         
       end
     end
@@ -371,10 +410,14 @@ private
     if (p_average)
       a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
     end
-    # logger.debug("Hash after sorting: #{a_hash}")
+    logger.debug("Hash after sorting: #{a_hash}")
     a_html = create_list_html(a_hash, "", p_create_link, p_data_key, 0, p_average)
     # logger.debug("HTML after completion #{a_html}")
-    return a_html
+
+    a_array = Array.new
+    a_array = create_array_from_hash(a_hash, a_array, 0, p_average, p_create_link, p_data_key)
+    logger.debug("array after completion #{a_array.inspect}")
+    return a_array
   end
 
 end
