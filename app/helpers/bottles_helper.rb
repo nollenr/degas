@@ -17,27 +17,37 @@ module BottlesHelper
     @temp ? true : false
   end
   
-  def level_0(p_hash)
-    html1 = content_tag(:button, content_tag(:span, "", class: "glyphicon glyphicon-plus"), class: "btn", type: "button", data: {toggle: "collapse", target: p_hash["data_target"]}) + p_hash["display_value"]
-    html1 = content_tag(:div, html1, class:"col-md-11")
-    html2 = content_tag(:div, p_hash["sum_or_avg_of_children"], class: "col-md-1")
-    concat content_tag(:div, html1 + html2, class: "row")
+  def class_config(p_level)
+    v_class = "col-md-" + (11-p_level).to_s
+    if p_level != 0
+      v_class += " col-md-offset-" + p_level.to_s
+    end
+    return v_class
   end
   
-  def level_1(p_hash)
-    html1 = content_tag(:div, p_hash["display_value"], class: "col-md-10 col-md-offset-1")
+  def level_0(p_hash)
+    # standlone html code for the topmost items of the expanding list
+    html1 = ""
+    if p_hash["number_of_children"] != 0
+      html1 = content_tag(:button, content_tag(:span, "", class: "glyphicon glyphicon-plus"), class: "btn", type: "button", data: {toggle: "collapse", target: p_hash["data_target"]})
+    end
+    html1 += p_hash["display_value"].html_safe
+    html1 = content_tag(:div, html1, class: class_config(p_hash["level"]))
     html2 = content_tag(:div, p_hash["sum_or_avg_of_children"], class: "col-md-1")
-    content_tag(:div, html1 + html2, class: "row")
+    concat content_tag(:div, html1 + html2, class: "row")
+    concat "\n".html_safe
   end
   
   def create_recursive_html(p_hash, p_level = 0, p_collapseID = nil)
     p_hash.each {|key, value|
-      # outter most (top) level
-      if p_level == 0
-        level_0({"display_value"=>key, "data_target"=>"#"+key, "sum_or_avg_of_children"=>value[1]})
+      level_0({"display_value"=>key, "data_target"=>"#" + key, "sum_or_avg_of_children"=>value[1], "level"=> p_level, "number_of_children"=>value[2]})
+      #wrap all children in an enclosing div
+      if !value[0].empty?
+        concat "<div id='#{key}' class='collapse'>\n".html_safe
+          create_recursive_html(value[0], p_level + 1, key)
+        concat "</div>\n".html_safe
       end
-    }
-
+    } #end of the p_hash.each loop
   end
 
 end
