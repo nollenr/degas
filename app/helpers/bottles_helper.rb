@@ -18,7 +18,11 @@ module BottlesHelper
   end
   
   def class_config(p_level)
-    v_class = "col-md-" + (11-p_level).to_s
+    v_class = "col-xs-" + (11-p_level).to_s
+    if p_level != 0
+      v_class += " col-xs-offset-" + p_level.to_s
+    end
+    v_class += " col-md-" + (11-p_level).to_s
     if p_level != 0
       v_class += " col-md-offset-" + p_level.to_s
     end
@@ -33,7 +37,7 @@ module BottlesHelper
     end
     html1 += p_hash["display_value"].html_safe
     html1 = content_tag(:div, html1, class: class_config(p_hash["level"]))
-    html2 = content_tag(:div, p_hash["sum_or_avg_of_children"], class: "col-md-1")
+    html2 = content_tag(:div, p_hash["sum_or_avg_of_children"], class: "col-xs-1 col-md-1")
     concat content_tag(:div, html1 + html2, class: "row")
     concat "\n".html_safe
   end

@@ -317,37 +317,6 @@ private
     }
     return p_array
   end
-
-  def create_list_html(p_hash, p_html, p_create_link, p_data_key, p_level, p_average)
-    v_data_key = p_data_key[p_level]
-    p_html = p_html + '<div class="row">'
-    p_html = p_html + '<ul>'
-    p_hash.each{|key, value|
-      p_html = p_html + '<li class = "collapse-li">'
-      if (p_create_link && !key.nil? && !v_data_key.nil?)
-        v_key = view_context.link_to key, bottles_path("q"=>{v_data_key=> key,"available_true"=>"1"})
-      else
-        v_key = key.nil? ? "Not Listed" : key
-      end
-      # If the data value is supposed to be an average, then do a divide
-      if (p_average)
-        v_value = (value[1]/value[2]).round(1)
-      else
-        v_value = value[1]
-      end
-      # logger.debug("for v_key #{v_key} p_data_key[#{p_level.inspect}]= #{v_data_key.inspect}")
-      p_html = p_html + '<div class="col-md-6 dataval">' + v_key + '</div> <div class="col-md-5 text-right dataval">' + v_value.to_s + '</div>'
-      if !value[0].empty?
-        p_level = p_level + 1
-        p_html = create_list_html(value[0], p_html, p_create_link, p_data_key, p_level, p_average)
-        p_level = p_level -1
-      end
-      p_html = p_html + '</li>'
-    }
-    p_html = p_html + '</ul>'
-    p_html = p_html + '</div>'
-    return p_html
-  end
   
   def process_array(p_array, p_hash, p_count, p_accum)
     # Build a nested list structure
@@ -413,14 +382,6 @@ private
       a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
     end
     return a_hash
-    logger.debug("Hash after sorting: #{a_hash}")
-    a_html = create_list_html(a_hash, "", p_create_link, p_data_key, 0, p_average)
-    # logger.debug("HTML after completion #{a_html}")
-
-    a_array = Array.new
-    a_array = create_array_from_hash(a_hash, a_array, 0, p_average, p_create_link, p_data_key)
-    logger.debug("array after completion #{a_array.inspect}")
-    return a_array
   end
 
 end
