@@ -7,7 +7,5 @@
 <hr />
 
 <div class="tableoc" id="toc_by_location">
-  <p class="lead">Cellar Contents By Location<p>
-  <!-- %= render partial: 'toc_by_location', collection: @toc_by_locations % -->
-  <%= @toc_by_locations_collapsable_list.html_safe %>
+  <% create_recursive_html(@toc_by_locations_hash) %>
 </div>

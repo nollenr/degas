@@ -214,7 +214,7 @@ class BottlesController < ApplicationController
     @toc_by_locations_group_by = ['wineries.country', 'wineries.location1', 'wineries.location2', 'wineries.location3', 'wineries.name']
     @toc_location_search_data_key = [nil, nil, nil, nil, 'winery_name_cont']
     @toc_by_locations = current_user.bottles.where(available: :TRUE).joins(:winery).order('wineries.country, wineries.location1, wineries.location2, wineries.location3, wineries.name').count(:all, group: @toc_by_locations_group_by).to_a    
-    @toc_by_locations_collapsable_list = format_collapsable_list(@toc_by_locations, true, @toc_location_search_data_key)
+    @toc_by_locations_hash = format_collapsable_list(@toc_by_locations, true, @toc_location_search_data_key)
   end
   
   def toc_by_bottle_type
@@ -317,8 +317,42 @@ private
     }
     return p_array
   end
+
+  def clean_and_prep_hash (p_hash, p_average, p_createLink, p_searchParams, p_level=0)
+    # if you want me to create a link, then I need the to know what the search  column (and condition) should be.
+    if p_createLink
+      v_searchParam = p_searchParams[p_level]
+    else
+      v_searchParam = nil
+    end
+    p_hash.each {|key, value|
+      # In order to create a link we need 3 things.  1st, we have to have been instructed to create the link.
+      # Second, we must have a key value to search with.  Third, we must have a search condition passed in.  
+      # If all of those conditions are met, then we can create the link.
+      if (p_createLink && !key.nil? && !v_searchParam.nil?)
+        v_create_link=true
+      else
+        v_create_link=false
+      end
+      # Next, we need to check if our values should be averages or not.  If they're averages, then we need to do a computation.      
+      if (p_average)
+        v_value_type = "average"
+        v_value = (value[1]/value[2]).round(1)
+      else
+        v_value_type = "count"
+        v_value = value[1]
+      end
+      # Clean up the keys.  Some of them can be "nil".  We'll substitute a value for the nil keys.
+      v_key = key.nil? ? "Not Listed" : key
+      # Add all these values as a new hash 
+      value.push({"create_link"=>v_create_link, "search_param"=> v_searchParam, "formatted_key"=>v_key, "row_value_type"=>v_value_type, "row_value"=>v_value})
+      if !value[0].empty?
+        clean_and_prep_hash(value[0], p_average, p_createLink, p_searchParams, p_level+1)
+      end
+    }
+  end
   
-  def process_array(p_array, p_hash, p_count, p_accum)
+  def process_array(p_array, p_hash, p_count, p_accum, p_rowID)
     # Build a nested list structure
     # pass in:
     #  1.  An array with 3 elements (usually created from the database)
@@ -357,7 +391,7 @@ private
       v_key = p_array.shift
       v_key = v_key == "" ? nil : v_key
       if p_hash.has_key?(v_key)
-        p_hash[v_key] = [process_array(p_array, p_hash[v_key][0], p_count, p_accum), p_hash[v_key][1] + p_count, p_hash[v_key][2] + 1]
+        p_hash[v_key] = [process_array(p_array, p_hash[v_key][0], p_count, p_accum, p_rowID), p_hash[v_key][1] + p_count, p_hash[v_key][2] + 1, p_rowID]
         return p_hash
       else
         # New hash (key doesn't exist)
@@ -366,7 +400,7 @@ private
         else
           v_children = 1
         end
-        p_hash[v_key] = [process_array(p_array, {}, p_count, 0), p_count, v_children] 
+        p_hash[v_key] = [process_array(p_array, {}, p_count, 0, p_rowID), p_count, v_children, p_rowID] 
         return p_hash         
       end
     end
@@ -374,13 +408,17 @@ private
   
   def format_collapsable_list(p_list, p_create_link, p_data_key, p_average=false)
     a_hash = {}
+    a_counter = 0
     p_list.each do |v_row|
-      a_hash = process_array(v_row[0], a_hash, v_row[1], 0)
+      a_counter += 1
+      a_hash = process_array(v_row[0], a_hash, v_row[1], 0, a_counter)
     end
     # logger.debug("Hash after completion: #{a_hash}")
     if (p_average)
       a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
     end
+    a_hash = clean_and_prep_hash(a_hash, p_average, p_create_link, p_data_key)
+    logger.debug "Hash after clean and prep... ready to be passed to the views.  #{a_hash}"
     return a_hash
   end
 

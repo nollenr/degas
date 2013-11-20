@@ -18,7 +18,7 @@ module BottlesHelper
   end
   
   def class_config(p_level)
-    v_class = "col-xs-" + (6-p_level).to_s
+    v_class = "col-xs-" + (7-p_level).to_s
     if p_level != 0
       v_class += " col-xs-offset-" + p_level.to_s
     end
@@ -42,13 +42,14 @@ module BottlesHelper
     concat "\n".html_safe
   end
   
-  def create_recursive_html(p_hash, p_level = 0, p_collapseID = nil)
+  def create_recursive_html(p_hash, p_level = 0)
     p_hash.each {|key, value|
-      level_0({"display_value"=>key, "data_target"=>"#" + key, "sum_or_avg_of_children"=>value[1], "level"=> p_level, "number_of_children"=>value[2]})
+      # data_target is the id to look for when collapsing a div.  to make a unique value, i took the rowID (value[3]) + "level" + the level numerical value
+      level_0({"display_value"=>value[4]["formatted_key"], "data_target"=>"#" + value[3].to_s + "level" + p_level.to_s, "sum_or_avg_of_children"=>value[1], "level"=> p_level, "number_of_children"=>value[2]})
       #wrap all children in an enclosing div
       if !value[0].empty?
-        concat "<div id='#{key}' class='collapse'>\n".html_safe
-          create_recursive_html(value[0], p_level + 1, key)
+        concat "<div id='#{value[3].to_s + "level" + p_level.to_s}' class='collapse'>\n".html_safe
+          create_recursive_html(value[0], p_level + 1)
         concat "</div>\n".html_safe
       end
     } #end of the p_hash.each loop
