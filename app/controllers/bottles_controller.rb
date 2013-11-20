@@ -418,7 +418,7 @@ private
       a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
     end
     a_hash = clean_and_prep_hash(a_hash, p_average, p_create_link, p_data_key)
-    logger.debug "Hash after clean and prep... ready to be passed to the views.  #{a_hash}"
+    # logger.debug "Hash after clean and prep... ready to be passed to the views.  #{a_hash}"
     return a_hash
   end
 

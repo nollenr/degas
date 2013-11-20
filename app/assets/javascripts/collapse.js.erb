@@ -1,4 +1,5 @@
 $(function() {
+  /* collapsing is now handled with Bootstrap CSS
   // Start off with everything hidden except for the outermost level.j
   // .hide() is a jQuery method
   $(".collapse-li").find(".collapse-li").hide();
@@ -14,24 +15,18 @@ $(function() {
       $(this).prepend('<div class="span1"></div>')
     }
   });
+  */
   
   // Add an event handler to each graphic to control the opening and closing of the list
-  $(".collapse-i").click(function() {
-    if ($(this).parent().parent(".collapse-li").find("ul").first().children("li").is(":hidden")) {
-      $(this).parent().parent(".collapse-li").find("i").first().removeClass("icon-plus").addClass("icon-minus");
-      $(this).parent().parent(".collapse-li").find("ul").first().children("li").show("slow");
-      // return false;
-    }
-    else {
-      // change this and all sub lists graphic to a "-" and hide them all
-      $(this).parent().parent().find(".collapse-li").slideUp("slow");
-      $(this).parent().parent().find("i").removeClass("icon-minus").addClass("icon-plus");
-      // return false;
-    }
+  $(".collapse-btn").click(function() {
+    console.log("Clicked on a collapse button!");
+    console.log($(this).children("span:first").toggleClass("glyphicon-chevron-down"));
+    console.log($(this).children("span:first").toggleClass("glyphicon-chevron-up"));
   });
+
   
   //Add an event handler to each row to create highlighting when hovered
-  $(".dataval").hover(
+  $(".dataline").hover(
     function() {
       $(this).siblings(".dataval").css('background-color', 'lightgray');
       $(this).css('background-color', 'lightgray');
