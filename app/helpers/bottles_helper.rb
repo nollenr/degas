@@ -18,7 +18,7 @@ module BottlesHelper
   end
   
   def class_config(p_level)
-    v_class = "col-xs-" + (11-p_level).to_s
+    v_class = "col-xs-" + (6-p_level).to_s
     if p_level != 0
       v_class += " col-xs-offset-" + p_level.to_s
     end
