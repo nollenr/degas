@@ -1,4 +1,4 @@
-<div class="hero-unit hero-unit-bottle-index">
+<div class="jumbotron">
   <h1>
   	<% if @bottle.is_for_rating_only %>
   		Add a Rating Only
@@ -9,82 +9,68 @@
     <% end %>
   </h1>
 </div>
+
 <% if @bottle.is_for_rating_only %>
-  <h1>Not for adding a bottle to your cellar</h1>
+  <div class="row"><div class="col-md-12"><h3>This is only to keep track of wines you like, not for adding bottles to your cellar.</h3></div></div>
 <% end %>
 
-<%= simple_form_for @bottle, html: {class: 'form-horizontal'} do |f| %>
-
-<div class="row">
-  <div class="span6 offset3">
-  <%= render 'shared/error_messages', object: f.object %>
-  </div>
-</div>
-
-<div class="row bottle-type-select">
-  <div class="span12">
-          <% BottleType.select("id, name").order(:display_order).each do |bottletype| %>
-            <% if bottletype.name == "Wine" %>
-              <label class="radio inline"> <%= f.radio_button :bottle_type_id, bottletype.id, :checked => true %> <%= bottletype.name %> </label>
-            <% else %>
-              <label class="radio inline"> <%= f.radio_button :bottle_type_id, bottletype.id %> <%= bottletype.name %> </label>
-            <% end %>
-          <% end %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="span6">
-  	  <%= f.hidden_field :is_for_rating_only %>
-  	  
-  	  <% unless @bottle.is_for_rating_only %>
-      <%= f.input :bottle_id_text, label: 'Bottle Identifier' %>
-
-      <%= f.input :date_added_to_cellar_text, label: 'Date Added to Cellar' %>
-
-      <%= f.input :cellar_location %>
-      <% end %>
-
-      <%= f.input :vintage, label: "Vintage (Year)" %>
-
-      <% unless @bottle.is_for_rating_only %>
-      <%= f.input :drink_by_year, label: "Drink By (Year)" %>
-      <% end %>
-
-      <%= f.input :name %>
-
-      <%= f.input :vineyard %>
-
-      <%= f.input :price %>
-
-      <%= f.input :grape_name, input_html: { data: { autocomplete_source: grapes_list_path } } %>
-      <!-- %= f.input :grape_id, collection: Grape.order("name"), selected: @bottle.grape_id  % -->
-
-      <%= f.input :winery_name, input_html: { data: { autocomplete_winery_source: wineries_list_path } } %>
-
-      <%= f.input :notes, label: 'Notes', :input_html => { :rows => 3 } %>
-
-      <% if !@bottle.id.blank? %>
-        <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
-        <%= f.input :rating, label: "Rating (1-10)"%>
-        <%= f.input :buy_at_this_price, as: :radio_buttons, item_wrapper_class: :inline, collection: [['true', :true], ['false', :false], ['undecided', ""]] %>
-      <% end %>
-      
-      <% if @bottle.is_for_rating_only %>
-        <% f.hidden_field :available, value: false %>
-        <%= f.input :rating, label: "Rating (1-10)" %>
-      <% end %>
-
-      <%= f.button :submit, label: "Create Bottle", class: "btn btn-large btn-primary" %>
-      <%= link_to "Cancel", bottles_path, class: 'btn btn-large' %>
-
-    <% end %>
-  </div>
-  <div class="span5 offset1">
-    <div class="float-image">
-      <%= image_tag "bottleBW.jpg", height: '230', width: '230' %>
+<%= simple_form_for @bottle, html: {class: 'form-horizontal'} do |f| %> 
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+    <%= render 'shared/error_messages', object: f.object %>
     </div>
   </div>
-</div>
-
+  
+  <div class="row bottle-type-select">
+    <div class="col-md-12">
+      <% BottleType.select("id, name").order(:display_order).each do |bottletype| %>
+        <% bottletype.name == "Wine" ? v_checked = true : v_checked = false %>
+        <label class="radio-inline"> <%= f.radio_button :bottle_type_id, bottletype.id, :checked => v_checked %> <%= bottletype.name %> </label>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-7">
+    	  <%= f.hidden_field :is_for_rating_only %>
+    	  
+    	  <% unless @bottle.is_for_rating_only %>
+          <%= f.input :bottle_id_text, label: 'Bottle Identifier' %>
+          <%= f.input :date_added_to_cellar_text, label: 'Date Added to Cellar' %>
+          <%= f.input :cellar_location %>
+        <% end %>
+  
+        <%= f.input :vintage, label: "Vintage (Year)" %>
+  
+        <% unless @bottle.is_for_rating_only %>
+          <%= f.input :drink_by_year, label: "Drink By (Year)" %>
+        <% end %>
+  
+        <%= f.input :name %>
+        <%= f.input :vineyard %>
+        <%= f.input :price %>
+        <%= f.input :grape_name, input_html: { data: { autocomplete_source: grapes_list_path } } %>
+        <%= f.input :winery_name, input_html: { data: { autocomplete_winery_source: wineries_list_path } } %>
+        <%= f.input :notes, label: 'Notes', :input_html => { :rows => 3 } %>
+  
+        <% if !@bottle.id.blank? %>
+          <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
+          <%= f.input :rating, label: "Rating (1-10)"%>
+          <%= f.input :buy_at_this_price, as: :radio_buttons, item_wrapper_class: :inline, collection: [['true', :true], ['false', :false], ['undecided', ""]] %>
+        <% end %>
+        
+        <% if @bottle.is_for_rating_only %>
+          <% f.hidden_field :available, value: false %>
+          <%= f.input :rating, label: "Rating (1-10)" %>
+        <% end %>
+  
+        <%= f.button :submit, label: "Create Bottle", class: "btn btn-large btn-primary" %>
+        <%= link_to "Cancel", bottles_path, class: 'btn btn-large' %>
+        
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <%= image_tag "bottleBW.jpg", height: '230', width: '230', class: "img-responsive" %>
+    </div>
+  </div>
+<% end %>
 
