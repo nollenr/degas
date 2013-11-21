@@ -48,7 +48,7 @@ module BottlesHelper
     md_total_length  = 8
     md_button_length = 1
     md_value_length  = 1
-    xs_total_length  = 6
+    xs_total_length  = 7
     xs_button_length = 1
     xs_value_length  = 1
 
@@ -57,16 +57,24 @@ module BottlesHelper
     
     # standlone html code for the topmost items of the expanding list
     html1 = "".html_safe
-    logger.debug("creating sibling 1")
-    # there are 3 inner html siblings html1:button, html2:display name, html3:value
-    # inner most html sibling 1: The button.  The button will be abesent if it has no children. Always offset for indentation.
+
+
+    ################################################################################################
+    # Button:                                                                                      #
+    # First item on the line is the button (to expand or reduce the list).  Create the button,     #
+    # and wrap it in the column html which has the column length plus the offset.                  #
+    ################################################################################################
     if p_hash["number_of_children"] != 0
       html1 = content_tag(:button, content_tag(:span, "", class: "glyphicon glyphicon-chevron-down"), class: "btn btn-default btn-xs collapse-btn", type: "button", data: {toggle: "collapse", target: p_hash["data_target"]})
     end
     # wrap html1 (the button sibling) in a column wrapper
     html1 = content_tag(:div, html1, class: v_class_definitions["col-xs-button"]+" " +v_class_definitions["col-xs-offset-display"]+" "+v_class_definitions["col-md-button"]+" "+v_class_definitions["col-md-offset-display"])
-    logger.debug("creating sibling 2")    
-    #create html2
+
+    ################################################################################################
+    # Display Text                                                                                 #
+    # The second item is the display text which may be a link.  Create the display text or link    #
+    # and wrap it in the column html.                                                              #
+    ################################################################################################
     if p_hash["create_link"]
       html2 = link_to p_hash["display_value"], bottles_path("q"=>{p_hash["search_param"]=>p_hash["display_value"], "available_true"=>"1"})
     else
@@ -74,17 +82,23 @@ module BottlesHelper
     end
     # wrap html2 (the display name sibling) in a column wrapper
     html2 = content_tag(:div, html2, class: v_class_definitions["col-xs-display"]+" "+v_class_definitions["col-md-display"])
-    logger.debug("creating sibling 3")    
+
+    ################################################################################################
+    # Value                                                                                        #
+    # The third item is the value.  Wrap the value in html, then wrap that in the column html.     #
+    ################################################################################################
     # wrap html3 (the value) in a column wrapper
     html3 = content_tag(:div, p_hash["sum_or_avg_of_children"], class: v_class_definitions["col-xs-value"]+" "+v_class_definitions["col-md-value"])
     
-    v_class="row dataline"
+    v_class="row dataline" #row is for bootstrap
     if p_hash["number_of_children"] != 0
       v_class += " collapse-space"
     end
-    
-    # this is the outter most wrapper for an item.  It wraps the two columns above in a row wrapper.  
-    # if this row has children, make it collapsable by adding the "collapse-space class(above)"   
+
+    ################################################################################################    
+    # this is the outter most wrapper for an item.  It wraps columns above in a row wrapper.       #  
+    # if this row has children, make it collapsable by adding the "collapse-space class(above)"    #
+    ################################################################################################
     concat content_tag(:div, html1 + html2 + html3, class: v_class)
     concat "\n".html_safe
   end
