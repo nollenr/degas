@@ -243,7 +243,7 @@ class BottlesController < ApplicationController
     # logger.debug("unformatted winery ratings.................................. #{@rating_by_winery_unformatted.inspect}")
     @rating_by_winery = @rating_by_winery_unformatted.map{|x| [[x[0][0], x[0][1] + " " + x[0][3] + " " + x[0][4], x[0][2]], x[1]]}
     # logger.debug("formatted winery ratings .................................... #{@rating_by_winery.inspect}")
-    @rating_collapsable_list = format_collapsable_list(@rating_by_winery, true, ["winery_name_cont",nil,nil], true)
+    @rating_collapsable_hash = format_collapsable_list(@rating_by_winery, true, ["winery_name_cont",nil,nil], true)
   end
 
   def grape_ratings
