@@ -207,7 +207,7 @@ class BottlesController < ApplicationController
     @toc_by_wineries_group_by = ['wineries.name', 'grapes.name']
     @toc_winery_search_data_key = ['winery_name_cont', 'grape_name_cont']
     @toc_by_wineries = current_user.bottles.where(available: :TRUE).joins(:winery, :grape).order('wineries.name, grapes.name').count('*', group: @toc_by_wineries_group_by).to_a
-    @toc_by_wineries_collapsable_list = format_collapsable_list(@toc_by_wineries, true, @toc_winery_search_data_key)
+    @toc_by_wineries_hash = format_collapsable_list(@toc_by_wineries, true, @toc_winery_search_data_key)
   end
   
   def toc_by_location
@@ -220,7 +220,8 @@ class BottlesController < ApplicationController
   def toc_by_bottle_type
     @toc_by_bottle_types_group_by = ['bottle_types.name']
     @toc_bottle_type_search_data_key = ['bottle_type_name_in']
-    @toc_by_bottle_types = current_user.bottles.where(available: :TRUE).joins(:bottle_type).order('bottle_types.name').count(:all, group: @toc_by_bottle_types_group_by).to_a 
+    @toc_by_bottle_types = current_user.bottles.where(available: :TRUE).joins(:bottle_type).order('bottle_types.name').count(:all, group: @toc_by_bottle_types_group_by).to_a
+    @toc_by_bottle_types_hash = format_collapsable_list(@toc_by_bottle_types, true, @toc_by_bottle_types) 
   end
   
   def ratings
@@ -411,7 +412,14 @@ private
     a_counter = 0
     p_list.each do |v_row|
       a_counter += 1
-      a_hash = process_array(v_row[0], a_hash, v_row[1], 0, a_counter)
+      # In a "single level" the sql will not return an array for the data (bottle_types)
+      # we get this [["Late Havest", 6]] instead of [[["Red", "Merlot"],6]]
+      if v_row[0].kind_of?(Array)
+        v_array = v_row[0]
+      else
+        v_array = [v_row[0]]
+      end
+      a_hash = process_array(v_array, a_hash, v_row[1], 0, a_counter)
     end
     # logger.debug("Hash after completion: #{a_hash}")
     if (p_average)
