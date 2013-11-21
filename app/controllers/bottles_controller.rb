@@ -282,42 +282,6 @@ private
     # sanitize the direction... only 2 directions should be allowed
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
-  
-  def create_array_from_hash (p_hash, p_array, p_level, p_average, p_createLink, p_searchParams, p_parentTarget=nil)
-    # p_hash is the recursive hash developed below
-    # p_array is the new array.  each row will be a display.  children will be hidden
-    # p_average is a flag indicating whether to average... if not, then it defaults to sum
-    # p_createLink is a flag indicating whether or not to generate the info needed for an html link
-    # p_searchParams is an array used for generating the html link.  it provides the search key and the "display_value" is the search value
-    if p_createLink
-      v_searchParam = p_searchParams[p_level]
-    else
-      v_searchParam = nil
-    end
-    p_hash.each{|key, value|
-      # Determine if we can create a search link from this data
-      if (p_createLink && !key.nil? && !v_searchParam.nil?)
-        v_create_link=true
-      else
-        v_create_link=false
-      end      
-      if (p_average)
-        v_value = (value[1]/value[2]).round(1)
-      else
-        v_value = value[1]
-      end
-      v_key = key.nil? ? "Not Listed" : key
-      v_dataTarget = "#" + v_key.gsub(" ","")
-      v_myID = p_parentTarget
-      p_array.push({"display_value"=>v_key, "sum_or_avg_of_children" => v_value, "number_of_children"=> value[2], "level"=> p_level, "create_link"=>v_create_link, "search_param"=>v_searchParam, "data_target"=>v_dataTarget, "myID"=>v_myID})
-      if !value[0].empty?
-        p_level = p_level + 1
-        p_array = create_array_from_hash(value[0], p_array, p_level, p_average, p_createLink, p_searchParams, v_dataTarget)
-        p_level = p_level -1
-      end
-    }
-    return p_array
-  end
 
   def clean_and_prep_hash (p_hash, p_average, p_createLink, p_searchParams, p_level=0)
     # if you want me to create a link, then I need the to know what the search  column (and condition) should be.
@@ -338,7 +302,11 @@ private
       # Next, we need to check if our values should be averages or not.  If they're averages, then we need to do a computation.      
       if (p_average)
         v_value_type = "average"
-        v_value = (value[1]/value[2]).round(1)
+        if value[2] ==0 #i.e. there are no children, then no computation is necessary (this is the average)
+          v_value = value[1]
+        else
+          v_value = ((value[1]/value[2]).round(1))
+        end
       else
         v_value_type = "count"
         v_value = value[1]
@@ -425,8 +393,9 @@ private
     if (p_average)
       a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
     end
+    logger.debug "Hash BEFORE clean and prep... ready to be passed to the views.  #{a_hash}"
     a_hash = clean_and_prep_hash(a_hash, p_average, p_create_link, p_data_key)
-    # logger.debug "Hash after clean and prep... ready to be passed to the views.  #{a_hash}"
+    logger.debug "Hash AFTER clean and prep... ready to be passed to the views.  #{a_hash}"
     return a_hash
   end
 

@@ -53,7 +53,7 @@ module BottlesHelper
     xs_value_length  = 1
 
     v_class_definitions = get_class_definitions(p_hash["level"], md_total_length, md_button_length, md_value_length, xs_total_length, xs_button_length, xs_value_length)
-    logger.debug("#{v_class_definitions.inspect}")
+    # logger.debug("#{v_class_definitions.inspect}")
     
     # standlone html code for the topmost items of the expanding list
     html1 = "".html_safe
