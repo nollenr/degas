@@ -1,10 +1,10 @@
 <% provide(:title, 'Home') %>
-<div class="row-fluid">
-  <div class="span12">
-    <div class="hero-unit homeHero">
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron">
       <h1>Welcome To Degas</h1>
-      <div class="row-fluid">
-        <div class="span3">
+      <div class="row">
+        <div class="col-md-3">
           <dl>
             <dt>Discover</dt>
             <dd><div class="muted"><small>the contents of your cellar.</small></div></dd>
@@ -14,7 +14,7 @@
             <dd><div class="muted"><small>your tasting experiences.</small></div></dd>
           </dl>
         </div> <!-- span6 (column1)-->
-        <div class="span9">
+        <div class="col-md-9">
           <div id="mediaarea">
             <p><%= image_tag "winepourmid.png", id: 'winepourpic' %></p>
           </div>
@@ -27,8 +27,8 @@
 
 <br>
 
-<div class="row-fluid">
-  <div class="span12">
+<div class="row">
+  <div class="col-md-12">
     <div class="text-center">
         <% if signed_in? %>
           <%= link_to "View Your Cellar List", bottles_path, class: "btn btn-large btn-primary" %>
