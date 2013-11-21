@@ -1,15 +1,11 @@
 <% provide(:title, 'Grape Ratings') %>
 
-<div class="hero-unit hero-unit-bottle-index">
+<div class="jumbotron">
   <h1>Rating by Grape</h1>
 </div>
 
 <hr />
 
 <div class="ratings" id="rating_by_winery">
-  <p class="lead">Ratings By Grapes</p>
-
-    
-  <%= @rating_collapsable_list.html_safe %>
-
+  <% create_recursive_html(@rating_collapsable_hash) %>
 </div>

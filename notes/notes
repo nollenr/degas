@@ -196,7 +196,7 @@ To Do:1:Update the help page.  Make sure it all makes sense!  Can I include pict
         do those get stored?  Assets?
 To Do:1:Fix the wineries... make it clear what each part really is... then allow searching.
 To Do:1:Allow searches on wine names.
-To Do:0:Bootstrap 3 / Responsive Completed: Bottles (cellar list, tocgrapes, tocwineries, tocbottletypes, toclocations, ratingbybottle, )
+To Do:0:Bootstrap 3 / Responsive Completed: Bottles (cellar list, tocgrapes, tocwineries, tocbottletypes, toclocations, ratingbybottle, ratingbywinery, ratingbygrape)
 
 ================ Next Version Ideas ====================================
 submit bug reports
