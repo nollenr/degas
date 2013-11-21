@@ -48,7 +48,7 @@ module BottlesHelper
     md_total_length  = 8
     md_button_length = 1
     md_value_length  = 1
-    xs_total_length  = 7
+    xs_total_length  = 8
     xs_button_length = 1
     xs_value_length  = 1
 
