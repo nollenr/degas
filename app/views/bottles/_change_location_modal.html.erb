@@ -11,8 +11,8 @@
         <p>Bottle ID:  <%= bottle.bottle_id %></p>
         <p>Current Location: <%= bottle.cellar_location %></p>
         <%= simple_form_for :bottle, url: change_location_bottle_path(bottle.id), html: {id: "locChange"+bottle.id.to_s, method: "put", remote: true} do |f| %>
-          <%= f.input :cellar_location %>
-         <%= f.button :submit, class: "btn btn-large btn-primary" %>
+          <%= f.input :cellar_location, input_html: {size: 20} %>
+          <%= f.button :submit, class: "btn btn-large btn-primary" %>
         <% end %>
       </div>
 
@@ -25,7 +25,7 @@
       <%= link_to 'submit', "#", :onclick => "$('#form_id').submit()" %>
       <%= link_to "Save Changes", change_location_bottle_path(bottle.id), method: :put, remote: true, class: "btn btn-primary", onclick: "$('#locChange67').submit()" %>
     -->
-  </div>
+      </div>
 
 
     </div> <!-- modal-content-->
