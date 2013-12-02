@@ -55,6 +55,7 @@ img {
 
 .jumbotron {
   @include gradient-vertical(#241970, #432de1, 0%, 90%);
+  color: white;
 }
 
 /* ********************************************** */

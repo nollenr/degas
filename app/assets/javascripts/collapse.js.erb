@@ -19,9 +19,9 @@ $(function() {
   
   // Add an event handler to each graphic to control the opening and closing of the list
   $(".collapse-btn").click(function() {
-    console.log("Clicked on a collapse button!");
-    console.log($(this).children("span:first").toggleClass("glyphicon-chevron-down"));
-    console.log($(this).children("span:first").toggleClass("glyphicon-chevron-up"));
+    // console.log("Clicked on a collapse button!");
+    $(this).children("span:first").toggleClass("glyphicon-chevron-down");
+    $(this).children("span:first").toggleClass("glyphicon-chevron-up");
   });
 
   
