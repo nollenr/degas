@@ -19,3 +19,13 @@
                 <%= f.collection_select :grape_color_eq, Grape.select(:color).uniq, :color, :color, {include_blank: 'Wine Color'}, {class: "form-control"} %>
               </div>
             </div>                        <!-- bottle id row end-->
+            <div class="row" id="searchFieldsRow2">
+              <div class="col-md-2">
+                <label>Wine Name</label>
+                <%= f.text_field :name_cont, class: "form-control", placeholder: "Wine Name"%>
+              </div>
+              <div class="col-md-4">
+                <label>Notes</label>
+                <%= f.text_field :notes_cont, class: "form-control", placeholder: "Notes"%>
+              </div>
+            </div>

@@ -3,22 +3,35 @@
   <div class="row">                         <!-- enclosing row 0 start -->
     <div class="col-md-12">                 <!-- enclosing row size start -->
       <div class="well well-sm" >
-        <h2 class="search-title">Sort</h2>
-      
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <%= sortable_button "bottle_id",     "Bottle Id " %>
-            <%= sortable_button "cellar_location" %>
-            <%= sortable_button "wineries.name", "Winery " %>
-            <%= sortable_button "grapes.name",   "Grape " %>
-            <%= sortable_button "vintage" %>
-            <%= sortable_button "name" %>
-            <%= sortable_button "vineyard" %>
-            <%= sortable_button "drink_by_year", "Drink By Year" %>
-            <%= sortable_button "price" %>
-            <%= sortable_button "rating" %>
+        
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="search-title">
+              Sort
+              <%= content_tag(:button, content_tag(:span, "", class: "glyphicon glyphicon-chevron-down"), class: "btn btn-default btn-xs collapse-btn", type: "button", data: {toggle: "collapse", target: "#cellarSortBar"}) %>
+            </h2>
           </div>
         </div>
+      
+        <div class="row collapse" id="cellarSortBar">
+          <div class="col-md-12">
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <%= sortable_button "bottle_id",     "Bottle Id " %>
+                <%= sortable_button "cellar_location" %>
+                <%= sortable_button "wineries.name", "Winery " %>
+                <%= sortable_button "grapes.name",   "Grape " %>
+                <%= sortable_button "vintage" %>
+                <%= sortable_button "name" %>
+                <%= sortable_button "vineyard" %>
+                <%= sortable_button "drink_by_year", "Drink By Year" %>
+                <%= sortable_button "price" %>
+                <%= sortable_button "rating" %>
+              </div>
+            </div> <!-- End btn-toolbar-->
+          </div>
+        </div>
+
       </div>
     </div>
   </div>  
