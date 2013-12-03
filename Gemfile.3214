@@ -32,6 +32,7 @@ end
 gem 'jquery-rails', '3.0.4'
 gem 'jquery-ui-rails', '4.0.5'
 # gem 'will_paginate', '3.0.3'
+gem 'kaminari', '0.15.0'
 gem 'faker', '1.1.2'
 gem 'ransack', '0.7.2'
 

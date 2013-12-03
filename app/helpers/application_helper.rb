@@ -8,7 +8,7 @@ module ApplicationHelper
     # and if it is currently ascending, then make it descending
     # sort_column and sort_direction are methods in bottles_controller
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    link_to title.html_safe, params.merge(sort: column, direction: direction), remote: true, class: "btn btn-primary" #this is the return value to the function call.
+    link_to title.html_safe, params.merge(sort: column, direction: direction, page: nil), remote: true, class: "btn btn-primary" #this is the return value to the function call.
   end
 
   def sort_icon_chevron (column)

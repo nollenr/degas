@@ -18,13 +18,20 @@
         <div class="col-md-12">
           <h2>
             Search
-            <%= content_tag(:button, content_tag(:span, "", class: "glyphicon glyphicon-chevron-down"), class: "btn btn-default btn-xs collapse-btn", type: "button", data: {toggle: "collapse", target: "#cellarSearchForm"}) %>
+            <% if params[:q] %>
+              <% buttonClass = "glyphicon glyphicon-chevron-up"%>
+              <% collapseClass = "collapse in"%>
+            <% else %>
+              <% buttonClass = "glyphicon glyphicon-chevron-down"%>
+              <% collapseClass = "collapse"%>
+            <% end %>
+            <%= content_tag(:button, content_tag(:span, "", class: buttonClass), class: "btn btn-default btn-xs collapse-btn", type: "button", data: {toggle: "collapse", target: "#cellarSearchForm"}) %>
           </h2>
         </div>
       </div>
 
       <%= search_form_for @search, html: {class: "search-form"}, remote: true do |f| %>
-        <div class="row collapse" id="cellarSearchForm">
+        <div class="row <%= collapseClass %>" id="cellarSearchForm">
           <div class="col-md-10">
             <%= render partial: "index_search_row1", locals: {f: f} %>
             <%= render partial: "index_search_row2", locals: {f: f} %>

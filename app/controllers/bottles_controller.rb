@@ -111,6 +111,7 @@ class BottlesController < ApplicationController
     # Checking if the hash key exists, not the value
     @bottles = @bottles.where(available: true) unless params[:q] && params[:q][:available_true]
     # logger.debug("********************** #{@bottles.inspect}")
+    @bottles = @bottles.page(params[:page]).per(30)
 
     respond_to do |format|
       format.html #index.html.erb
