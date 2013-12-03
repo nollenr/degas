@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <%= search_form_for @search, html: {class: "search-form"}, remote: true do |f| %>
+      <%= search_form_for @search, html: {class: "search-form"} do |f| %>
         <div class="row <%= collapseClass %>" id="cellarSearchForm">
           <div class="col-md-10">
             <%= render partial: "index_search_row1", locals: {f: f} %>
