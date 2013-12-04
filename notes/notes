@@ -144,16 +144,24 @@ Done:   Layout: Move the "wine color" ddlb up to the previous line
 Done:  :The cvs download is a little incorrect b/c the headers for the fk are added before
         the "value_to" executes to find all the values for the keys.  Maybe pull out the
         headers, find the attributes, then add the header values to the string.
+Done :1:Version number on "about".  Is there a way to increment that automatically? And to add that
+        here with the "done" message so those can be kept in sync with the GIT commit/push?
+        Need to do this so that the released version is recognizable.  How can I track these
+        changes related to the version?  Go back and update after the commit?  Then I've
+        got uncommitted changes.  Or does all of this have to go in the change request?
 Done:  :Un-consuming a bottle (via edit)
 Done:  :Add Foreign key constraint to users!!
 Done:  :Show available only as the default.
 Done:  :Add multi-bottles at once by using a "-" in the bottle id
 Done:  :Should the bottle ID be a text field?  NO.  This will need to be an integer... like a primary key
+Done:  :Clear search button.  Resets all of the search fields and does a search.
 Done:  :Home page should have a "you're already signed in"... if this isn't
         you, sign out/login
 Done:  :Index page - if no results are returned set a message to the user to 
         make the functionality clearer.
-Done :0:Bootstrap 3 / Responsive 
+Done: 0:Bootstrap 3 / Responsive 
+Done: 1:Allow searches on wine names.
+Done: 1:Allow searches on notes.
 Cancel :Should folks be able to load new wineries/grapes on demand?  That would mean
         default values for not null columns like "color" for grapes.  If not, then
         how do I restrict them on the entry form?   Maybe grapes and wineries should
@@ -162,6 +170,8 @@ Cancel :Should folks be able to load new wineries/grapes on demand?  That would 
         to force a selection from the autoselect.
         Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
         A great example is the wine I just purchased from Ljubljana.
+
+
 
 To Do: :Flash a consume... so the user sees the status change.
 Hold:  :Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
@@ -187,17 +197,9 @@ To Do: :Location of winery/bottle... I may have a winery in Walla Walla (US/Wash
         model?
 To Do: :Tasting notes on "consume"
 To Do: :Hints about using the date added field (today, last Thursday, etc)
-To Do: :Clear search button.  Resets all of the search fields and does a search.
-To Do:1:Version number on "about".  Is there a way to increment that automatically? And to add that
-        here with the "done" message so those can be kept in sync with the GIT commit/push?
-        Need to do this so that the released version is recognizable.  How can I track these
-        changes related to the version?  Go back and update after the commit?  Then I've
-        got uncommitted changes.  Or does all of this have to go in the change request?
 To Do:1:Update the help page.  Make sure it all makes sense!  Can I include pictures?  Where
         do those get stored?  Assets?
 To Do:1:Fix the wineries... make it clear what each part really is... then allow searching.
-To Do:1:Allow searches on wine names.
-To Do:1:Allow searches on notes.
 
 ================ Next Version Ideas ====================================
 submit bug reports

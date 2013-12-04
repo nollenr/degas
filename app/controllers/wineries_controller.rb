@@ -12,6 +12,7 @@ class WineriesController < ApplicationController
       # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
       # logger.debug "************************** Index #{@query}"
       @wineries = @search.result.order(:name)
+      @wineries = @wineries.page(params[:page]).per(30)
 
     respond_to do |format|
       format.html # index.html.erb
