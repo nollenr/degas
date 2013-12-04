@@ -159,9 +159,12 @@ Done:  :Home page should have a "you're already signed in"... if this isn't
         you, sign out/login
 Done:  :Index page - if no results are returned set a message to the user to 
         make the functionality clearer.
+Done: 9:Pretty everything up.  Maybe make the sort direction buttons a la 
+        "http://bootstrapdocs.com/v2.0.4/docs/base-css.html" at the bottom.
 Done: 0:Bootstrap 3 / Responsive 
 Done: 1:Allow searches on wine names.
 Done: 1:Allow searches on notes.
+Done: 7:Validations of bottles... uniqueness, etc.
 Cancel :Should folks be able to load new wineries/grapes on demand?  That would mean
         default values for not null columns like "color" for grapes.  If not, then
         how do I restrict them on the entry form?   Maybe grapes and wineries should
@@ -170,21 +173,15 @@ Cancel :Should folks be able to load new wineries/grapes on demand?  That would 
         to force a selection from the autoselect.
         Can't add a new winery on the fly.  That might be okay for grapes... but probably not wineries.
         A great example is the wine I just purchased from Ljubljana.
-
-
-
-To Do: :Flash a consume... so the user sees the status change.
-Hold:  :Enter a message on the confirm consume pop-up... like date consumed and a note.  I may undo the
-        Ajax consume function and go to a page to update the date/message when consuming... then go back
-        to the index page.  What would that user experience be like?  Would that make adding a pop-up 
-        later easier?  It think so.  Also... can the wine be rated at the same time?
-To Do:9:Pretty everything up.  Maybe make the sort direction buttons a la 
-        "http://bootstrapdocs.com/v2.0.4/docs/base-css.html" at the bottom.
-To Do:8:Should cellar locations be a look-up that I can add to... for instance: "12th Shelf - Left"
+Cancel :Flash a consume... so the user sees the status change.  The fact that the consume message is changed
+        should be enough info for the user.
+Cancel :Should cellar locations be a look-up that I can add to... for instance: "12th Shelf - Left"
         might be a look-up, but "refridgerator" might be something I want to use even tho
         it isn't in the lookup.
-To Do:7:Validations of bottles... uniqueness, etc.
-To Do: :Deploy with SSL (see 7.4.4 of the Hartl book).
+
+
+To Do:0:Enter a message on the confirm consume pop-up... like date consumed and a note. Add
+        rating at the same time in the same pop-up.
 To Do:9:bottle controller index method has a bunch of unnecessary de-bugging
         stuff that should be cleaned up.
 To Do: :approved user bit... do I want to use that?  How?  What do I message
