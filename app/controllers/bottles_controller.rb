@@ -99,7 +99,7 @@ class BottlesController < ApplicationController
   end
 
   def index
-    logger.debug "*****************   Bottle Controller Index: #{params.inspect}"
+    # logger.debug "*****************   Bottle Controller Index: #{params.inspect}"
     @search = current_user.bottles.includes(:bottle_type, :winery, :grape).search(params[:q])
     # This was a huge mistake and a mis-comprehension regarding active record.
     # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
@@ -135,7 +135,7 @@ class BottlesController < ApplicationController
     @bottle = current_user.bottles.find_by_id(params[:id])
     @bottle.cellar_location = params[:bottle][:cellar_location]
     @bottle.save
-    logger.debug "Change Location *************************** #{params.inspect}"
+    # logger.debug "Change Location *************************** #{params.inspect}"
     respond_to do |format|
       format.js   #change_location.js.erb
     end
@@ -264,7 +264,7 @@ class BottlesController < ApplicationController
   end
   
   def buy_again   
-    logger.debug "buy_again edit: **************************** #{params.inspect}"
+    # logger.debug "buy_again edit: **************************** #{params.inspect}"
     bottle = current_user.bottles.update(params[:id], buy_at_this_price: params[:buy_at_this_price])
     bottle.save
     @bottle = current_user.bottles.find_by_id(params[:id])
@@ -394,9 +394,9 @@ private
     if (p_average)
       a_hash = a_hash.sort_by{|k,v| (v[1]/v[2])}.reverse
     end
-    logger.debug "Hash BEFORE clean and prep... ready to be passed to the views.  #{a_hash}"
+    # logger.debug "Hash BEFORE clean and prep... ready to be passed to the views.  #{a_hash}"
     a_hash = clean_and_prep_hash(a_hash, p_average, p_create_link, p_data_key)
-    logger.debug "Hash AFTER clean and prep... ready to be passed to the views.  #{a_hash}"
+    # logger.debug "Hash AFTER clean and prep... ready to be passed to the views.  #{a_hash}"
     return a_hash
   end
 

@@ -33,3 +33,12 @@ Tag
   git describe --long --dirty --abbrev=10 --tags
    --gives me something like 7.2.0.Final-447-g65bf4ef2d4
    --which is 447 commits after the 7.2.0.Final tag and the first 10 digest of the global SHA-1 at the current HEAD are "65bf4ef2d4"
+
+Test Merge
+	I don't think there is a way of simulating what will happen until you try the merge. However, if you make sure that the 
+	output of git status is empty before you do the merge, it is quite safe to just go ahead and try it. If you get conflicts, 
+	you can immediately get back to the state you were at before with:
+
+	git reset --merge
+
+	
