@@ -18,24 +18,21 @@
         <div class="col-md-12">
           <h2>
             Search
-            <% if params[:q] %>
-              <% buttonClass = "glyphicon glyphicon-chevron-up"%>
-              <% collapseClass = "collapse in"%>
-            <% else %>
-              <% buttonClass = "glyphicon glyphicon-chevron-down"%>
-              <% collapseClass = "collapse"%>
-            <% end %>
-            <%= content_tag(:button, content_tag(:span, "", class: buttonClass), class: "btn btn-default btn-xs collapse-btn", type: "button", data: {toggle: "collapse", target: "#cellarSearchForm"}) %>
+            <%# setting up variables I'll need to determine the status of the search box (collapsed or expanded)%>
+            <%# as well as default search options %>
+            <% search_box_hash = search_box_helper(params[:q]) %>
+            <%= content_tag(:button, content_tag(:span, "", class: search_box_hash[:buttonClass]), class: "btn btn-default btn-xs collapse-btn", type: "button", data: {toggle: "collapse", target: "#cellarSearchForm"}) %>
           </h2>
         </div>
       </div>
 
       <%= search_form_for @search, html: {class: "search-form"} do |f| %>
-        <div class="row <%= collapseClass %>" id="cellarSearchForm">
+        <div class="row <%= search_box_hash[:collapseClass] %>" id="cellarSearchForm">
           <div class="col-md-10">
             <%= render partial: "index_search_row1", locals: {f: f} %>
             <%= render partial: "index_search_row2", locals: {f: f} %>
-            <%= render partial: "index_search_row3", locals: {f: f} %>
+            <% available_radio = search_box_hash[:available_radio] %>
+            <%= render partial: "index_search_row3", locals: {f: f, available_radio: available_radio} %>
           </div>
           <div class="col-md-2">
             <%= render partial: "index_button_column", locals: {f: f} %>          

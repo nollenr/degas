@@ -99,18 +99,44 @@ class BottlesController < ApplicationController
   end
 
   def index
-    # logger.debug "*****************   Bottle Controller Index: #{params.inspect}"
+    logger.debug "*****************   Bottle Controller Index Params (Before): #{params.inspect}"
+    # If there is no search hash in the params hash, add one and set available_true (this is the default search condition)
+    if !params.has_key?("q")
+      params["q"] = {available_true: "1"}
+    end
+    # If there is a search hash (:q), then check if available_eq is part of the hash
+    # If so, the if if available_eq is true, then only show available bottles, false only consumed bottles
+    # if available_eq is nil, then remove it becuase we want to show all bottles (i.e. not a search condition)
+    if params.has_key?("q") && params["q"].has_key?("available_eq")
+      available_setting = params["q"]["available_eq"]
+      params["q"].delete("available_eq")
+      if available_setting!="nil"
+        logger.debug "value of the :avilable_eq key is: #{available_setting.inspect}"
+        case available_setting
+        when "true"
+          params["q"]["available_true"] = "1"
+          params["q"].delete("is_for_rating_only_true")
+          params["q"]["is_for_rating_only_false"]="1"
+        when "false"
+          params["q"]["available_false"] = "1"
+          params["q"].delete("is_for_rating_only_true")
+          params["q"]["is_for_rating_only_false"]="1"
+        when "ratingOnly"
+          params["q"]["is_for_rating_only_true"] = "1"
+        end
+      end
+    end
+    logger.debug "*****************   Bottle Controller Index Params (After): #{params.inspect}"
     @search = current_user.bottles.includes(:bottle_type, :winery, :grape).search(params[:q])
+    @search_sql = @search.result.to_sql
+    logger.debug "*****************   SQL is: #{@search_sql.inspect}"
     # This was a huge mistake and a mis-comprehension regarding active record.
     # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
     # To see what the query looks like add the following 2 lines
     # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
     # logger.debug "************************** Index #{@query}"
     @bottles = @search.result.order(sort_column + " " + sort_direction)
-    @bottles = @bottles.where(is_for_rating_only: false) unless params[:q] && params[:q][:is_for_rating_only_true]
-    # Checking if the hash key exists, not the value
-    @bottles = @bottles.where(available: true) unless params[:q] && params[:q][:available_true]
-    # logger.debug("********************** #{@bottles.inspect}")
+    # @bottles = @bottles.where(is_for_rating_only: false) unless params[:q] && params[:q][:is_for_rating_only_true]
     @bottles = @bottles.page(params[:page]).per(15)
 
     respond_to do |format|
