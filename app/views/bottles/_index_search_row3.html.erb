@@ -3,25 +3,25 @@
             <div class="form-group">
               <label>Other Search Options</label>
               <div class="row">
-                <div class="col-md-6">
-                  <div class="radio">
-                    <label>
-                      <%= f.radio_button :available_eq, "true", checked: available_radio=="available"?true:false %>Show Only Available Bottles
+                <div class="col-md-12"> Which bottles?
+                  <div class="radio-inline">
+                    <label class="radio-inline">
+                      <%= f.radio_button :available_eq, "true", checked: available_radio=="available"?true:false %>Available Only
                     </label>
                   </div>
-                  <div class="radio">
-                    <label>
-                      <%= f.radio_button :available_eq, "false", checked: available_radio=="consumed"?true:false %>Show Only Consumed Bottles
+                  <div class="radio-inline">
+                    <label class="radio-inline">
+                      <%= f.radio_button :available_eq, "false", checked: available_radio=="consumed"?true:false %>Consumed Only
                     </label>
                   </div>
-                  <div class="radio">
-                    <label>
-                      <%= f.radio_button :available_eq, "nil", checked: available_radio=="all"?true:false %>Show All Bottles
+                  <div class="radio-inline">
+                    <label class="radio-inline">
+                      <%= f.radio_button :available_eq, "nil", checked: available_radio=="all"?true:false %>All
                     </label>
                   </div> 
-                  <div class="radio">
-                    <label>
-                      <%= f.radio_button :available_eq, "ratingOnly", checked: available_radio=="ratingOnly"?true:false %>Show Rating Only Bottles
+                  <div class="radio-inline">
+                    <label class="radio-inline">
+                      <%= f.radio_button :available_eq, "ratingOnly", checked: available_radio=="ratingOnly"?true:false %>Rating Only
                     </label>
                   </div>                
                 </div>
