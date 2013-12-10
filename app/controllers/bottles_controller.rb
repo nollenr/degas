@@ -169,7 +169,7 @@ class BottlesController < ApplicationController
 
   def consume
     # @bottleid = params[:id].to_s
-    bottle = current_user.bottles.update(params[:id], available: :false)
+    bottle = current_user.bottles.update(params[:id], available: :false, notes: params[:bottle][:notes])
     bottle.save
     @bottle = current_user.bottles.find_by_id(params[:id])
     flash.now[:success] = "You have successfully consumed bottle " + bottle.bottle_id.to_s + "!"
