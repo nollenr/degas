@@ -4,11 +4,10 @@
       
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden-"true">x</button>
-        <h3 id="<%= "consumebtlModal"+bottle.id.to_s %>" >Change Location</h3>
+        <h3 id="<%= "consumebtlModal"+bottle.id.to_s %>" >Consume Bottle <%= bottle.bottle_id%>?</h3>
       </div>                      <!-- modal header -->
       
       <div class="modal-body">
-        <p>Bottle ID:  <%= bottle.bottle_id %></p>
         <%= simple_form_for :bottle, url: consume_bottle_path(bottle.id), html: {id: "availChange"+bottle.id.to_s, method: "put", remote: true} do |f| %>
           <%= f.input :notes, as: :text, label: 'Notes', autofocus: true, required: false, input_html: { cols: 25, rows: 3, value: bottle.notes } %>
           <%= f.button :submit, class: "btn btn-large btn-primary" %>
