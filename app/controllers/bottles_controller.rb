@@ -248,7 +248,7 @@ class BottlesController < ApplicationController
     @toc_by_bottle_types_group_by = ['bottle_types.name']
     @toc_bottle_type_search_data_key = ['bottle_type_name_in']
     @toc_by_bottle_types = current_user.bottles.where(available: :TRUE).joins(:bottle_type).order('bottle_types.name').count(:all, group: @toc_by_bottle_types_group_by).to_a
-    @toc_by_bottle_types_hash = format_collapsable_list(@toc_by_bottle_types, true, @toc_by_bottle_types) 
+    @toc_by_bottle_types_hash = format_collapsable_list(@toc_by_bottle_types, true, @toc_bottle_type_search_data_key) 
   end
   
   def ratings
