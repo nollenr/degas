@@ -51,7 +51,7 @@
         <% end %>
         <%= 
           if @bottles_previous_ratings.has_key?([bottle.winery.name, bottle.grape.name, bottle.vintage, bottle.vineyard, bottle.name])
-            content_tag(:div, content_tag(:div, "Average Bottle Rating: " + @bottles_previous_ratings[[bottle.winery.name, bottle.grape.name, bottle.vintage, bottle.vineyard, bottle.name]].round(1).to_s, class: "col-md-12 muted"), class: "row")
+            content_tag(:div, content_tag(:div, content_tag(:span, "Average Bottle Rating: ", class: "text-muted") + content_tag(:span, @bottles_previous_ratings[[bottle.winery.name, bottle.grape.name, bottle.vintage, bottle.vineyard, bottle.name]].round(1).to_s), class: "col-md-12"), class: "row")
           end
         %>
         <%= render partial: "bottle_rating", locals: {bottle: bottle} %>
