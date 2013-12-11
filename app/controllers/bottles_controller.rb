@@ -99,46 +99,62 @@ class BottlesController < ApplicationController
   end
 
   def index
-    logger.debug "*****************   Bottle Controller Index Params (Before): #{params.inspect}"
-    # If there is no search hash in the params hash, add one and set available_true (this is the default search condition)
-    if !params.has_key?("q")
-      params["q"] = {available_true: "1"}
-    end
-    # If there is a search hash (:q), then check if available_eq is part of the hash
-    # If so, the if if available_eq is true, then only show available bottles, false only consumed bottles
-    # if available_eq is nil, then remove it becuase we want to show all bottles (i.e. not a search condition)
-    if params.has_key?("q") && params["q"].has_key?("available_eq")
-      available_setting = params["q"]["available_eq"]
-      params["q"].delete("available_eq")
-      if available_setting!="nil"
-        logger.debug "*****************   Bottle Controller (During) value of the :avilable_eq key is: #{available_setting.inspect}"
-        case available_setting
-        when "available"
-          params["q"]["available_true"] = "1"
-          params["q"].delete("is_for_rating_only_true")
-          params["q"]["is_for_rating_only_false"]="1"
-        when "consumed"
-          params["q"]["available_false"] = "1"
-          params["q"].delete("is_for_rating_only_true")
-          params["q"]["is_for_rating_only_false"]="1"
-        when "ratingOnly"
-          params["q"]["is_for_rating_only_true"] = "1"
+    #logger.debug "*****************   Bottle Controller Index Params (Before): #{params.inspect}"
+    # Reset the search parameters hash
+        # If there is no search hash in the params hash, add one and set available_true (this is the default search condition)
+        if !params.has_key?("q")
+          params["q"] = {available_true: "1"}
         end
-      end
-    end
-    logger.debug "*****************   Bottle Controller Index Params (After): #{params.inspect}"
+        # If there is a search hash (:q), then check if available_eq is part of the hash
+        # If so, then if available_eq is "true"available"", then only show available bottles, false only consumed bottles
+        # if available_eq is "all", then remove it becuase we want to show all bottles (i.e. not a search condition)
+        if params.has_key?("q") && params["q"].has_key?("available_eq")
+          available_setting = params["q"]["available_eq"]
+          params["q"].delete("available_eq")
+          if available_setting!="all"
+            #logger.debug "*****************   Bottle Controller (During) value of the :avilable_eq key is: #{available_setting.inspect}"
+            case available_setting
+            when "available"
+              params["q"]["available_true"] = "1"
+              params["q"].delete("is_for_rating_only_true")
+              params["q"]["is_for_rating_only_false"]="1"
+            when "consumed"
+              params["q"]["available_false"] = "1"
+              params["q"].delete("is_for_rating_only_true")
+              params["q"]["is_for_rating_only_false"]="1"
+            when "ratingOnly"
+              params["q"]["is_for_rating_only_true"] = "1"
+            end
+          end
+        end
+        #logger.debug "*****************   Bottle Controller Index Params (After): #{params.inspect}"
     @search = current_user.bottles.includes(:bottle_type, :winery, :grape).search(params[:q])
     @search_sql = @search.result.to_sql
-    logger.debug "*****************   SQL is: #{@search_sql.inspect}"
+    #logger.debug "*****************   SQL is: #{@search_sql.inspect}"
     # This was a huge mistake and a mis-comprehension regarding active record.
     # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)
     # To see what the query looks like add the following 2 lines
     # @query =   @search.result.order(sort_column + " " + sort_direction).to_sql
     # logger.debug "************************** Index #{@query}"
     @bottles = @search.result.order(sort_column + " " + sort_direction)
+    # get the average rating for bottles in this list, but be careful, we want all ratings, not
+    # just those for available, consumed or rating only, but we do want to limit the list to
+    # what the user is searching for to try and reduce the query results as much as possible.
+        params.has_key?("q") ? @search_params=params[:q].clone : @search_params = {}
+        @search_params.delete("is_for_rating_only_true")
+        @search_params.delete("is_for_rating_only_false")
+        @search_params.delete("available_true")
+        @search_params.delete("available_false")
+        @rating_list_group_by = ['wineries.name', 'grapes.name', 'vintage', 'vineyard', 'bottles.name']
+        @bottles_previous_ratings = current_user.bottles.joins(:grape, :winery).where("rating is not null").search(@search_params)
+        @bottles_previous_ratings = @bottles_previous_ratings.result
+        @bottles_previous_ratings = @bottles_previous_ratings.average("rating", group: @rating_list_group_by)
+        @bottles_previous_ratings = @bottles_previous_ratings
+        #logger.debug "*****************   bottles #{@bottles.inspect}"
+        #logger.debug "*****************   bottles_previous_ratings #{@bottles_previous_ratings.inspect}"
     # @bottles = @bottles.where(is_for_rating_only: false) unless params[:q] && params[:q][:is_for_rating_only_true]
     @bottles = @bottles.page(params[:page]).per(15)
-    logger.debug "*****************   End of controller"
+    #logger.debug "*****************   End of controller"
     respond_to do |format|
       format.html #index.html.erb
       format.js   #index.js.erb

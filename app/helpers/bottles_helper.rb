@@ -131,24 +131,24 @@ module BottlesHelper
     # Here's something to remember.  When pagination is used (i.e. the user hits a "page number button"), 
     # 
     #if search_params is nil, then set it to the empty hash
-    logger.debug "*****************   Starting helper"    
-    logger.debug "*****************   search_params initialization (Before): #{search_params.inspect}"
+    #logger.debug "*****************   Starting helper"    
+    #logger.debug "*****************   search_params initialization (Before): #{search_params.inspect}"
     search_params ||= {}
-    logger.debug "*****************   search_params initialization (After): #{search_params.inspect}"
+    #logger.debug "*****************   search_params initialization (After): #{search_params.inspect}"
     search_box_hash = Hash.new
-    logger.debug "*****************   search_params full params (Before): #{params.inspect}"
+    #logger.debug "*****************   search_params full params (Before): #{params.inspect}"
     case
     when search_params.empty?
       # params[:q] is empty (showing all bottles)
       # this is the easiest case... it means I'm showing all bottles, and the search list needs to be expanded
-      logger.debug "*****************   search_params - case is Showing all bottles"
+      #logger.debug "*****************   search_params - case is Showing all bottles"
       search_box_hash[:buttonClass] = "glyphicon glyphicon-chevron-up"
       search_box_hash[:collapseClass] = "collapse in"
       search_box_hash[:available_radio] = "all"
     when search_params.has_key?("available_false")
       # another easy case... it means I'm showing only consumed bottles, and the search list needs to be expanded
       # showing only consumed bottles
-      logger.debug "*****************   search_params - case is Showing only consumed bottles"
+      #logger.debug "*****************   search_params - case is Showing only consumed bottles"
       search_box_hash[:buttonClass] = "glyphicon glyphicon-chevron-up"
       search_box_hash[:collapseClass] = "collapse in"
       search_box_hash[:available_radio] = "consumed"
@@ -156,28 +156,28 @@ module BottlesHelper
       # I have to check all other search options to be sure they're empty
       # showing only available bottles (default behavior)
       if all_params_empty?(search_params)
-        logger.debug "*****************   search_params - case is Showing only available bottles -- default behavior -- no need to show search panel"
+        #logger.debug "*****************   search_params - case is Showing only available bottles -- default behavior -- no need to show search panel"
         search_box_hash[:buttonClass] = "glyphicon glyphicon-chevron-down"
         search_box_hash[:collapseClass] = "collapse"
         search_box_hash[:available_radio] = "available"
       else
-        logger.debug "*****************   search_params - case is Showing only available bottles but other params are non-empty"
+        #logger.debug "*****************   search_params - case is Showing only available bottles but other params are non-empty"
         search_box_hash[:buttonClass] = "glyphicon glyphicon-chevron-up"
         search_box_hash[:collapseClass] = "collapse in"
         search_box_hash[:available_radio] = "available"
       end
     when search_params.has_key?("is_for_rating_only_true")
-      logger.debug "*****************   search_params - case is Showing rating only bottles."
+      #logger.debug "*****************   search_params - case is Showing rating only bottles."
       search_box_hash[:buttonClass] = "glyphicon glyphicon-chevron-up"
       search_box_hash[:collapseClass] = "collapse in"
       search_box_hash[:available_radio] = "ratingOnly"
     else
-      logger.debug "*****************   search_params - case is All search params are empty -- I must be showing all bottles -- same as first case"
+      #logger.debug "*****************   search_params - case is All search params are empty -- I must be showing all bottles -- same as first case"
       search_box_hash[:buttonClass] = "glyphicon glyphicon-chevron-up"
       search_box_hash[:collapseClass] = "collapse in"
       search_box_hash[:available_radio] = "all"
     end
-    logger.debug "*****************   search_params full params  (After): #{params.inspect} and search_box_hash #{search_box_hash.inspect}"
+    #logger.debug "*****************   search_params full params  (After): #{params.inspect} and search_box_hash #{search_box_hash.inspect}"
     return search_box_hash
   end
 
