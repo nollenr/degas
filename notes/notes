@@ -191,7 +191,13 @@ Cancel :Location of winery/bottle... I may have a winery in Walla Walla (US/Wash
         Oregon Pinots... what level do I want to track the location?  Maybe make a locations
         model?
 
-
+To Do: :If there are ratings for a bottle in the cellar, that "average" rating should
+        be displayed along with the wine (kinda the reverse of the ratings page -- where
+        the number of bottles in the cellar is displayed along with a link.
+To Do: :Make the site work for beers, etc.  Can everything change dynamically?  So are there
+        "types" and then "sub-types"?  Do I have to tell it what I want to use.  Set a 
+        default for the user, but let them switch to any other "site" (like I usually want
+        to use the wine site, but I can go to the beer/whiskey-bourbon-rye/vodka)?  
 To Do: :List grape color on bottles
 To Do: :Hints about using the date added field (today, last Thursday, etc)
 To Do:1:Update the help page.  Make sure it all makes sense!  Can I include pictures?  Where
