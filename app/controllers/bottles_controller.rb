@@ -111,13 +111,13 @@ class BottlesController < ApplicationController
       available_setting = params["q"]["available_eq"]
       params["q"].delete("available_eq")
       if available_setting!="nil"
-        logger.debug "value of the :avilable_eq key is: #{available_setting.inspect}"
+        logger.debug "*****************   Bottle Controller (During) value of the :avilable_eq key is: #{available_setting.inspect}"
         case available_setting
-        when "true"
+        when "available"
           params["q"]["available_true"] = "1"
           params["q"].delete("is_for_rating_only_true")
           params["q"]["is_for_rating_only_false"]="1"
-        when "false"
+        when "consumed"
           params["q"]["available_false"] = "1"
           params["q"].delete("is_for_rating_only_true")
           params["q"]["is_for_rating_only_false"]="1"
@@ -138,7 +138,7 @@ class BottlesController < ApplicationController
     @bottles = @search.result.order(sort_column + " " + sort_direction)
     # @bottles = @bottles.where(is_for_rating_only: false) unless params[:q] && params[:q][:is_for_rating_only_true]
     @bottles = @bottles.page(params[:page]).per(15)
-
+    logger.debug "*****************   End of controller"
     respond_to do |format|
       format.html #index.html.erb
       format.js   #index.js.erb

@@ -6,17 +6,17 @@
                 <div class="col-md-12"> Which bottles?
                   <div class="radio-inline">
                     <label class="radio-inline">
-                      <%= f.radio_button :available_eq, "true", checked: available_radio=="available"?true:false %>Available Only
+                      <%= f.radio_button :available_eq, "available", checked: available_radio=="available"?true:false %>Available Only
                     </label>
                   </div>
                   <div class="radio-inline">
                     <label class="radio-inline">
-                      <%= f.radio_button :available_eq, "false", checked: available_radio=="consumed"?true:false %>Consumed Only
+                      <%= f.radio_button :available_eq, "consumed", checked: available_radio=="consumed"?true:false %>Consumed Only
                     </label>
                   </div>
                   <div class="radio-inline">
                     <label class="radio-inline">
-                      <%= f.radio_button :available_eq, "nil", checked: available_radio=="all"?true:false %>All
+                      <%= f.radio_button :available_eq, "all", checked: available_radio=="all"?true:false %>All
                     </label>
                   </div> 
                   <div class="radio-inline">
