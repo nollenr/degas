@@ -123,7 +123,7 @@ module BottlesHelper
     temp_hash.delete("available_true")
     temp_hash.delete("available_false")
     temp_hash.delete_if{ |key, value| value.empty? }
-    logger.debug("*****************   checking if all params are empty: #{temp_hash.inspect} length: #{temp_hash.length}")
+    #logger.debug("*****************   checking if all params are empty: #{temp_hash.inspect} length: #{temp_hash.length}")
     return temp_hash.empty? ? true : false
   end
   
