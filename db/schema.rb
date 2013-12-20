@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911152917) do
+ActiveRecord::Schema.define(:version => 20131220231901) do
+
+  create_table "availability_change_reason_lookups", :force => true do |t|
+    t.string   "reason",     :limit => 50, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
 
   create_table "bottle_types", :force => true do |t|
     t.string   "name",          :limit => 30, :null => false
@@ -23,31 +29,36 @@ ActiveRecord::Schema.define(:version => 20130911152917) do
   add_index "bottle_types", ["name"], :name => "index_bottle_types_on_name", :unique => true
 
   create_table "bottles", :force => true do |t|
-    t.integer  "bottle_id",                                                                                  :null => false
-    t.integer  "grape_id",                                                                                   :null => false
-    t.datetime "created_at",                                                                                 :null => false
-    t.datetime "updated_at",                                                                                 :null => false
-    t.boolean  "available",                                                               :default => true,  :null => false
+    t.integer  "bottle_id",                                                                                    :null => false
+    t.integer  "grape_id",                                                                                     :null => false
+    t.datetime "created_at",                                                                                   :null => false
+    t.datetime "updated_at",                                                                                   :null => false
+    t.boolean  "available",                                                                 :default => true,  :null => false
     t.datetime "availability_change_date"
     t.string   "availability_change_message"
     t.integer  "winery_id"
-    t.string   "vintage",                     :limit => 4
-    t.string   "drink_by_year",               :limit => 4
+    t.string   "vintage",                       :limit => 4
+    t.string   "drink_by_year",                 :limit => 4
     t.string   "vineyard"
     t.string   "name"
-    t.string   "cellar_location",             :limit => 30
-    t.decimal  "price",                                     :precision => 8, :scale => 2
-    t.integer  "user_id",                                                                                    :null => false
+    t.string   "cellar_location",               :limit => 30
+    t.decimal  "price",                                       :precision => 8, :scale => 2
+    t.integer  "user_id",                                                                                      :null => false
     t.integer  "rating"
-    t.integer  "bottle_type_id",                                                                             :null => false
+    t.integer  "bottle_type_id",                                                                               :null => false
     t.datetime "date_added_to_cellar"
     t.text     "notes"
-    t.boolean  "is_for_rating_only",                                                      :default => false, :null => false
+    t.boolean  "is_for_rating_only",                                                        :default => false, :null => false
     t.boolean  "buy_at_this_price"
+    t.integer  "availability_change_reason_id"
   end
 
+  add_index "bottles", ["bottle_id"], :name => "index_bottles_on_bottle_id"
   add_index "bottles", ["grape_id"], :name => "index_bottles_on_grape_id"
+  add_index "bottles", ["id"], :name => "index_bottles_on_id", :unique => true
   add_index "bottles", ["user_id", "bottle_id"], :name => "index_bottles_on_user_id_and_bottle_id", :unique => true
+  add_index "bottles", ["user_id", "id"], :name => "index_bottles_on_user_id_and_id", :unique => true
+  add_index "bottles", ["winery_id"], :name => "index_bottles_on_winery_id"
 
   create_table "grapes", :force => true do |t|
     t.string   "name",        :limit => 100, :null => false
