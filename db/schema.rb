@@ -11,13 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131220231901) do
+ActiveRecord::Schema.define(:version => 20131223153021) do
 
   create_table "availability_change_reason_lookups", :force => true do |t|
     t.string   "reason",     :limit => 50, :null => false
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
+
+  add_index "availability_change_reason_lookups", ["reason"], :name => "index_availability_change_reason_lookups_on_reason", :unique => true
 
   create_table "bottle_types", :force => true do |t|
     t.string   "name",          :limit => 30, :null => false

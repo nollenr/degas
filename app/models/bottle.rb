@@ -48,7 +48,7 @@ class Bottle < ActiveRecord::Base
     :cellar_location, :vintage, :drink_by_year, :name, :vineyard, 
     :grape_name, :winery_name, :price, :rating, :bottle_type_id, 
     :date_added_to_cellar_text, :notes, :confirmed, :is_for_rating_only,
-    :buy_at_this_price
+    :buy_at_this_price, :availability_change_reason_id
 
   #This creates the setter (writer)... correct?
   attr_writer :date_added_to_cellar_text 
