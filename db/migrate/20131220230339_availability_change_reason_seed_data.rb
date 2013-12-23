@@ -1,9 +1,9 @@
 class AvailabilityChangeReasonSeedData < ActiveRecord::Migration
   def up
-    AvailabilityChangeReasonLookup.create(reason: "Drank")
-    AvailabilityChangeReasonLookup.create(reason: "Spoiled")
-    AvailabilityChangeReasonLookup.create(reason: "Gift")
-    AvailabilityChangeReasonLookup.create(reason: "Other")
+    AvailabilityChangeReasonLookup.create(reason: "Consumed", display_order: 10)
+    AvailabilityChangeReasonLookup.create(reason: "Spoiled", display_order: 20)
+    AvailabilityChangeReasonLookup.create(reason: "Gift", display_order: 30)
+    AvailabilityChangeReasonLookup.create(reason: "Other", display_order: 40)
   end
 
   def down

@@ -10,6 +10,14 @@
       <div class="modal-body">
         <%= simple_form_for :bottle, url: consume_bottle_path(bottle.id), html: {id: "availChange"+bottle.id.to_s, method: "put", remote: true} do |f| %>
           <%= f.input :notes, as: :text, label: 'Notes', autofocus: true, required: false, input_html: { cols: 25, rows: 3, value: bottle.notes } %>
+          <!-- %= f.input :availability_change_reason_id, as: :radio_buttons, item_wrapper_class: :inline, collection: AvailabilityChangeReasonLookup, label_method: :reason, value_method: :id % -->
+          <!-- %= f.collection_radio_buttons :availability_change_reason_id, [[true, 'Yes'] ,[false, 'No']], :first, :last % -->
+          <hr />
+          <div class="row">
+            <%= content_tag(:span, content_tag(:strong, "Disposition Reason"), class: "col-md-10") %>
+            <%= f.collection_radio_buttons :availability_change_reason_id, @availability_change_reasons, :id, :reason, options = {checked: 1, item_wrapper_class: "col-xs-7 col-xs-offset-1"} %>
+          </div>
+          <hr />
           <%= f.button :submit, class: "btn btn-large btn-primary" %>
         <% end %>
       </div>

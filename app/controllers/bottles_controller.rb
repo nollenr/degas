@@ -155,6 +155,9 @@ class BottlesController < ApplicationController
     # @bottles = @bottles.where(is_for_rating_only: false) unless params[:q] && params[:q][:is_for_rating_only_true]
     @bottles = @bottles.page(params[:page]).per(15)
     #logger.debug "*****************   End of controller"
+    # create a collection of availibility_change_reasons
+    @availability_change_reasons = AvailabilityChangeReasonLookup.select("id, reason").order("display_order")
+    logger.debug "******************   Availability Change Reasons: #{@availability_change_reasons.inspect}"
     respond_to do |format|
       format.html #index.html.erb
       format.js   #index.js.erb
@@ -185,7 +188,7 @@ class BottlesController < ApplicationController
 
   def consume
     # @bottleid = params[:id].to_s
-    bottle = current_user.bottles.update(params[:id], available: :false, notes: params[:bottle][:notes])
+    bottle = current_user.bottles.update(params[:id], available: :false, notes: params[:bottle][:notes], availability_change_reason_id: params[:bottle][:availability_change_reason_id])
     bottle.save
     @bottle = current_user.bottles.find_by_id(params[:id])
     flash.now[:success] = "You have successfully consumed bottle " + bottle.bottle_id.to_s + "!"
