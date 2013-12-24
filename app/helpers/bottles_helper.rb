@@ -181,4 +181,9 @@ module BottlesHelper
     return search_box_hash
   end
 
+  def get_AvailabilityChangeReason_collection
+    @availability_change_reasons = AvailabilityChangeReasonLookup.select("id, reason").order("display_order")
+    return @availability_change_reasons
+  end
+
 end

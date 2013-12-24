@@ -156,8 +156,7 @@ class BottlesController < ApplicationController
     @bottles = @bottles.page(params[:page]).per(15)
     #logger.debug "*****************   End of controller"
     # create a collection of availibility_change_reasons - this will get displayed on the "consume pop-up" modal
-    @availability_change_reasons = AvailabilityChangeReasonLookup.select("id, reason").order("display_order")
-    # logger.debug "******************   Availability Change Reasons: #{@availability_change_reasons.inspect}"
+    @availability_change_reasons = get_AvailabilityChangeReason_collection
     respond_to do |format|
       format.html #index.html.erb
       format.js   #index.js.erb
@@ -214,7 +213,7 @@ class BottlesController < ApplicationController
   def edit
     @bottle = current_user.bottles.find_by_id(params[:id])
     # create a collection of availibility_change_reasons
-    @availability_change_reasons = AvailabilityChangeReasonLookup.select("id, reason").order("display_order")
+    @availability_change_reasons = get_AvailabilityChangeReason_collection
     render 'new'
   end
 
