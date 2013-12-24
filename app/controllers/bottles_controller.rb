@@ -155,9 +155,9 @@ class BottlesController < ApplicationController
     # @bottles = @bottles.where(is_for_rating_only: false) unless params[:q] && params[:q][:is_for_rating_only_true]
     @bottles = @bottles.page(params[:page]).per(15)
     #logger.debug "*****************   End of controller"
-    # create a collection of availibility_change_reasons
+    # create a collection of availibility_change_reasons - this will get displayed on the "consume pop-up" modal
     @availability_change_reasons = AvailabilityChangeReasonLookup.select("id, reason").order("display_order")
-    logger.debug "******************   Availability Change Reasons: #{@availability_change_reasons.inspect}"
+    # logger.debug "******************   Availability Change Reasons: #{@availability_change_reasons.inspect}"
     respond_to do |format|
       format.html #index.html.erb
       format.js   #index.js.erb
@@ -213,6 +213,8 @@ class BottlesController < ApplicationController
 
   def edit
     @bottle = current_user.bottles.find_by_id(params[:id])
+    # create a collection of availibility_change_reasons
+    @availability_change_reasons = AvailabilityChangeReasonLookup.select("id, reason").order("display_order")
     render 'new'
   end
 

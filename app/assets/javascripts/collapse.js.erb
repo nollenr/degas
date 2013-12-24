@@ -1,22 +1,5 @@
 $(function() {
-  /* collapsing is now handled with Bootstrap CSS
-  // Start off with everything hidden except for the outermost level.j
-  // .hide() is a jQuery method
-  $(".collapse-li").find(".collapse-li").hide();
 
-
-  // Add a graphic for expanding and contracting a list
-  $(".collapse-li").each(function(){
-    if ($(this).find("ul").length > 0 ) {
-      // $(this).find("div").first().prepend('<i class="icon-plus collapse-i"></i>');
-      $(this).prepend('<div class="span1"><i class="icon-plus collapse-i"></i></div>');
-    }
-    else {
-      $(this).prepend('<div class="span1"></div>')
-    }
-  });
-  */
-  
   // Add an event handler to each graphic to control the opening and closing of the list
   $(".collapse-btn").click(function() {
     // console.log("Clicked on a collapse button!");
@@ -37,4 +20,15 @@ $(function() {
     }
   );
 
+  // Using bootstrap JavaScript to control collapse of "disposition reasons"
+  // on bottle-new/edit page.  Using JavaScript since I am not toggling
+  // the collapse. 
+  $('#bottle_available_true').click(function() {
+    console.log("Clicked on the true radio button");
+    $('#disposition').addClass('dispositionHidden');
+  });
+  $('#bottle_available_false').click(function() {
+    console.log("Clicked on the false radio button");
+    $('#disposition').removeClass('dispositionHidden');
+  });
 });

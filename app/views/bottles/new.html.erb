@@ -53,8 +53,19 @@
         <%= f.input :winery_name, input_html: { data: { autocomplete_winery_source: wineries_list_path } } %>
         <%= f.input :notes, label: 'Notes', :input_html => { :rows => 3 } %>
   
-        <% if !@bottle.id.blank? %>
+        <!-- % if !@bottle.id.blank? %>
           <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
+        end % -->
+        
+        <% if !(@bottle.id.blank? or @bottle.is_for_rating_only) %>
+          <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
+          <div id="disposition" class="row <%= @bottle.available  ? "dispositionHidden" : nil %>">
+            <%= content_tag(:span, content_tag(:strong, "Disposition Reason"), class: "col-md-10") %>
+            <%= f.collection_radio_buttons :availability_change_reason_id, @availability_change_reasons, :id, :reason, options = {checked: 1, item_wrapper_class: "col-xs-7 col-xs-offset-1"} %>
+          </div>
+        <% end %>
+        
+        <% if !@bottle.id.blank? %>
           <%= f.input :rating, label: "Rating (1-10)"%>
           <%= f.input :buy_at_this_price, as: :radio_buttons, item_wrapper_class: :inline, collection: [['true', :true], ['false', :false], ['undecided', ""]] %>
         <% end %>
