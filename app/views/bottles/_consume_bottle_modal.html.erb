@@ -15,7 +15,7 @@
           <hr />
           <div class="row">
             <%= content_tag(:span, content_tag(:strong, "Disposition Reason"), class: "col-md-10") %>
-            <%= f.collection_radio_buttons :availability_change_reason_id, @availability_change_reasons, :id, :reason, options = {checked: bottle.availability_change_reason_id.nil? ? 1 : bottle.availability_change_reason_id, item_wrapper_class: "col-xs-7 col-xs-offset-1"} %>
+            <%= f.collection_radio_buttons( :availability_change_reason_id, @availability_change_reasons, :id, :reason, options = {checked: bottle.availability_change_reason_id.nil? ? 1 : bottle.availability_change_reason_id, item_wrapper_class: "col-xs-7 col-xs-offset-1"}) %>
             <hr />
           </div>
           <%= f.button :submit, class: "btn btn-large btn-primary" %>
