@@ -61,7 +61,7 @@
           <%= f.input :available, as: :radio_buttons, item_wrapper_class: :inline, collection: [:true, :false] %>
           <div id="disposition" class="row <%= @bottle.available  ? "dispositionHidden" : nil %>">
             <%= content_tag(:span, content_tag(:strong, "Disposition Reason"), class: "col-md-10") %>
-            <%= f.collection_radio_buttons :availability_change_reason_id, @availability_change_reasons, :id, :reason, options = {checked: 1, item_wrapper_class: "col-xs-7 col-xs-offset-1"} %>
+            <%= f.collection_radio_buttons :availability_change_reason_id, @availability_change_reasons, :id, :reason, options = {checked: @bottle.availability_change_reason_id.nil? ? 1 : @bottle.availability_change_reason_id, item_wrapper_class: "col-xs-7 col-xs-offset-1"} %>
           </div>
         <% end %>
         
