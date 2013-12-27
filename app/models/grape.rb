@@ -14,4 +14,7 @@ class Grape < ActiveRecord::Base
   has_many :bottles
   attr_accessible :color, :name
 
+  has_many :blend_compositions
+  has_many :blends, through: blend_compositions
+
 end
