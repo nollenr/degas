@@ -10,7 +10,7 @@ gem 'therubyracer', '0.11.4'
 gem 'pg', '0.16.0'
 
 gem 'annotate', '2.5.0'
-gem 'bcrypt-ruby', '3.0.1'
+gem 'bcrypt-ruby', '3.1.2'
 
 group :development, :test do
   gem 'rspec-rails', '2.14.0'

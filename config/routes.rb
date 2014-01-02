@@ -12,7 +12,7 @@ Degas::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
 
   # resources :users, only: [:new, :create, :index, :edit]
-  resources :users
+  resources :users, except: [:destroy]
 
   # match "users/new" => "users#new", :via => :get
   # match "users" => "users#create", :via => :post
@@ -32,7 +32,7 @@ Degas::Application.routes.draw do
 
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
   # resources :bottles, except: [:show, :update, :edit, :destroy] do
-  resources :bottles  do
+  resources :bottles, except: [:destroy]  do
     put :rate, on: :member
     put :buy_again, on: :member
     put :consume, on: :member
