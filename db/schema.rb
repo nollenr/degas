@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20131227231817) do
     t.datetime "updated_at",               :null => false
   end
 
+  add_index "blends", ["name"], :name => "index_blends_on_name", :unique => true
+
   create_table "bottle_types", :force => true do |t|
     t.string   "name",          :limit => 30, :null => false
     t.datetime "created_at",                  :null => false

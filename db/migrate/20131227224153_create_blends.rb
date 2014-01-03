@@ -5,5 +5,6 @@ class CreateBlends < ActiveRecord::Migration
 
       t.timestamps
     end
+  add_index :blends, [:name], unique: true
   end
 end
