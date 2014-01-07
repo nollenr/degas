@@ -129,7 +129,7 @@ class BottlesController < ApplicationController
         end
         #logger.debug "*****************   Bottle Controller Index Params (After): #{params.inspect}"
     @search = current_user.bottles.includes(:bottle_type, :winery, :grape).search(params[:q])
-    @search_sql = @search.result.to_sql
+    # @search_sql = @search.result.to_sql
     #logger.debug "*****************   SQL is: #{@search_sql.inspect}"
     # This was a huge mistake and a mis-comprehension regarding active record.
     # @bottles = @search.result.order(sort_column + " " + sort_direction).joins(:grape, :winery)

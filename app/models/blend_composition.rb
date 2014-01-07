@@ -3,4 +3,5 @@ class BlendComposition < ActiveRecord::Base
   
   belongs_to :blend
   belongs_to :grape
+  
 end

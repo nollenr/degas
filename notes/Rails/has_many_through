@@ -40,3 +40,19 @@ grape (table: grapes, class: Grape)
 =====================================================
 # This only seems to work for initialization (can't add new ones using this method)
 @blend.blend_compositions=[@bc1, @bc2]
+=====================================================
+@g1 = Grape.where("name ilike '%zinf%'").first
+@g2 = Grape.where("name ilike '%syrah%'").first
+@b1=Blend.new
+@b1.blend_compositions.build(percent_of_grape: 50, grape_id: @g1.id)
+@b1.blend_compositions.build(percent_of_grape: 50, grape_id: @g2.id)
+@b1.save
+
+This makes the most sense for what I'm trying to do...
+On the screen, capture a name for the blend and all the grapes/percentages that should be part of the blend
+create a new blend (with the given name - or a default) (@b1)
+loop
+  find the id of the grape
+  build the blend_composition (@b1.blend_composition.build(percent_of_grape: 50, grape_id: grape_id_n))
+end loop
+save the blend (and associated blend_compositions (@b1.save)
