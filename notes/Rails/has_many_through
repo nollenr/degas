@@ -41,6 +41,14 @@ grape (table: grapes, class: Grape)
 # This only seems to work for initialization (can't add new ones using this method)
 @blend.blend_compositions=[@bc1, @bc2]
 =====================================================
+My problem was that when I found a grape:
+@g1 = Grape.where("name ilike '%zinf%'")
+
+This was returning a class of Activerecord::Relation.
+What I needed was a class of Grape
+
+I return a class of Grape (i.e. the model) by adding a ".first"
+=====================================================
 @g1 = Grape.where("name ilike '%zinf%'").first
 @g2 = Grape.where("name ilike '%syrah%'").first
 @b1=Blend.new
