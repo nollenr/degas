@@ -71,3 +71,11 @@ RAILS_ENV=production bundle exec rake assets:precompile
 
 As root:
 service httpd start
+====================================================
+To use the scripts to deploy
+
+	ssh to ec2 from nollenr
+	sudo su -
+	cd /usr/local/bin
+	./deploy.sh -- or -- ./deploy.sh branch_name_from_git	
+	
