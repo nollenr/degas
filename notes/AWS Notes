@@ -79,3 +79,6 @@ To use the scripts to deploy
 	cd /usr/local/bin
 	./deploy.sh -- or -- ./deploy.sh branch_name_from_git	
 	
+====================================================
+To update the database, do it from pgadmin3 as postgres on sa002
+	
