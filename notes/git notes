@@ -41,4 +41,8 @@ Test Merge
 
 	git reset --merge
 
+Revert local files to last commit
+	git reset --hard  #my experience says to do a "git add ." first.  Otherwise the new files are left on the filesystem.
+
+
 	

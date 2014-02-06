@@ -31,7 +31,7 @@ GEM
     annotate (2.5.0)
       rake
     arel (3.0.2)
-    bcrypt-ruby (3.1.2)
+    bcrypt-ruby (3.0.1)
     bootstrap-sass (3.0.2.1)
       sass (~> 3.2)
     builder (3.0.4)
@@ -143,7 +143,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (= 2.5.0)
-  bcrypt-ruby (= 3.1.2)
+  bcrypt-ruby (~> 3.0.0)
   bootstrap-sass (= 3.0.2.1)
   chronic
   coffee-rails (= 3.2.2)
