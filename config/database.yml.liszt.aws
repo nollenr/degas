@@ -1,8 +1,0 @@
-production:
-  adapter: postgresql
-  host: ec2-54-200-176-233.us-west-2.compute.amazonaws.com
-  port: 1521
-  database: degasdb
-  pool: 5
-  username: degas
-  password: degas

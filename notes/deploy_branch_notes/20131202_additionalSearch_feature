@@ -1,5 +1,0 @@
-install gem:
-gem install kaminari --version '0.15.0'
-
-bundle install --local
-
