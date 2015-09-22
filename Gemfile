@@ -38,5 +38,5 @@ gem 'simple_form-bootstrap', '~> 1.1'
 
 # For Heroku
 # gem 'heroku'
-gem 'passenger', '~> 5.0'
+# gem 'passenger', '~> 5.0'
 
