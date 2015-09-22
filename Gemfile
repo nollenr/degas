@@ -40,3 +40,5 @@ gem 'simple_form-bootstrap', '~> 1.1'
 # gem 'heroku'
 # gem 'passenger', '~> 5.0'
 
+# gem for authentication
+gem 'devise', '~> 3.5'
